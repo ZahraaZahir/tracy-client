@@ -1,0 +1,8 @@
+.godot/
+extended_runnable_typed_dictionary.py
+android/
+build/
+*.pck
+*.exe
+*.zip
+*.vck
