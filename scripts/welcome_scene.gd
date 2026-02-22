@@ -8,7 +8,7 @@ func _ready() -> void:
 	register_button.pressed.connect(_on_register_pressed)
 
 func _on_login_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/auth/login_scene.tscn")
+	get_tree().change_scene_to_file("res://scenes/auth/login.tscn")
 
 func _on_register_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/auth/register_scene.tscn")
+	get_tree().change_scene_to_file("res://scenes/auth/register.tscn")
