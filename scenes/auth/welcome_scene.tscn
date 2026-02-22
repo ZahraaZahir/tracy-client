@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://lvusyqkntfi"]
+
+[ext_resource type="Script" uid="uid://cd1c2vm40jst" path="res://scripts/welcome_scene.gd" id="1_hmrjn"]
+[ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/rainyhearts.ttf" id="2_p3uh1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3uh1"]
+bg_color = Color(0.73333335, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmrjn"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 2
+
+[node name="WelcomeScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hmrjn")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p3uh1")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.626228, 0.48448384, 0.4851147, 1)
+theme_override_fonts/font = ExtResource("2_p3uh1")
+theme_override_font_sizes/font_size = 40
+text = "Welcome, Tracy!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RegisterButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(160, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_p3uh1")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_hmrjn")
+text = "Register"
+
+[node name="LoginButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(160, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_p3uh1")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_hmrjn")
+text = "Login"

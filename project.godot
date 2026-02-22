@@ -11,12 +11,17 @@ config_version=5
 [application]
 
 config/name="tracy-client"
+run/main_scene="uid://lvusyqkntfi"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 ApiService="*res://autoloads/api_service.gd"
+
+[display]
+
+mouse_cursor/custom_image="uid://c8idd1nmnq5x5"
 
 [rendering]
 
