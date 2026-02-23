@@ -15,33 +15,29 @@ const COLOR_PENDING = Color("#ffef4b")
 func _ready() -> void:
 	register_button.pressed.connect(_on_register_pressed)
 	back_button.pressed.connect(_on_back_pressed)
-	ApiService.request_completed.connect(_on_api_response)
+	
+	AuthService.auth_finished.connect(_on_auth_result)
 	status_label.text = ""
 
 func _on_register_pressed() -> void:
 	var email = email_input.text.strip_edges()
 	var username = username_input.text.strip_edges()
 	var password = password_input.text.strip_edges()
-	var confirm_password = confirm_password_input.text.strip_edges()
+	var confirm = confirm_password_input.text.strip_edges()
 	
-	if email.is_empty() or username.is_empty() or password.is_empty() or confirm_password.is_empty():
+	if email.is_empty() or username.is_empty() or password.is_empty() or confirm.is_empty():
 		_set_status("Error: All fields required.", COLOR_ERROR)
 		return
 	
-	if password != confirm_password:
+	if password != confirm:
 		_set_status("Error: Passwords do not match.", COLOR_ERROR)
-		password_input.text = ""
-		confirm_password_input.text = ""
 		return
 		
 	_set_status("Connecting to system...", COLOR_PENDING)
 	register_button.disabled = true
-	ApiService.register(email, username, password)
+	AuthService.register(email, username, password)
 	
-func _on_api_response(endpoint: String, success: bool, response_data: Dictionary) -> void:
-	if endpoint != "/auth/register":
-		return
-		
+func _on_auth_result(success: bool, message: String) -> void:
 	register_button.disabled = false
 	
 	if success:
@@ -50,8 +46,7 @@ func _on_api_response(endpoint: String, success: bool, response_data: Dictionary
 		if is_inside_tree():
 			_on_back_pressed()
 	else:
-		var err_msg = response_data.get("message", response_data.get("error", "Registration failed"))
-		_set_status("Error: " + str(err_msg), COLOR_ERROR)
+		_set_status("Error: " + message, COLOR_ERROR)
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/auth/welcome.tscn")
@@ -60,4 +55,3 @@ func _set_status(text: String, color: Color) -> void:
 	status_label.text = text
 	status_label.add_theme_color_override("font_color", color)
 	status_label.visible = true
-	print("UI Feedback: ", text)

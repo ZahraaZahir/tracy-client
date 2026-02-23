@@ -12,10 +12,9 @@ const COLOR_PENDING = Color("#ffef4b")
 
 func _ready() -> void:
 	login_button.pressed.connect(_on_login_pressed)
-	back_button.pressed.connect(_on_back_pressed)
+	back_button.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/auth/welcome.tscn"))
 	
-	ApiService.request_completed.connect(_on_api_response)
-	
+	AuthService.auth_finished.connect(_on_auth_result)
 	status_label.text = ""
 	identifier_input.grab_focus()
 
@@ -24,31 +23,22 @@ func _on_login_pressed() -> void:
 	var pw = password_input.text.strip_edges()
 	
 	if id.is_empty() or pw.is_empty():
-		_update_status("Error: Enter credentials.", COLOR_ERROR)
+		_set_status("Error: Enter credentials.", COLOR_ERROR)
 		return
 	
-	_update_status("Authenticating...", COLOR_PENDING)
+	_set_status("Authenticating...", COLOR_PENDING)
 	login_button.disabled = true
-	
-	ApiService.login(id, pw)
+	AuthService.login(id, pw)
 
-func _on_api_response(endpoint: String, success: bool, response_data: Dictionary) -> void:
-	if endpoint != "/auth/login":
-		return
-		
+func _on_auth_result(success: bool, message: String) -> void:
 	login_button.disabled = false
 	
 	if success:
-		_update_status("Login Successful!", COLOR_SUCCESS)
-		print("Token acquired: ", ApiService.auth_token)
+		_set_status("Welcome, Developer.", COLOR_SUCCESS)
 	else:
-		var error_msg = response_data.get("message", "Invalid email or password.")
-		_update_status("Error: " + str(error_msg), COLOR_ERROR)
+		_set_status("Error: " + message, COLOR_ERROR)
 
-func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/auth/welcome.tscn")
-
-func _update_status(text: String, color: Color) -> void:
+func _set_status(text: String, color: Color) -> void:
 	status_label.text = text
 	status_label.add_theme_color_override("font_color", color)
 	status_label.visible = true

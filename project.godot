@@ -21,7 +21,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ApiService="*res://autoloads/api_service.gd"
+BaseApiService="*uid://dhu41xyaip8il"
+AuthService="*uid://bqa3kcfb7f4ka"
 
 [display]
 
