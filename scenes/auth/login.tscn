@@ -1525,4 +1525,5 @@ text = "Login"
 [node name="StatusLabel" type="Label" parent="CenterContainer/CredentialsContainer" unique_id=1797959225]
 visible = false
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8wugm")
 horizontal_alignment = 1
