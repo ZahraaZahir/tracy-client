@@ -25,9 +25,13 @@ ApiService="*res://autoloads/api_service.gd"
 
 [display]
 
+window/size/mode=3
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://c8idd1nmnq5x5"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=3
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

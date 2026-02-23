@@ -1,13 +1,15 @@
 extends Node
 
-const BASE_URL = "http://localhost:3050"
+const BASE_URL = "http://localhost:3050/api/v1"
 var auth_token: String = ""
+
+signal request_completed(endpoint: String, success: bool, response_data: Dictionary)
 
 func register(email: String, username: String, password: String) -> void:
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
 
-	http_request.request_completed.connect(_on_request_completed.bind(http_request))
+	http_request.request_completed.connect(_on_request_completed.bind(http_request, "/auth/register"))
 	
 	var body = JSON.stringify({
 		"email": email,
@@ -20,18 +22,23 @@ func register(email: String, username: String, password: String) -> void:
 	
 	if error != OK:
 		push_error("Failed to start HTTP request")
+		request_completed.emit("/auth/register", false, {"message": "Local request error"})
 		http_request.queue_free()
 
-func _on_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, request_node: HTTPRequest) -> void:
+func _on_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, request_node: HTTPRequest, endpoint: String) -> void:
 	request_node.queue_free()
 	
 	var response_text = body.get_string_from_utf8()
 	var json_data = JSON.parse_string(response_text)
 	
-	if response_code == 201 or response_code == 200:
-		print("Registration Successful: ", json_data)
+	if json_data == null:
+		json_data = {"message": "Invalid server response"}
+	
+	var success = (response_code == 201 or response_code == 200)
+	
+	if success:
+		print("API Success [" + endpoint + "]: ", json_data)
 	else:
-		var error_msg = "Unknown Error"
-		if json_data and json_data.has("error"):
-			error_msg = json_data["error"]
-		push_error("Registration Failed (" + str(response_code) + "): " + error_msg)
+		push_error("API Error [" + endpoint + "] (" + str(response_code) + "): " + str(json_data))
+	
+	request_completed.emit(endpoint, success, json_data)
