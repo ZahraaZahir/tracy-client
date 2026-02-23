@@ -6,26 +6,38 @@ extends Control
 @onready var back_button: Button = $CenterContainer/CredentialsContainer/ButtonsContainer/BackButton
 @onready var register_button: Button = $CenterContainer/CredentialsContainer/ButtonsContainer/RegisterButton
 @onready var status_label: Label = $CenterContainer/CredentialsContainer/StatusLabel
+@onready var confirm_password_input: LineEdit = $CenterContainer/CredentialsContainer/ConfirmPasswordContainer/ConfirmPasswordInput
+
+const COLOR_ERROR = Color("ff6761ff")
+const COLOR_SUCCESS = Color("65ffb7ff")
+const COLOR_PENDING = Color("#ffef4b")
 
 func _ready() -> void:
 	register_button.pressed.connect(_on_register_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	ApiService.request_completed.connect(_on_api_response)
-	status_label.text = "" # Start empty
+	status_label.text = ""
 
 func _on_register_pressed() -> void:
 	var email = email_input.text.strip_edges()
 	var username = username_input.text.strip_edges()
 	var password = password_input.text.strip_edges()
+	var confirm_password = confirm_password_input.text.strip_edges()
 	
-	if email.is_empty() or username.is_empty() or password.is_empty():
-		_set_status("Error: All fields required.", Color.RED)
+	if email.is_empty() or username.is_empty() or password.is_empty() or confirm_password.is_empty():
+		_set_status("Error: All fields required.", COLOR_ERROR)
 		return
 	
-	_set_status("Connecting to system...", Color.YELLOW)
+	if password != confirm_password:
+		_set_status("Error: Passwords do not match.", COLOR_ERROR)
+		password_input.text = ""
+		confirm_password_input.text = ""
+		return
+		
+	_set_status("Connecting to system...", COLOR_PENDING)
 	register_button.disabled = true
 	ApiService.register(email, username, password)
-
+	
 func _on_api_response(endpoint: String, success: bool, response_data: Dictionary) -> void:
 	if endpoint != "/auth/register":
 		return
@@ -33,13 +45,13 @@ func _on_api_response(endpoint: String, success: bool, response_data: Dictionary
 	register_button.disabled = false
 	
 	if success:
-		_set_status("Registration Successful!", Color.GREEN)
+		_set_status("Registration Successful!", COLOR_SUCCESS)
 		await get_tree().create_timer(1.5).timeout
 		if is_inside_tree():
 			_on_back_pressed()
 	else:
 		var err_msg = response_data.get("message", response_data.get("error", "Registration failed"))
-		_set_status("Error: " + str(err_msg), Color.RED)
+		_set_status("Error: " + str(err_msg), COLOR_ERROR)
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/auth/welcome.tscn")
@@ -47,3 +59,5 @@ func _on_back_pressed() -> void:
 func _set_status(text: String, color: Color) -> void:
 	status_label.text = text
 	status_label.add_theme_color_override("font_color", color)
+	status_label.visible = true
+	print("UI Feedback: ", text)
