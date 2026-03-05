@@ -71,7 +71,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [68, 69]
+"values": [66, 67]
 }
 
 [sub_resource type="Animation" id="Animation_ioo17"]
@@ -261,6 +261,9 @@ animation = &"idle_down"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wukud"]
 animation = &"idle_up"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1u2l1"]
+animation = &"idle_right"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_il2jm"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_cbp6q")
 blend_point_0/pos = Vector2(-1, 0)
@@ -270,6 +273,8 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_bc84e")
 blend_point_2/pos = Vector2(0, 1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_wukud")
 blend_point_3/pos = Vector2(0, -1)
+blend_point_4/node = SubResource("AnimationNodeAnimation_1u2l1")
+blend_point_4/pos = Vector2(1, 0)
 max_space = Vector2(1, 1.1)
 blend_mode = 1
 
@@ -381,12 +386,11 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_attacking = false
 parameters/conditions/is_idling = false
 parameters/conditions/is_walking = false
-parameters/Idle/blend_position = Vector2(-0.43290043, 1.0158019)
+parameters/Idle/blend_position = Vector2(0.8936485, 0.040094256)
 parameters/Sword/blend_position = Vector2(-0.3603896, 0.509434)
 parameters/Walk/blend_position = Vector2(0.21320343, -0.23231143)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=157346821]
-visible = false
 custom_minimum_size = Vector2(2000, 2000)
 offset_left = -957.0
 offset_top = -1030.0
