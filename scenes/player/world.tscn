@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4h4v11ymnsep" path="res://scripts/player.gd" id="1_1u2l1"]
 [ext_resource type="Texture2D" uid="uid://bt545g3cv2k74" path="res://assets/character/main.png" id="2_jt3wm"]
+[ext_resource type="PackedScene" uid="uid://sn5lx0oavkad" path="res://scenes/entities/cow_npc.tscn" id="3_jt3wm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aqk2v"]
 
@@ -359,6 +360,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(76.27507, 38.594917)
 
 [node name="World" type="Node2D" unique_id=2062264167]
+y_sort_enabled = true
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=566782800]
 z_index = 5
@@ -391,11 +393,12 @@ parameters/Sword/blend_position = Vector2(-0.3603896, 0.509434)
 parameters/Walk/blend_position = Vector2(0.21320343, -0.23231143)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=157346821]
+y_sort_enabled = true
 custom_minimum_size = Vector2(2000, 2000)
-offset_left = -957.0
-offset_top = -1030.0
-offset_right = 1043.0
-offset_bottom = 970.0
+offset_left = -955.0
+offset_top = -992.0
+offset_right = 1045.0
+offset_bottom = 1008.0
 color = Color(0.5910455, 1, 0.42129093, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=1019837182]
@@ -404,3 +407,7 @@ offset_top = -77.0
 offset_right = 240.0
 offset_bottom = 38.0
 color = Color(0.61484796, 0.11843618, 0.07090295, 1)
+
+[node name="NpcCow" parent="." unique_id=477695199 instance=ExtResource("3_jt3wm")]
+y_sort_enabled = true
+position = Vector2(90, 57)
