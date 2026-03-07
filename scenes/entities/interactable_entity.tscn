@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cjnbh3yfi05ui"]
+
+[ext_resource type="Script" uid="uid://cpkph0aca3mcb" path="res://scripts/interactable_entity.gd" id="1_3q5qu"]
+[ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://scenes/entities/interactable_entity.gdshader" id="1_duvm5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mf7ll"]
+shader = ExtResource("1_duvm5")
+shader_parameter/is_glitched = true
+shader_parameter/jitter_power = 0.02
+shader_parameter/color_split = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7eka"]
+size = Vector2(19, 7)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2m16p"]
+radius = 15.033297
+
+[node name="InteractableEntity" type="CharacterBody2D" unique_id=850722004]
+script = ExtResource("1_3q5qu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=275432032]
+material = SubResource("ShaderMaterial_mf7ll")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1988172749]
+position = Vector2(49, 71)
+shape = SubResource("RectangleShape2D_i7eka")
+
+[node name="InteractionZone" type="Area2D" parent="." unique_id=509359783]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone" unique_id=1782964673]
+position = Vector2(68, 49)
+shape = SubResource("CircleShape2D_2m16p")
+
+[node name="PromptLabel" type="Label" parent="." unique_id=2035734970]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=773796458]

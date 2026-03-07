@@ -1,17 +1,10 @@
-[gd_scene format=3 uid="uid://sn5lx0oavkad"]
+[gd_scene format=3 uid="uid://b0aqj5sgsxwo4"]
 
-[ext_resource type="Shader" uid="uid://ctjmcwjof47ox" path="res://scenes/entities/cow_npc.gdshader" id="1_1vdsr"]
-[ext_resource type="Script" uid="uid://cslfnhc12okqa" path="res://scripts/cow_npc.gd" id="1_3q5qu"]
-[ext_resource type="Texture2D" uid="uid://yqgbmd0jqeco" path="res://assets/character/cow.png" id="2_3q5qu"]
+[ext_resource type="PackedScene" uid="uid://cjnbh3yfi05ui" path="res://scenes/entities/interactable_entity.tscn" id="1_ihjqs"]
+[ext_resource type="Texture2D" uid="uid://yqgbmd0jqeco" path="res://assets/character/cow.png" id="2_ybkv1"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p7vj8"]
-shader = ExtResource("1_1vdsr")
-shader_parameter/is_glitched = true
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1vdsr"]
-size = Vector2(14, 9)
-
-[sub_resource type="Animation" id="Animation_3q5qu"]
+[sub_resource type="Animation" id="Animation_ybkv1"]
+resource_name = "RESET"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -38,7 +31,7 @@ tracks/1/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_1vdsr"]
+[sub_resource type="Animation" id="Animation_wowj4"]
 resource_name = "glitch_active"
 length = 0.5
 loop_mode = 1
@@ -67,7 +60,7 @@ tracks/1/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_p7vj8"]
+[sub_resource type="Animation" id="Animation_blxjd"]
 resource_name = "idle_normal"
 length = 0.6
 loop_mode = 1
@@ -96,35 +89,28 @@ tracks/1/keys = {
 "values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0roic"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhvoo"]
 _data = {
-&"RESET": SubResource("Animation_3q5qu"),
-&"glitch_active": SubResource("Animation_1vdsr"),
-&"idle_normal": SubResource("Animation_p7vj8")
+&"RESET": SubResource("Animation_ybkv1"),
+&"glitch_active": SubResource("Animation_wowj4"),
+&"idle_normal": SubResource("Animation_blxjd")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3q5qu"]
-radius = 14.3178215
+[node name="CowNpc" unique_id=850722004 instance=ExtResource("1_ihjqs")]
+texture_filter = 1
+entity_id = "npc_cow_01"
 
-[node name="NpcCow" type="CharacterBody2D" unique_id=477695199]
-script = ExtResource("1_3q5qu")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1587608114]
-material = SubResource("ShaderMaterial_p7vj8")
-texture = ExtResource("2_3q5qu")
+[node name="Sprite2D" parent="." index="0" unique_id=275432032]
+texture_filter = 1
+texture = ExtResource("2_ybkv1")
 hframes = 3
 vframes = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1844192424]
+[node name="CollisionShape2D" parent="." index="1" unique_id=1988172749]
 position = Vector2(-1, 8.5)
-shape = SubResource("RectangleShape2D_1vdsr")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=233262506]
-libraries/ = SubResource("AnimationLibrary_0roic")
-
-[node name="InteractionZone" type="Area2D" parent="." unique_id=45478450]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone" unique_id=243149497]
+[node name="CollisionShape2D" parent="InteractionZone" parent_id_path=PackedInt32Array(509359783) index="0" unique_id=1782964673]
 position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_3q5qu")
+
+[node name="AnimationPlayer" parent="." index="4" unique_id=773796458]
+libraries/ = SubResource("AnimationLibrary_uhvoo")
