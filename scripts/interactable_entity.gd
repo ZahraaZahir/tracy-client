@@ -22,11 +22,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if player_is_near and not is_fixed:
+		print("Press E to simulate fix", entity_id)
 		if Input.is_action_just_pressed("interact"):
 			_simulate_fix()
 
 func _simulate_fix() -> void:
-	print("DEBUG: Manually patching ", entity_id)
+	print("Fixed entity ", entity_id)
 	is_fixed = true
 
 func _apply_visual_state() -> void:
