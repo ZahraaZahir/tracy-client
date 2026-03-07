@@ -1,22 +1,31 @@
 shader_type canvas_item;
 
 uniform bool is_glitched = true;
-uniform float jitter_power : hint_range(0.0, 1.0) = 0.02;
-uniform float color_split : hint_range(0.0, 1.0) = 0.1;
+
+uniform float shake_power : hint_range(0.0, 1.0) = 0.03;
+uniform float color_split : hint_range(0.0, 1.0) = 0.0;
+uniform float flicker_power : hint_range(0.0, 1.0) = 0.0;
 
 void fragment() {
-	vec4 pixel_color = texture(TEXTURE, UV);
+	vec4 color = texture(TEXTURE, UV);
 	
 	if (is_glitched) {
-		float shift = sin(TIME * 40.0) * jitter_power;
+		float time_step = floor(TIME * 20.0);
 		
-		float r = texture(TEXTURE, vec2(UV.x + shift, UV.y)).r;
-		float g = pixel_color.g;
-		float b = texture(TEXTURE, vec2(UV.x - shift, UV.y)).b;
+		float x_shift = sin(time_step * 50.0) * shake_power;
+		float y_shift = cos(time_step * 30.0) * shake_power;
 		
-		float flicker = step(0.95, sin(TIME * 100.0));
-		COLOR = vec4(r, g, b, pixel_color.a - flicker);
+		float split = color_split * 0.05;
+		color.r = texture(TEXTURE, vec2(UV.x + x_shift + split, UV.y + y_shift)).r;
+		color.g = texture(TEXTURE, vec2(UV.x + x_shift,       UV.y + y_shift)).g;
+		color.b = texture(TEXTURE, vec2(UV.x + x_shift - split, UV.y + y_shift)).b;
+		
+		float noise = step(0.5, sin(TIME * 60.0));
+		color.a = mix(color.a, color.a * noise, flicker_power);
+		
 	} else {
-		COLOR = pixel_color;
+		COLOR = texture(TEXTURE, UV);
 	}
+	
+	COLOR = color;
 }

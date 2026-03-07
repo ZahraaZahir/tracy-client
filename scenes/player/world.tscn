@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b4h4v11ymnsep" path="res://scripts/player.gd" id="1_1u2l1"]
 [ext_resource type="Texture2D" uid="uid://bt545g3cv2k74" path="res://assets/character/main.png" id="2_jt3wm"]
 [ext_resource type="PackedScene" uid="uid://b0aqj5sgsxwo4" path="res://scenes/entities/cow_entity.tscn" id="3_jt3wm"]
+[ext_resource type="PackedScene" uid="uid://dsm878oh674qo" path="res://scenes/entities/girl_farmer_entity.tscn" id="4_0b7qn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aqk2v"]
 
@@ -395,11 +396,14 @@ parameters/Walk/blend_position = Vector2(0.21320343, -0.23231143)
 [node name="ColorRect" type="ColorRect" parent="." unique_id=157346821]
 y_sort_enabled = true
 custom_minimum_size = Vector2(2000, 2000)
-offset_left = -955.0
-offset_top = -992.0
-offset_right = 1045.0
-offset_bottom = 1008.0
+offset_left = -944.0
+offset_top = -967.0
+offset_right = 1056.0
+offset_bottom = 1033.0
 color = Color(0.5921569, 1, 0.53333336, 1)
 
 [node name="CowNpc" parent="." unique_id=850722004 instance=ExtResource("3_jt3wm")]
 position = Vector2(86, 59)
+
+[node name="GirlFarmerEntity" parent="." unique_id=182755861 instance=ExtResource("4_0b7qn")]
+position = Vector2(189, 83)
