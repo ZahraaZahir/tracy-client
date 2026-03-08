@@ -1,0 +1,236 @@
+[gd_scene format=3 uid="uid://lvgw3x5uboda"]
+
+[ext_resource type="PackedScene" uid="uid://cjnbh3yfi05ui" path="res://scenes/entities/interactable_entity.tscn" id="1_20kda"]
+[ext_resource type="Script" uid="uid://bu4ychi07rp67" path="res://scripts/mouse_entity.gd" id="2_gjn3a"]
+[ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://scenes/entities/interactable_entity.gdshader" id="2_j5r6x"]
+[ext_resource type="Texture2D" uid="uid://dt6ge5phc2fep" path="res://assets/character/mouse.png" id="3_gjn3a"]
+[ext_resource type="Texture2D" uid="uid://c7iq4d0tvxob5" path="res://assets/ui/world/sunflower.png" id="4_j5r6x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mtlud"]
+shader = ExtResource("2_j5r6x")
+shader_parameter/is_glitched = false
+shader_parameter/shake_power = 0.0010000000475
+shader_parameter/color_split = 0.786000037335
+shader_parameter/flicker_power = 0.6000000285
+
+[sub_resource type="Animation" id="Animation_gjn3a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlowerPatch:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlowerPatch/Flower3:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlowerPatch/Flower2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlowerPatch/Flower:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:material")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_mtlud")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [21]
+}
+
+[sub_resource type="Animation" id="Animation_fjr50"]
+resource_name = "glitch_active"
+length = 0.43333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_mtlud")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [21]
+}
+
+[sub_resource type="Animation" id="Animation_q6l4m"]
+resource_name = "idle_normal"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlowerPatch:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlowerPatch/Flower3:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlowerPatch/Flower2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlowerPatch/Flower:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:material")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_mtlud")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.56666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [21, 22, 23, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjat7"]
+_data = {
+&"RESET": SubResource("Animation_gjn3a"),
+&"glitch_active": SubResource("Animation_fjr50"),
+&"idle_normal": SubResource("Animation_q6l4m")
+}
+
+[node name="MouseEntity" unique_id=850722004 instance=ExtResource("1_20kda")]
+script = ExtResource("2_gjn3a")
+
+[node name="Sprite2D" parent="." index="0" unique_id=275432032]
+material = SubResource("ShaderMaterial_mtlud")
+texture = ExtResource("3_gjn3a")
+hframes = 4
+vframes = 6
+frame = 21
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1988172749]
+position = Vector2(0, 3)
+
+[node name="CollisionShape2D" parent="InteractionZone" parent_id_path=PackedInt32Array(509359783) index="0" unique_id=1782964673]
+position = Vector2(0, -6)
+
+[node name="AnimationPlayer" parent="." index="4" unique_id=773796458]
+libraries/ = SubResource("AnimationLibrary_mjat7")
+
+[node name="FlowerPatch" type="Node2D" parent="." index="5" unique_id=1743982776]
+
+[node name="Flower" type="Sprite2D" parent="FlowerPatch" index="0" unique_id=653091116]
+position = Vector2(22.5, 23.5)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_j5r6x")
+
+[node name="Flower2" type="Sprite2D" parent="FlowerPatch" index="1" unique_id=827844651]
+position = Vector2(1.5, 23.5)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_j5r6x")
+
+[node name="Flower3" type="Sprite2D" parent="FlowerPatch" index="2" unique_id=138465656]
+position = Vector2(-20.5, 23.5)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_j5r6x")

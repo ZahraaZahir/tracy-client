@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bt545g3cv2k74" path="res://assets/character/main.png" id="2_jt3wm"]
 [ext_resource type="PackedScene" uid="uid://b0aqj5sgsxwo4" path="res://scenes/entities/cow_entity.tscn" id="3_jt3wm"]
 [ext_resource type="PackedScene" uid="uid://dsm878oh674qo" path="res://scenes/entities/girl_farmer_entity.tscn" id="4_0b7qn"]
+[ext_resource type="PackedScene" uid="uid://lvgw3x5uboda" path="res://scenes/entities/mouse_entity.tscn" id="5_k64l8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aqk2v"]
 
@@ -407,3 +408,6 @@ position = Vector2(86, 59)
 
 [node name="GirlFarmerEntity" parent="." unique_id=182755861 instance=ExtResource("4_0b7qn")]
 position = Vector2(189, 83)
+
+[node name="MouseEntity" parent="." unique_id=1559858639 instance=ExtResource("5_k64l8")]
+position = Vector2(43, 102)
