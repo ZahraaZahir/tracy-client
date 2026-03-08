@@ -319,5 +319,14 @@ position = Vector2(-1, 8.5)
 [node name="CollisionShape2D" parent="InteractionZone" parent_id_path=PackedInt32Array(509359783) index="0" unique_id=1782964673]
 position = Vector2(0, 1)
 
-[node name="AnimationPlayer" parent="." index="5" unique_id=773796458]
+[node name="AnimationPlayer" parent="." index="4" unique_id=773796458]
 libraries/ = SubResource("AnimationLibrary_uhvoo")
+
+[node name="InspectPrompt" parent="CanvasLayer" parent_id_path=PackedInt32Array(152072634) index="0" unique_id=2035734970]
+offset_left = -56.0
+offset_top = -9.0
+offset_right = 17.0
+offset_bottom = 6.0
+
+[node name="PromptAnchor" parent="." index="6" unique_id=2067890196]
+position = Vector2(-28, -16)

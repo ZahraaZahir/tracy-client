@@ -375,11 +375,13 @@ hframes = 33
 vframes = 4
 frame = 88
 
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1297502761]
+position = Vector2(0, 3)
+zoom = Vector2(4, 4)
+process_callback = 0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=851933479]
 shape = SubResource("CircleShape2D_aqk2v")
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1297502761]
-zoom = Vector2(4, 4)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player" unique_id=336018869]
 libraries/ = SubResource("AnimationLibrary_ikiii")
@@ -397,14 +399,14 @@ parameters/Walk/blend_position = Vector2(0.21320343, -0.23231143)
 [node name="ColorRect" type="ColorRect" parent="." unique_id=157346821]
 y_sort_enabled = true
 custom_minimum_size = Vector2(2000, 2000)
-offset_left = -944.0
-offset_top = -967.0
-offset_right = 1056.0
-offset_bottom = 1033.0
-color = Color(0.5921569, 1, 0.53333336, 1)
+offset_left = -927.0
+offset_top = -964.0
+offset_right = 1073.0
+offset_bottom = 1036.0
+color = Color(0.6115383, 1, 0.46152216, 1)
 
 [node name="CowEntity" parent="." unique_id=850722004 instance=ExtResource("3_jt3wm")]
-position = Vector2(86, 59)
+position = Vector2(86, 63)
 
 [node name="GirlFarmerEntity" parent="." unique_id=182755861 instance=ExtResource("4_0b7qn")]
 position = Vector2(189, 83)

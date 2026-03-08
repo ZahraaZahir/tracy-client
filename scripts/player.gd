@@ -28,5 +28,8 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("attack"):
 		animation_state.travel("Sword")
+		
+	if $Camera2D:
+		$Camera2D.global_position = $Camera2D.global_position.round()
 
 	move_and_slide()

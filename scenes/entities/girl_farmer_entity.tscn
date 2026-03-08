@@ -241,5 +241,14 @@ position = Vector2(2, 3)
 [node name="CollisionShape2D" parent="InteractionZone" index="0" unique_id=1782964673]
 position = Vector2(-2, -5)
 
-[node name="AnimationPlayer" parent="." index="4" unique_id=773796458]
+[node name="AnimationPlayer" parent="." index="3" unique_id=773796458]
 libraries/ = SubResource("AnimationLibrary_wf1mc")
+
+[node name="InspectPrompt" parent="CanvasLayer" parent_id_path=PackedInt32Array(152072634) index="0" unique_id=2035734970]
+offset_left = -60.0
+offset_top = -18.0
+offset_right = 13.0
+offset_bottom = -3.0
+
+[node name="PromptAnchor" parent="." index="5" unique_id=2067890196]
+position = Vector2(-14, -24)

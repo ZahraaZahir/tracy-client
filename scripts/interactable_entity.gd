@@ -5,11 +5,14 @@ extends CharacterBody2D
 @export var is_fixed: bool = false:
 	set(value):
 		is_fixed = value
+		if is_fixed and prompt:
+			prompt.visible = false
 		_apply_visual_state()
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var prompt: Label = $PromptLabel
+@onready var prompt: Label = %InspectPrompt 
+@onready var anchor: Marker2D = $PromptAnchor
 
 var player_is_near: bool = false
 
@@ -22,12 +25,21 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if player_is_near and not is_fixed:
-		print("Press E to simulate fix", entity_id)
 		if Input.is_action_just_pressed("interact"):
 			_simulate_fix()
 
+	if prompt.visible:
+		_update_prompt_position()
+
+func _update_prompt_position() -> void:
+	var screen_origin = get_global_transform_with_canvas().origin
+	
+	var cam_zoom = get_viewport().get_camera_2d().zoom.x
+	
+	prompt.global_position = screen_origin + (anchor.position * cam_zoom)
+
 func _simulate_fix() -> void:
-	print("Fixed entity ", entity_id)
+	print("SYSTEM: Patching ", entity_id)
 	is_fixed = true
 
 func _apply_visual_state() -> void:
@@ -44,7 +56,8 @@ func _apply_visual_state() -> void:
 func _on_player_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		player_is_near = true
-		if not is_fixed: prompt.visible = true
+		if not is_fixed: 
+			prompt.visible = true
 
 func _on_player_exited(body: Node2D) -> void:
 	if body.name == "Player":
