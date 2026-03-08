@@ -6,14 +6,15 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mf7ll"]
 shader = ExtResource("1_duvm5")
 shader_parameter/is_glitched = true
-shader_parameter/jitter_power = 0.02
+shader_parameter/shake_power = 0.03
 shader_parameter/color_split = 0.1
+shader_parameter/flicker_power = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i7eka"]
 size = Vector2(12.5, 9.25)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2m16p"]
-radius = 9.0
+radius = 12.0415945
 
 [node name="InteractableEntity" type="CharacterBody2D" unique_id=850722004]
 script = ExtResource("1_3q5qu")

@@ -402,7 +402,7 @@ offset_right = 1056.0
 offset_bottom = 1033.0
 color = Color(0.5921569, 1, 0.53333336, 1)
 
-[node name="CowNpc" parent="." unique_id=850722004 instance=ExtResource("3_jt3wm")]
+[node name="CowEntity" parent="." unique_id=850722004 instance=ExtResource("3_jt3wm")]
 position = Vector2(86, 59)
 
 [node name="GirlFarmerEntity" parent="." unique_id=182755861 instance=ExtResource("4_0b7qn")]

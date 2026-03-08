@@ -1,8 +1,16 @@
 [gd_scene format=3 uid="uid://b0aqj5sgsxwo4"]
 
 [ext_resource type="PackedScene" uid="uid://cjnbh3yfi05ui" path="res://scenes/entities/interactable_entity.tscn" id="1_ihjqs"]
+[ext_resource type="Script" uid="uid://bnuvg6o2tmyhe" path="res://scripts/cow_entity.gd" id="2_blxjd"]
 [ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://scenes/entities/interactable_entity.gdshader" id="2_wowj4"]
 [ext_resource type="Texture2D" uid="uid://yqgbmd0jqeco" path="res://assets/character/cow.png" id="2_ybkv1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blxjd"]
+bg_color = Color(0, 0, 0, 0.39215687)
+corner_radius_top_left = 1024
+corner_radius_top_right = 1024
+corner_radius_bottom_right = 1024
+corner_radius_bottom_left = 1024
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_blxjd"]
 shader = ExtResource("2_wowj4")
@@ -38,6 +46,78 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -30)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.4)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shadow:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.3137255)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Shadow:theme_override_styles/panel")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StyleBoxFlat_blxjd")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Shadow:size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(29.999998, 8)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Shadow:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 11)]
+}
 
 [sub_resource type="Animation" id="Animation_wowj4"]
 resource_name = "glitch_active"
@@ -66,6 +146,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.7, 0.7)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shadow:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.3137255)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -10), Vector2(0, -12.5), Vector2(0, -15), Vector2(0, -12.2), Vector2(0, -10)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Shadow:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(18.571426, 4.285713)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Shadow:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 11)]
 }
 
 [sub_resource type="Animation" id="Animation_blxjd"]
@@ -96,6 +236,54 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shadow:theme_override_styles/panel")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StyleBoxFlat_blxjd")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shadow:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(29.999998, 8)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Shadow:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uhvoo"]
 _data = {
@@ -104,22 +292,32 @@ _data = {
 &"idle_normal": SubResource("Animation_blxjd")
 }
 
-[node name="CowNpc" unique_id=850722004 instance=ExtResource("1_ihjqs")]
+[node name="CowEntity" unique_id=850722004 instance=ExtResource("1_ihjqs")]
 texture_filter = 1
-entity_id = "npc_cow_01"
+script = ExtResource("2_blxjd")
 
-[node name="Sprite2D" parent="." index="0" unique_id=275432032]
+[node name="Shadow" type="Panel" parent="." index="0" unique_id=1696698810]
+modulate = Color(0, 0, 0, 0.3137255)
+offset_left = -8.0
+offset_top = 11.0
+offset_right = 21.999998
+offset_bottom = 19.0
+scale = Vector2(0.4, 0.4)
+theme_override_styles/panel = SubResource("StyleBoxFlat_blxjd")
+
+[node name="Sprite2D" parent="." index="1" unique_id=275432032]
 texture_filter = 1
 material = SubResource("ShaderMaterial_blxjd")
 texture = ExtResource("2_ybkv1")
+offset = Vector2(0, -30)
 hframes = 3
 vframes = 2
 
-[node name="CollisionShape2D" parent="." index="1" unique_id=1988172749]
+[node name="CollisionShape2D" parent="." index="2" unique_id=1988172749]
 position = Vector2(-1, 8.5)
 
 [node name="CollisionShape2D" parent="InteractionZone" parent_id_path=PackedInt32Array(509359783) index="0" unique_id=1782964673]
 position = Vector2(0, 1)
 
-[node name="AnimationPlayer" parent="." index="4" unique_id=773796458]
+[node name="AnimationPlayer" parent="." index="5" unique_id=773796458]
 libraries/ = SubResource("AnimationLibrary_uhvoo")
