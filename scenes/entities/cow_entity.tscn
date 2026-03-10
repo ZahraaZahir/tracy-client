@@ -295,6 +295,7 @@ _data = {
 [node name="CowEntity" unique_id=850722004 instance=ExtResource("1_ihjqs")]
 texture_filter = 1
 script = ExtResource("2_blxjd")
+entity_id = "npc_cow_01"
 
 [node name="Shadow" type="Panel" parent="." index="0" unique_id=1696698810]
 modulate = Color(0, 0, 0, 0.3137255)

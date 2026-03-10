@@ -201,6 +201,7 @@ _data = {
 
 [node name="MouseEntity" unique_id=850722004 instance=ExtResource("1_20kda")]
 script = ExtResource("2_gjn3a")
+entity_id = "npc_mouse_01"
 
 [node name="Sprite2D" parent="." index="0" unique_id=275432032]
 material = SubResource("ShaderMaterial_mtlud")
