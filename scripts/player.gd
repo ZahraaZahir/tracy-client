@@ -14,25 +14,22 @@ func _physics_process(delta):
 	input_vector = input_vector.normalized()
 
 	if input_vector != Vector2.ZERO:
-		
 		animation_tree.set("parameters/Idle/blend_position", input_vector)
 		animation_tree.set("parameters/Walk/blend_position", input_vector)
 		animation_tree.set("parameters/Sword/blend_position", input_vector)
-		
 
 		animation_state.travel("Walk")
 		
-		
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
-	
 		animation_state.travel("Idle")
 		
-	
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 	if Input.is_action_just_pressed("attack"):
 		animation_state.travel("Sword")
+		
+	if $Camera2D:
+		$Camera2D.global_position = $Camera2D.global_position.round()
 
-	
 	move_and_slide()
