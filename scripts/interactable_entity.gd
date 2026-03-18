@@ -11,7 +11,7 @@ extends CharacterBody2D
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var prompt: Label = %InspectPrompt 
+@onready var prompt: Label = %InspectPrompt  
 @onready var anchor: Marker2D = $PromptAnchor
 
 var player_is_near: bool = false
@@ -26,7 +26,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if player_is_near and not is_fixed:
 		if Input.is_action_just_pressed("interact"):
-			_simulate_fix()
+			_open_inspector()
 
 	if prompt.visible:
 		_update_prompt_position()
@@ -38,9 +38,10 @@ func _update_prompt_position() -> void:
 	
 	prompt.global_position = screen_origin + (anchor.position * cam_zoom)
 
-func _simulate_fix() -> void:
-	print("SYSTEM: Patching ", entity_id)
-	is_fixed = true
+func _open_inspector() -> void:
+	print("CLIENT: Inspecting ", entity_id)
+	EntityService.fetch_entity(entity_id) 
+	print("SYSTEM: Request sent for ", entity_id)
 
 func _apply_visual_state() -> void:
 	if not is_inside_tree() or not sprite: return

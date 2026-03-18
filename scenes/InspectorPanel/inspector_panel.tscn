@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://crinpj5srnbbe"]
+
+[ext_resource type="Script" uid="uid://ddah705c5sjoy" path="res://scenes/InspectorPanel/inspector_panel.gd" id="1_qiei4"]
+[ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/fonts/rainyhearts.ttf" id="2_06qfm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qiei4"]
+bg_color = Color(0.73333335, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06qfm"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phi0c"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="CodeHighlighter" id="CodeHighlighter_1mb5v"]
+number_color = Color(0.44746363, 0.7487378, 0.76641077, 1)
+symbol_color = Color(0.9334722, 0.76629347, 0.39448404, 1)
+function_color = Color(0.47941977, 0.43396938, 0.9398737, 1)
+keyword_colors = {
+"else": Color(0, 0, 0, 1),
+"false": Color(0, 0, 0, 1),
+"func": Color(0, 0, 0, 1),
+"if": Color(0, 0, 0, 1),
+"return": Color(0, 0, 0, 1),
+"true": Color(0, 0, 0, 1),
+"var": Color(0, 0, 0, 1)
+}
+
+[node name="InspectorPanel" type="Control" unique_id=1875940252]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1778004976]
+visible = false
+script = ExtResource("1_qiei4")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1307634207]
+custom_minimum_size = Vector2(700, 700)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qiei4")
+
+[node name="TerminalDisplay" type="CodeEdit" parent="CanvasLayer/PanelContainer" unique_id=815938414]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_06qfm")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxFlat_06qfm")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_phi0c")
+syntax_highlighter = SubResource("CodeHighlighter_1mb5v")
