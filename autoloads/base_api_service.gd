@@ -1,11 +1,11 @@
 extends Node
 
 const BASE_URL = "http://localhost:3050/api/v1"
-var auth_token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5NjZiMmE5Yi1jMTU2LTRlMzEtYmE4Zi01N2IzZjllZTg0YzMiLCJpYXQiOjE3NzM1MjEzMzMsImV4cCI6MTc3NDEyNjEzM30.pHtL9MnrbpfnnFWmnF9_5CpzBSbLkw3F5e6TZaCY5-8"
+var auth_token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0OTgwZTE0NC05NTlkLTRiN2UtYjZjZC0xZjllNTU1N2U1MjQiLCJpYXQiOjE3NzQ0NzU2ODIsImV4cCI6MTc3NTA4MDQ4Mn0.N6qk0uPfV9WGQsLwVR__1lDgbZXKAyW249Zo-9jOKi4"
 
 signal request_finished(endpoint: String, success: bool, data: Dictionary)
 
-func send_request(endpoint: String, method: int, payload: Dictionary = {}, use_auth: bool = false) -> void:
+func send_request(endpoint: String, method: int, payload: Dictionary = {}, use_auth: bool = false) -> void:   
 	var http = HTTPRequest.new()
 	add_child(http)
 	http.request_completed.connect(_on_request_completed.bind(http, endpoint))
@@ -22,7 +22,9 @@ func send_request(endpoint: String, method: int, payload: Dictionary = {}, use_a
 		request_finished.emit(endpoint, false, {"message": "Local connection error"})
 		http.queue_free()
 
-func _on_request_completed(_result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, http_node: HTTPRequest, endpoint: String) -> void:
+func _on_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, http_node: HTTPRequest, endpoint: String) -> void:
+	print("BRIDGE DEBUG: Received response from ", endpoint, " | Code: ", response_code)
+
 	var response_text = body.get_string_from_utf8()
 	var json_data = JSON.parse_string(response_text)
 	

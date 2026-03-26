@@ -19,6 +19,7 @@ var player_is_near: bool = false
 func _ready() -> void:
 	$InteractionZone.body_entered.connect(_on_player_entered)
 	$InteractionZone.body_exited.connect(_on_player_exited)
+	EntityService.entity_fixed_globally.connect(_on_entity_fixed_externally)
 	
 	_apply_visual_state()
 	prompt.visible = false
@@ -39,9 +40,8 @@ func _update_prompt_position() -> void:
 	prompt.global_position = screen_origin + (anchor.position * cam_zoom)
 
 func _open_inspector() -> void:
-	print("CLIENT: Inspecting ", entity_id)
-	EntityService.fetch_entity(entity_id) 
-	print("SYSTEM: Request sent for ", entity_id)
+	print("SYSTEM: Requesting state for ", entity_id)
+	EntityService.fetch_entity(entity_id)
 
 func _apply_visual_state() -> void:
 	if not is_inside_tree() or not sprite: return
@@ -64,3 +64,8 @@ func _on_player_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		player_is_near = false
 		prompt.visible = false
+
+func _on_entity_fixed_externally(fixed_id: String) -> void:
+	if fixed_id == entity_id:
+		print("NPC ", entity_id, ": I feel much better now!")
+		is_fixed = true 

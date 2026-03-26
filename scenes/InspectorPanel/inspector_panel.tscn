@@ -1,29 +1,35 @@
 [gd_scene format=3 uid="uid://crinpj5srnbbe"]
 
 [ext_resource type="Script" uid="uid://ddah705c5sjoy" path="res://scenes/InspectorPanel/inspector_panel.gd" id="1_qiei4"]
+[ext_resource type="Texture2D" uid="uid://vf1oevujiiuo" path="res://assets/ui/Inspector/ExamplesLikeBorders/Quests.png" id="2_1mb5v"]
 [ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/fonts/rainyhearts.ttf" id="2_06qfm"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qiei4"]
-bg_color = Color(0.73333335, 0.6, 0.6, 1)
+[ext_resource type="StyleBox" uid="uid://2e75ukqqc36h" path="res://assets/ui/normalButton.tres" id="4_i0kcm"]
+[ext_resource type="StyleBox" uid="uid://d1uh8prkym2hu" path="res://assets/ui/pressedButton.tres" id="5_0ly6t"]
+[ext_resource type="FontFile" uid="uid://dmwxkvjhiy2n0" path="res://assets/fonts/VaultUI.ttf" id="6_i0kcm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06qfm"]
 bg_color = Color(1, 1, 1, 0)
+border_color = Color(0, 0, 0, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phi0c"]
-bg_color = Color(1, 1, 1, 0)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i0kcm"]
 
 [sub_resource type="CodeHighlighter" id="CodeHighlighter_1mb5v"]
-number_color = Color(0.44746363, 0.7487378, 0.76641077, 1)
-symbol_color = Color(0.9334722, 0.76629347, 0.39448404, 1)
-function_color = Color(0.47941977, 0.43396938, 0.9398737, 1)
+number_color = Color(0.9318984, 0.42224783, 0.5336104, 1)
+symbol_color = Color(0.6915759, 0.54482013, 0.9846414, 1)
+function_color = Color(0.4987538, 0.621182, 0.19155896, 1)
+member_variable_color = Color(0.13725491, 0.87058824, 0.9647059, 1)
 keyword_colors = {
-"else": Color(0, 0, 0, 1),
-"false": Color(0, 0, 0, 1),
-"func": Color(0, 0, 0, 1),
-"if": Color(0, 0, 0, 1),
-"return": Color(0, 0, 0, 1),
-"true": Color(0, 0, 0, 1),
-"var": Color(0, 0, 0, 1)
+"else": Color(0.5737281, 0.31661403, 0.8214268, 1),
+"false": Color(0.1196293, 0.36344498, 0.5067428, 1),
+"func": Color(1.6364455e-06, 0.42532858, 0.39431965, 1),
+"if": Color(0.6821015, 0.6486794, 0.94870466, 1),
+"return": Color(0.56967205, 0.19716099, 0.48769826, 1),
+"true": Color(0.15733007, 0.66429293, 0.59092486, 1),
+"var": Color(0.92574775, 0.8369831, 0.101789825, 1)
+}
+color_regions = {
+"[": Color(1, 0, 0, 1),
+"]": Color(0.96862745, 0, 0, 1)
 }
 
 [node name="InspectorPanel" type="Control" unique_id=1875940252]
@@ -34,29 +40,111 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1778004976]
-visible = false
+[node name="InspectorPanel" type="CanvasLayer" parent="." unique_id=1778004976]
 script = ExtResource("1_qiei4")
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1307634207]
-custom_minimum_size = Vector2(700, 700)
+[node name="ContentRoot" type="Control" parent="InspectorPanel" unique_id=1366474709]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="BackgroundOverlay" type="ColorRect" parent="InspectorPanel/ContentRoot" unique_id=444555217]
+layout_mode = 0
+offset_right = 1919.0
+offset_bottom = 1098.0
+color = Color(0.101960786, 0.08235294, 0.08235294, 0.5882353)
+
+[node name="MainWindow" type="NinePatchRect" parent="InspectorPanel/ContentRoot" unique_id=377900043]
+custom_minimum_size = Vector2(1200, 900)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -600.0
+offset_top = -450.0
+offset_right = 600.0
+offset_bottom = 450.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qiei4")
+scale = Vector2(-1, -1)
+pivot_offset = Vector2(600, 450)
+texture = ExtResource("2_1mb5v")
+region_rect = Rect2(-11, -10.422108, 197, 166.18019)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
 
-[node name="TerminalDisplay" type="CodeEdit" parent="CanvasLayer/PanelContainer" unique_id=815938414]
+[node name="VBoxContainer" type="VBoxContainer" parent="InspectorPanel/ContentRoot" unique_id=1900063180]
+custom_minimum_size = Vector2(860, 560)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -438.0
+offset_top = -362.0
+offset_right = 453.0
+offset_bottom = 417.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="TerminalContainer" type="MarginContainer" parent="InspectorPanel/ContentRoot/VBoxContainer" unique_id=1455771987]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_06qfm")
-theme_override_font_sizes/font_size = 34
+size_flags_vertical = 3
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="TerminalDisplay" type="CodeEdit" parent="InspectorPanel/ContentRoot/VBoxContainer/TerminalContainer" unique_id=815938414]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6784314, 0.46666667, 0.34117648, 1)
+theme_override_fonts/font = ExtResource("6_i0kcm")
+theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxFlat_06qfm")
-theme_override_styles/read_only = SubResource("StyleBoxFlat_phi0c")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_i0kcm")
+theme_override_colors/line_number_color = Color(0.45882353, 0.654902, 0.2627451, 1)
+editable = false
+wrap_mode = 1
 syntax_highlighter = SubResource("CodeHighlighter_1mb5v")
+gutters_draw_line_numbers = true
+
+[node name="status_label" type="Label" parent="InspectorPanel/ContentRoot/VBoxContainer" unique_id=61679443]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0020835039, 0.0004491884, 0.00016380934, 1)
+theme_override_fonts/font = ExtResource("2_06qfm")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InspectorPanel/ContentRoot/VBoxContainer" unique_id=758589971]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="submit_button" type="Button" parent="InspectorPanel/ContentRoot/VBoxContainer/HBoxContainer" unique_id=918641416]
+custom_minimum_size = Vector2(370, 110)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.7137255, 0.5372549, 0.38431373, 1)
+theme_override_colors/font_pressed_color = Color(0.7137255, 0.5372549, 0.38431373, 1)
+theme_override_colors/font_hover_color = Color(0.7137255, 0.5372549, 0.38431373, 1)
+theme_override_fonts/font = ExtResource("2_06qfm")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = ExtResource("4_i0kcm")
+theme_override_styles/pressed = ExtResource("5_0ly6t")
+theme_override_styles/hover = ExtResource("4_i0kcm")
+text = "SUBMIT"
+expand_icon = true
+
+[connection signal="pressed" from="InspectorPanel/ContentRoot/VBoxContainer/HBoxContainer/submit_button" to="InspectorPanel" method="_on_submit_pressed"]
