@@ -23,6 +23,8 @@ config/icon="res://icon.svg"
 
 BaseApiService="*uid://dhu41xyaip8il"
 AuthService="*uid://bqa3kcfb7f4ka"
+EntityService="*uid://d38fyeovgt72m"
+InspectorPanel="*uid://crinpj5srnbbe"
 
 [display]
 

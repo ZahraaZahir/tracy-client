@@ -11,7 +11,7 @@ extends CharacterBody2D
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var prompt: Label = %InspectPrompt 
+@onready var prompt: Label = %InspectPrompt  
 @onready var anchor: Marker2D = $PromptAnchor
 
 var player_is_near: bool = false
@@ -19,6 +19,7 @@ var player_is_near: bool = false
 func _ready() -> void:
 	$InteractionZone.body_entered.connect(_on_player_entered)
 	$InteractionZone.body_exited.connect(_on_player_exited)
+	EntityService.entity_fixed_globally.connect(_on_entity_fixed_externally)
 	
 	_apply_visual_state()
 	prompt.visible = false
@@ -26,7 +27,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if player_is_near and not is_fixed:
 		if Input.is_action_just_pressed("interact"):
-			_simulate_fix()
+			_open_inspector()
 
 	if prompt.visible:
 		_update_prompt_position()
@@ -38,9 +39,9 @@ func _update_prompt_position() -> void:
 	
 	prompt.global_position = screen_origin + (anchor.position * cam_zoom)
 
-func _simulate_fix() -> void:
-	print("SYSTEM: Patching ", entity_id)
-	is_fixed = true
+func _open_inspector() -> void:
+	print("SYSTEM: Requesting state for ", entity_id)
+	EntityService.fetch_entity(entity_id)
 
 func _apply_visual_state() -> void:
 	if not is_inside_tree() or not sprite: return
@@ -63,3 +64,8 @@ func _on_player_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		player_is_near = false
 		prompt.visible = false
+
+func _on_entity_fixed_externally(fixed_id: String) -> void:
+	if fixed_id == entity_id:
+		print("NPC ", entity_id, ": I feel much better now!")
+		is_fixed = true 
