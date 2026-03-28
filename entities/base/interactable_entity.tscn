@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cjnbh3yfi05ui"]
+
+[ext_resource type="Script" uid="uid://cpkph0aca3mcb" path="res://entities/base/interactable_entity.gd" id="1_3q5qu"]
+[ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://entities/base/interactable_entity.gdshader" id="1_duvm5"]
+[ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/fonts/rainyhearts.ttf" id="3_i7eka"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mf7ll"]
+shader = ExtResource("1_duvm5")
+shader_parameter/is_glitched = true
+shader_parameter/shake_power = 0.03
+shader_parameter/color_split = 0.1
+shader_parameter/flicker_power = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7eka"]
+size = Vector2(12.5, 12.625)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2m16p"]
+radius = 12.0415945
+
+[sub_resource type="LabelSettings" id="LabelSettings_i7eka"]
+font = ExtResource("3_i7eka")
+font_size = 32
+
+[node name="InteractableEntity" type="CharacterBody2D" unique_id=850722004]
+script = ExtResource("1_3q5qu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=275432032]
+material = SubResource("ShaderMaterial_mf7ll")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1988172749]
+position = Vector2(49, 71)
+shape = SubResource("RectangleShape2D_i7eka")
+
+[node name="InteractionZone" type="Area2D" parent="." unique_id=509359783]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone" unique_id=1782964673]
+position = Vector2(68, 49)
+shape = SubResource("CircleShape2D_2m16p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=773796458]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=152072634]
+
+[node name="InspectPrompt" type="Label" parent="CanvasLayer" unique_id=2035734970]
+unique_name_in_owner = true
+visible = false
+offset_right = 73.0
+offset_bottom = 15.0
+theme_override_colors/font_outline_color = Color(0.26293266, 0.2629324, 0.26293254, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_i7eka")
+theme_override_font_sizes/font_size = 8
+text = "[I] INSPECT"
+label_settings = SubResource("LabelSettings_i7eka")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PromptAnchor" type="Marker2D" parent="." unique_id=2067890196]
+position = Vector2(35, 7)

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://fwfupe5nvrcr"]
+
+[ext_resource type="PackedScene" uid="uid://dht6uj4hviygm" path="res://player/player.tscn" id="1_0b7qn"]
+[ext_resource type="PackedScene" uid="uid://b0aqj5sgsxwo4" path="res://entities/cow/cow_entity.tscn" id="3_jt3wm"]
+[ext_resource type="PackedScene" uid="uid://dsm878oh674qo" path="res://entities/girl_farmer/girl_farmer_entity.tscn" id="4_0b7qn"]
+[ext_resource type="PackedScene" uid="uid://lvgw3x5uboda" path="res://entities/mouse/mouse_entity.tscn" id="5_k64l8"]
+
+[node name="World" type="Node2D" unique_id=2062264167]
+y_sort_enabled = true
+
+[node name="Player" parent="." unique_id=303713143 instance=ExtResource("1_0b7qn")]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=157346821]
+y_sort_enabled = true
+custom_minimum_size = Vector2(2000, 2000)
+offset_left = -927.0
+offset_top = -964.0
+offset_right = 1073.0
+offset_bottom = 1036.0
+color = Color(0.6115383, 1, 0.46152216, 1)
+
+[node name="CowEntity" parent="." unique_id=850722004 instance=ExtResource("3_jt3wm")]
+position = Vector2(86, 63)
+
+[node name="GirlFarmerEntity" parent="." unique_id=182755861 instance=ExtResource("4_0b7qn")]
+position = Vector2(189, 83)
+
+[node name="MouseEntity" parent="." unique_id=1559858639 instance=ExtResource("5_k64l8")]
+position = Vector2(43, 102)
