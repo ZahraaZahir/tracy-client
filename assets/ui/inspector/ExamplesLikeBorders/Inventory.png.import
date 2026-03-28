@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vf1oevujiiuo"
-path="res://.godot/imported/Quests.png-324cb67be81363c993b7eb1a4b6b8315.ctex"
+uid="uid://kf0076otmdj0"
+path="res://.godot/imported/Inventory.png-f6b35b07d6d93f49906cfd9e903135f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/Inspector/ExamplesLikeBorders/Quests.png"
-dest_files=["res://.godot/imported/Quests.png-324cb67be81363c993b7eb1a4b6b8315.ctex"]
+source_file="res://assets/ui/inspector/ExamplesLikeBorders/Inventory.png"
+dest_files=["res://.godot/imported/Inventory.png-f6b35b07d6d93f49906cfd9e903135f6.ctex"]
 
 [params]
 

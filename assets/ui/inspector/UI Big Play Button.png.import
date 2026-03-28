@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kf0076otmdj0"
-path="res://.godot/imported/Inventory.png-60a8ef586aa9ea9e61f2e51b72529354.ctex"
+uid="uid://d0ro2snl8i1qu"
+path="res://.godot/imported/UI Big Play Button.png-ec9847265b66508d1091881cc0e9bbe1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/Inspector/ExamplesLikeBorders/Inventory.png"
-dest_files=["res://.godot/imported/Inventory.png-60a8ef586aa9ea9e61f2e51b72529354.ctex"]
+source_file="res://assets/ui/inspector/UI Big Play Button.png"
+dest_files=["res://.godot/imported/UI Big Play Button.png-ec9847265b66508d1091881cc0e9bbe1.ctex"]
 
 [params]
 

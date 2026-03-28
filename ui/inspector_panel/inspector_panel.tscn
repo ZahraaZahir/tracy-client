@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://crinpj5srnbbe"]
 
-[ext_resource type="Script" uid="uid://ddah705c5sjoy" path="res://scenes/InspectorPanel/inspector_panel.gd" id="1_qiei4"]
-[ext_resource type="Texture2D" uid="uid://vf1oevujiiuo" path="res://assets/ui/Inspector/ExamplesLikeBorders/Quests.png" id="2_1mb5v"]
+[ext_resource type="Script" uid="uid://ddah705c5sjoy" path="res://ui/inspector_panel/inspector_panel.gd" id="1_qiei4"]
+[ext_resource type="Texture2D" uid="uid://vf1oevujiiuo" path="res://assets/ui/inspector/ExamplesLikeBorders/Quests.png" id="2_1mb5v"]
 [ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/fonts/rainyhearts.ttf" id="2_06qfm"]
 [ext_resource type="StyleBox" uid="uid://2e75ukqqc36h" path="res://assets/ui/normalButton.tres" id="4_i0kcm"]
 [ext_resource type="StyleBox" uid="uid://d1uh8prkym2hu" path="res://assets/ui/pressedButton.tres" id="5_0ly6t"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xuem63kmn6dv"
-path="res://.godot/imported/Square Buttons 26x19.png-8a6b7822a92b38c4e7bfd9da19d6e5e0.ctex"
+uid="uid://r6hhr8rvwjia"
+path="res://.godot/imported/DialogueBox.png-714e525b98dbcb7857ec104085e7e2d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/Inspector/Square Buttons 26x19.png"
-dest_files=["res://.godot/imported/Square Buttons 26x19.png-8a6b7822a92b38c4e7bfd9da19d6e5e0.ctex"]
+source_file="res://assets/ui/inspector/ExamplesLikeBorders/DialogueBox.png"
+dest_files=["res://.godot/imported/DialogueBox.png-714e525b98dbcb7857ec104085e7e2d4.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dsm878oh674qo"]
 
-[ext_resource type="PackedScene" uid="uid://cjnbh3yfi05ui" path="res://scenes/entities/interactable_entity.tscn" id="1_8epw3"]
-[ext_resource type="Script" uid="uid://bf8qxelj00sh7" path="res://scripts/girl_farmer_entity.gd" id="2_a1nye"]
+[ext_resource type="PackedScene" uid="uid://cjnbh3yfi05ui" path="res://entities/base/interactable_entity.tscn" id="1_8epw3"]
+[ext_resource type="Script" uid="uid://bf8qxelj00sh7" path="res://entities/girl_farmer/girl_farmer_entity.gd" id="2_a1nye"]
 [ext_resource type="Texture2D" uid="uid://p7qrmdhhnd5" path="res://assets/character/girl-farmer.png" id="2_ul56o"]
-[ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://scenes/entities/interactable_entity.gdshader" id="2_wf1mc"]
+[ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://entities/base/interactable_entity.gdshader" id="2_wf1mc"]
 [ext_resource type="Texture2D" uid="uid://dnhjq70a5fcay" path="res://assets/character/tools.png" id="4_e1hex"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e1hex"]

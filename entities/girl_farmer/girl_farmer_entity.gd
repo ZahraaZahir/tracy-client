@@ -1,4 +1,4 @@
-extends "res://scripts/interactable_entity.gd"
+extends "res://entities/base/interactable_entity.gd"
 
 @export var target_offset: Vector2 = Vector2(150, 0) 
 @onready var target_pos: Vector2 = global_position + target_offset

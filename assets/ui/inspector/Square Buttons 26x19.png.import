@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0ro2snl8i1qu"
-path="res://.godot/imported/UI Big Play Button.png-73f085ee11a9c9b4ab640f88197abde8.ctex"
+uid="uid://xuem63kmn6dv"
+path="res://.godot/imported/Square Buttons 26x19.png-6b429572c6ec07f5000467b9d0415447.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/Inspector/UI Big Play Button.png"
-dest_files=["res://.godot/imported/UI Big Play Button.png-73f085ee11a9c9b4ab640f88197abde8.ctex"]
+source_file="res://assets/ui/inspector/Square Buttons 26x19.png"
+dest_files=["res://.godot/imported/Square Buttons 26x19.png-6b429572c6ec07f5000467b9d0415447.ctex"]
 
 [params]
 

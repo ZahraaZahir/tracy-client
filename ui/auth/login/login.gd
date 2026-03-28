@@ -12,7 +12,7 @@ const COLOR_PENDING = Color("#ffef4b")
 
 func _ready() -> void:
 	login_button.pressed.connect(_on_login_pressed)
-	back_button.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/auth/welcome.tscn"))
+	back_button.pressed.connect(func(): get_tree().change_scene_to_file("res://ui/welcome/welcome.tscn"))
 	
 	AuthService.auth_finished.connect(_on_auth_result)
 	status_label.text = ""

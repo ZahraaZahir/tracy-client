@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lt711ji6nnl6"
-path="res://.godot/imported/Shop.png-4837943b819b2508b7b719f542942db1.ctex"
+uid="uid://vf1oevujiiuo"
+path="res://.godot/imported/Quests.png-04d53bda73bd0ef5513f47c83ac4fe67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/Inspector/ExamplesLikeBorders/Shop.png"
-dest_files=["res://.godot/imported/Shop.png-4837943b819b2508b7b719f542942db1.ctex"]
+source_file="res://assets/ui/inspector/ExamplesLikeBorders/Quests.png"
+dest_files=["res://.godot/imported/Quests.png-04d53bda73bd0ef5513f47c83ac4fe67.ctex"]
 
 [params]
 

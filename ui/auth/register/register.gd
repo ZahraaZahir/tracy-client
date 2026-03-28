@@ -49,7 +49,7 @@ func _on_auth_result(success: bool, message: String) -> void:
 		_set_status("Error: " + message, COLOR_ERROR)
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/auth/welcome.tscn")
+	get_tree().change_scene_to_file("res://ui/welcome/welcome.tscn")
 
 func _set_status(text: String, color: Color) -> void:
 	status_label.text = text

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://lvgw3x5uboda"]
 
-[ext_resource type="PackedScene" uid="uid://cjnbh3yfi05ui" path="res://scenes/entities/interactable_entity.tscn" id="1_20kda"]
-[ext_resource type="Script" uid="uid://bu4ychi07rp67" path="res://scripts/mouse_entity.gd" id="2_gjn3a"]
-[ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://scenes/entities/interactable_entity.gdshader" id="2_j5r6x"]
+[ext_resource type="PackedScene" uid="uid://cjnbh3yfi05ui" path="res://entities/base/interactable_entity.tscn" id="1_20kda"]
+[ext_resource type="Script" uid="uid://bu4ychi07rp67" path="res://entities/mouse/mouse_entity.gd" id="2_gjn3a"]
+[ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://entities/base/interactable_entity.gdshader" id="2_j5r6x"]
 [ext_resource type="Texture2D" uid="uid://dt6ge5phc2fep" path="res://assets/character/mouse.png" id="3_gjn3a"]
 [ext_resource type="Texture2D" uid="uid://c7iq4d0tvxob5" path="res://assets/ui/world/sunflower.png" id="4_j5r6x"]
 

@@ -1,4 +1,4 @@
-extends "res://scripts/interactable_entity.gd"
+extends "res://entities/base/interactable_entity.gd"
 
 var is_falling: bool = false
 

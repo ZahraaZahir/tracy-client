@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cjnbh3yfi05ui"]
 
-[ext_resource type="Script" uid="uid://cpkph0aca3mcb" path="res://scripts/interactable_entity.gd" id="1_3q5qu"]
-[ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://scenes/entities/interactable_entity.gdshader" id="1_duvm5"]
+[ext_resource type="Script" uid="uid://cpkph0aca3mcb" path="res://entities/base/interactable_entity.gd" id="1_3q5qu"]
+[ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://entities/base/interactable_entity.gdshader" id="1_duvm5"]
 [ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/fonts/rainyhearts.ttf" id="3_i7eka"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mf7ll"]
