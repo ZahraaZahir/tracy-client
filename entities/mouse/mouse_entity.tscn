@@ -219,13 +219,7 @@ position = Vector2(0, -6)
 [node name="AnimationPlayer" parent="." index="3" unique_id=773796458]
 libraries/ = SubResource("AnimationLibrary_mjat7")
 
-[node name="InspectPrompt" parent="CanvasLayer" parent_id_path=PackedInt32Array(152072634) index="0" unique_id=2035734970]
-offset_left = -66.0
-offset_top = -19.0
-offset_right = 7.0
-offset_bottom = -4.0
-
-[node name="FlowerPatch" type="Node2D" parent="." index="5" unique_id=1743982776]
+[node name="FlowerPatch" type="Node2D" parent="." index="4" unique_id=1743982776]
 
 [node name="Flower" type="Sprite2D" parent="FlowerPatch" index="0" unique_id=653091116]
 position = Vector2(20.5, 23.5)
@@ -241,6 +235,3 @@ texture = ExtResource("4_j5r6x")
 position = Vector2(-22.5, 23.5)
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("4_j5r6x")
-
-[node name="PromptAnchor" parent="." index="6" unique_id=2067890196]
-position = Vector2(-16, -25)
