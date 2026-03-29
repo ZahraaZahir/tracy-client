@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://b0aqj5sgsxwo4" path="res://entities/cow/cow_entity.tscn" id="3_jt3wm"]
 [ext_resource type="PackedScene" uid="uid://dsm878oh674qo" path="res://entities/girl_farmer/girl_farmer_entity.tscn" id="4_0b7qn"]
 [ext_resource type="PackedScene" uid="uid://lvgw3x5uboda" path="res://entities/mouse/mouse_entity.tscn" id="5_k64l8"]
+[ext_resource type="Script" uid="uid://b37bdxws7wns" path="res://ui/interaction/prompt_manager.gd" id="6_fn3g3"]
+[ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/fonts/rainyhearts.ttf" id="6_sc4t8"]
 
 [node name="World" type="Node2D" unique_id=2062264167]
 y_sort_enabled = true
@@ -29,3 +31,15 @@ position = Vector2(189, 83)
 
 [node name="MouseEntity" parent="." unique_id=1559858639 instance=ExtResource("5_k64l8")]
 position = Vector2(43, 102)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1755151250]
+layer = 10
+
+[node name="PromptLabel" type="Label" parent="UI" unique_id=1065362751]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_sc4t8")
+theme_override_font_sizes/font_size = 32
+script = ExtResource("6_fn3g3")

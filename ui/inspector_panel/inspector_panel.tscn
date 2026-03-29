@@ -41,6 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="InspectorPanel" type="CanvasLayer" parent="." unique_id=1778004976]
+layer = 20
 script = ExtResource("1_qiei4")
 
 [node name="ContentRoot" type="Control" parent="InspectorPanel" unique_id=1366474709]
