@@ -17,6 +17,7 @@ extends CharacterBody2D
 var player_is_near: bool = false
 
 func _ready() -> void:
+	add_to_group("interactable")
 	$InteractionZone.body_entered.connect(_on_player_entered)
 	$InteractionZone.body_exited.connect(_on_player_exited)
 	EntityService.entity_fixed_globally.connect(_on_entity_fixed_externally)

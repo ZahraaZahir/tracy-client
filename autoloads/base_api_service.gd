@@ -2,8 +2,7 @@ extends Node
 
 const BASE_URL = "http://localhost:3050/api/v1"
 
-var auth_token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkYWMwZDliMC0wZTFjLTQ1M2YtYTI5Yi1mZDdlY2UwMjk0ZDYiLCJpYXQiOjE3NzQ3MjgwMTYsImV4cCI6MTc3NTMzMjgxNn0.KGIQFzXAL4aKLeRSx-fc1IIFqZlcZKlfXexDc1G2FuY"
-
+var auth_token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkMmJiZTU3MC00NDVmLTQzNTUtYTk5NC0yNWQ4OWEyZTdlODciLCJpYXQiOjE3NzQ3Nzk1MjcsImV4cCI6MTc3NTM4NDMyN30.nbDJYPAjmD6pxGo-YerBtoHSVjk2yqEuagkfnDEtL60"
 signal request_finished(endpoint: String, success: bool, data: Dictionary)
 
 func send_request(endpoint: String, method: int, payload: Dictionary = {}, use_auth: bool = false) -> void:   

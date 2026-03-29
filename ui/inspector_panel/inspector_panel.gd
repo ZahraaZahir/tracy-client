@@ -17,7 +17,6 @@ func _on_npc_data_arrived(success: bool, data: Dictionary) -> void:
 		current_entity_id = data.id 
 		panel.visible = true
 		
-		
 		if data.isFixed:
 			status_label.text = "STATUS: STABLE"
 			submit_button.disabled = true
@@ -29,7 +28,6 @@ func _on_npc_data_arrived(success: bool, data: Dictionary) -> void:
 			terminal.text = _render_terminal_text(data.templateCode, {}, false)
 	else:
 		push_error("UI: Could not find NPC data in the database.")
-
 
 func _render_terminal_text(template: String, solutions: Dictionary, fixed: bool) -> String:
 	var result_text = template
@@ -47,7 +45,13 @@ func _render_terminal_text(template: String, solutions: Dictionary, fixed: bool)
 	return result_text
 
 func _on_submit_pressed() -> void:
-	var my_answer = {"s1": 1.0} 
+	var my_answer = {}
+	if current_entity_id == "npc_cow_01":
+		my_answer = {"s1": 1.0}
+	elif current_entity_id == "npc_girl_farmer_01":
+		my_answer = {"s1": false}
+	elif current_entity_id == "npc_mouse_01":
+		my_answer = {"s1": "Sunflower"} 
 	EntityService.solve_entity(current_entity_id, my_answer)
 
 func _on_solve_result(success: bool, message: String, _wrong_slot: String) -> void:
