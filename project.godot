@@ -25,6 +25,7 @@ BaseApiService="*uid://dhu41xyaip8il"
 AuthService="*uid://bqa3kcfb7f4ka"
 EntityService="*uid://d38fyeovgt72m"
 InspectorPanel="*uid://crinpj5srnbbe"
+WorldService="*uid://ce7s0x7xswksv"
 
 [display]
 

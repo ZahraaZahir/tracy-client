@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://fwfupe5nvrcr"]
 
 [ext_resource type="PackedScene" uid="uid://dht6uj4hviygm" path="res://player/player.tscn" id="1_0b7qn"]
+[ext_resource type="Script" uid="uid://jkmpj2mnijw" path="res://world/world.gd" id="1_mmdvd"]
 [ext_resource type="PackedScene" uid="uid://b0aqj5sgsxwo4" path="res://entities/cow/cow_entity.tscn" id="3_jt3wm"]
 [ext_resource type="PackedScene" uid="uid://dsm878oh674qo" path="res://entities/girl_farmer/girl_farmer_entity.tscn" id="4_0b7qn"]
 [ext_resource type="PackedScene" uid="uid://lvgw3x5uboda" path="res://entities/mouse/mouse_entity.tscn" id="5_k64l8"]
 
 [node name="World" type="Node2D" unique_id=2062264167]
 y_sort_enabled = true
+script = ExtResource("1_mmdvd")
 
 [node name="Player" parent="." unique_id=303713143 instance=ExtResource("1_0b7qn")]
 
