@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var player = $Player
 
+const MAP_ID = "main_world"
+
 func _ready() -> void:
 	WorldService.world_loaded.connect(_on_world_loaded)
 	WorldService.load_state()
@@ -28,6 +30,5 @@ func _on_world_loaded(data: Dictionary) -> void:
 	WorldService.is_persistence_ready = true
 
 func _on_entity_fixed(id: String) -> void:
-	print("SYSTEM: Success detected on ", id, ". Committing player position...")
-	# Force the save to happen right where Tracy is standing
-	WorldService.save_state(player.global_position, get_tree().current_scene.name)
+		print("SYSTEM: Success detected. Committing player position to ", MAP_ID)
+		WorldService.save_state(player.global_position, MAP_ID)
