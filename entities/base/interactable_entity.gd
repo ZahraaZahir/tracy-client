@@ -9,8 +9,9 @@ signal player_left()
 	set(value):
 		is_fixed = value
 		if is_fixed:
-			player_left.emit()
+			EntityService.request_prompt_hide.emit()
 		_apply_visual_state()
+
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
@@ -46,7 +47,6 @@ func _apply_visual_state() -> void:
 
 func _on_player_entered(body: Node2D) -> void:
 	if body.name == "Player":
-		print("DEBUG: Player entered zone of ", entity_id) # <--- Add this
 		player_is_near = true
 		if not is_fixed: 
 			EntityService.request_prompt_show.emit(self)
@@ -54,7 +54,7 @@ func _on_player_entered(body: Node2D) -> void:
 func _on_player_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		player_is_near = false
-		player_left.emit() 
+		EntityService.request_prompt_hide.emit()
 
 func _on_entity_fixed_externally(fixed_id: String) -> void:
 	if fixed_id == entity_id:
