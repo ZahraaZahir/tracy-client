@@ -53,9 +53,12 @@ grow_vertical = 2
 size_flags_horizontal = 4
 
 [node name="BackgroundOverlay" type="ColorRect" parent="InspectorPanel/ContentRoot" unique_id=444555217]
-layout_mode = 0
-offset_right = 1919.0
-offset_bottom = 1098.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.101960786, 0.08235294, 0.08235294, 0.5882353)
 
 [node name="MainWindow" type="NinePatchRect" parent="InspectorPanel/ContentRoot" unique_id=377900043]

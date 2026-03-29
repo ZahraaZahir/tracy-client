@@ -13,6 +13,7 @@ func _ready() -> void:
 	EntityService.entity_solve_finished.connect(_on_solve_result)
 
 func _on_npc_data_arrived(success: bool, data: Dictionary) -> void:
+	status_label.remove_theme_color_override("font_color")
 	if success:
 		current_entity_id = data.id 
 		panel.visible = true
@@ -49,21 +50,41 @@ func _on_submit_pressed() -> void:
 	if current_entity_id == "npc_cow_01":
 		my_answer = {"s1": 1.0}
 	elif current_entity_id == "npc_girl_farmer_01":
-		my_answer = {"s1": false}
+		my_answer = {"s1": true}
 	elif current_entity_id == "npc_mouse_01":
 		my_answer = {"s1": "Sunflower"} 
 	EntityService.solve_entity(current_entity_id, my_answer)
 
 func _on_solve_result(success: bool, message: String, _wrong_slot: String) -> void:
 	if success:
-		print("VICTORY: ", message)
-		status_label.text = "STATUS: PATCHED"
-		await get_tree().create_timer(1.5).timeout
-		panel.visible = false 
+		status_label.text = "STATUS: PATCHED!"
+		submit_button.disabled = true 
+		
+		var tween = create_tween()
+		
+		tween.tween_property(panel, "modulate:a", 0.0, 0.2)\
+			.set_trans(Tween.TRANS_SINE)\
+			.set_ease(Tween.EASE_IN)
+		
+		tween.tween_callback(func():
+			panel.visible = false
+			panel.modulate.a = 1.0
+		)
 	else:
-		status_label.text = "ERROR: " + message
-		print("LOGIC ERROR: ", message)
+		_set_status_error(message)
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel") and panel.visible:
 		panel.visible = false
+
+func _set_status_error(message: String) -> void:
+	status_label.text = "ERROR: " + message
+	
+	status_label.add_theme_color_override("font_color", Color("ff6761"))
+	
+	submit_button.disabled = false
+	
+	var shake_tween = create_tween()
+	shake_tween.tween_property(panel, "position:x", panel.position.x + 5, 0.05)
+	shake_tween.tween_property(panel, "position:x", panel.position.x - 5, 0.05)
+	shake_tween.set_loops(2)
