@@ -1,7 +1,10 @@
 extends Node
 
 signal world_loaded(data: Dictionary)
+signal progress_updated(current: int, total: int)
 
+var patched_bugs_count: int = 0
+var total_bugs_count: int = 0
 var is_persistence_ready: bool = false
 
 func _ready() -> void:
@@ -24,7 +27,13 @@ func load_state() -> void:
 
 func _on_base_request_finished(endpoint: String, success: bool, data: Dictionary) -> void:
 	if endpoint == "/world/load" and success:
-		var actual_data = data.get("data", {})
+		var actual_data = data.get("data", data)
 		world_loaded.emit(actual_data)
 	elif endpoint == "/world/save" and success:
 		print("SYSTEM: World synced.")
+
+func sync_progress(fixed_list: Array, total: int) -> void:
+	patched_bugs_count = fixed_list.size()
+	total_bugs_count = total
+	progress_updated.emit(patched_bugs_count, total_bugs_count)
+	

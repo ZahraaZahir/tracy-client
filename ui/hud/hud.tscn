@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bseeh4r2mrijf"]
+
+[ext_resource type="Script" uid="uid://clbhok0qf2jo5" path="res://ui/hud/hud.gd" id="1_4d6w6"]
+[ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/fonts/rainyhearts.ttf" id="1_xmswo"]
+[ext_resource type="Texture2D" uid="uid://d0ro2snl8i1qu" path="res://assets/ui/inspector/UI Big Play Button.png" id="2_e0nub"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w75iv"]
+texture = ExtResource("2_e0nub")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(0, 0, 96, 32)
+
+[node name="Hud" type="CanvasLayer" unique_id=167699842]
+layer = 5
+script = ExtResource("1_4d6w6")
+
+[node name="MainMargin" type="MarginContainer" parent="." unique_id=949798187]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TopRight" type="VBoxContainer" parent="MainMargin" unique_id=778169558]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ProgressWidget" type="PanelContainer" parent="MainMargin/TopRight" unique_id=241064091]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_w75iv")
+
+[node name="Padding" type="MarginContainer" parent="MainMargin/TopRight/ProgressWidget" unique_id=809288271]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ProgressHBox" type="HBoxContainer" parent="MainMargin/TopRight/ProgressWidget/Padding" unique_id=296655421]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMargin/TopRight/ProgressWidget/Padding/ProgressHBox" unique_id=1574933262]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.49506336, 0.3567175, 0.23513815, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_xmswo")
+theme_override_font_sizes/font_size = 32
+text = "Fixed: 0 / 3"

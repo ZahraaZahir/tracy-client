@@ -18,17 +18,15 @@ func _on_world_loaded(data: Dictionary) -> void:
 		var target_pos = Vector2(data.posX, data.posY)
 		if target_pos.length() > 0.1:
 			player.set_deferred("global_position", target_pos)
-			print("SYSTEM: Player restored to: ", target_pos)
 	
-	if data.has("fixedGlitches"):
-		var fixed_list = data.fixedGlitches
-		await get_tree().process_frame 
+	if data.has("fixedGlitches") and data.has("totalEntities"):
+		ProgressionService.sync(data.fixedGlitches, data.totalEntities)
+		
 		for npc in get_tree().get_nodes_in_group("interactable"):
-			if npc.entity_id in fixed_list:
+			if npc.entity_id in data.fixedGlitches:
 				npc.is_fixed = true
-				
+
 	WorldService.is_persistence_ready = true
 
-func _on_entity_fixed(id: String) -> void:
-		print("SYSTEM: Success detected. Committing player position to ", MAP_ID)
-		WorldService.save_state(player.global_position, MAP_ID)
+func _on_entity_fixed(_id: String) -> void:
+	WorldService.save_state(player.global_position, MAP_ID)
