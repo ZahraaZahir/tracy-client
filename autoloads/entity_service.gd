@@ -23,12 +23,13 @@ func _on_base_request_finished(endpoint: String, success: bool, data: Dictionary
 		entity_data_received.emit(success, data)
 	elif endpoint.ends_with("/solve"):
 		if success:
+			if data.has("fixedGlitches") and data.has("totalEntities"):
+				ProgressionService.sync(data.fixedGlitches, data.totalEntities)
 			var parts = endpoint.split("/")
 			if parts.size() > 2:
-				var id = parts[2]
-				print("BRIDGE DEBUG: Emitting fixed signal for ", id)
-				entity_fixed_globally.emit(id)
+				entity_fixed_globally.emit(parts[2])
 		
 		var msg = data.get("message", "Error")
 		var wrong = data.get("wrongSlot", "")
 		entity_solve_finished.emit(success, msg, wrong)
+		

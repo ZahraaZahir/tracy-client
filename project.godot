@@ -26,6 +26,7 @@ AuthService="*uid://bqa3kcfb7f4ka"
 EntityService="*uid://d38fyeovgt72m"
 InspectorPanel="*uid://crinpj5srnbbe"
 WorldService="*uid://ce7s0x7xswksv"
+ProgressionService="*uid://8qaiklypwson"
 
 [display]
 

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://lvgw3x5uboda" path="res://entities/mouse/mouse_entity.tscn" id="5_k64l8"]
 [ext_resource type="Script" uid="uid://b37bdxws7wns" path="res://ui/interaction/prompt_manager.gd" id="6_fn3g3"]
 [ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/fonts/rainyhearts.ttf" id="6_sc4t8"]
+[ext_resource type="PackedScene" uid="uid://bseeh4r2mrijf" path="res://ui/hud/hud.tscn" id="8_ai45w"]
 
 [node name="World" type="Node2D" unique_id=2062264167]
 y_sort_enabled = true
@@ -21,7 +22,7 @@ offset_left = -927.0
 offset_top = -964.0
 offset_right = 1073.0
 offset_bottom = 1036.0
-color = Color(0.6115383, 1, 0.46152216, 1)
+color = Color(0.6172603, 0.99999994, 0.52946705, 1)
 
 [node name="CowEntity" parent="." unique_id=850722004 instance=ExtResource("3_jt3wm")]
 position = Vector2(86, 63)
@@ -43,3 +44,5 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_sc4t8")
 theme_override_font_sizes/font_size = 32
 script = ExtResource("6_fn3g3")
+
+[node name="Hud" parent="." unique_id=167699842 instance=ExtResource("8_ai45w")]
