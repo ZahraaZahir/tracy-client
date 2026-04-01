@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bgj837d1mab7w"]
+
+[ext_resource type="FontFile" uid="uid://dmwxkvjhiy2n0" path="res://assets/fonts/VaultUI.ttf" id="1_q4my2"]
+[ext_resource type="Script" uid="uid://yb1dm8rlyqli" path="res://ui/inspector_panel/code_slot/code_slot.gd" id="2_k1ao0"]
+
+[node name="CodeSlot" type="Button" unique_id=660433212]
+custom_minimum_size = Vector2(60, 0)
+theme_override_fonts/font = ExtResource("1_q4my2")
+theme_override_font_sizes/font_size = 50
+text = "???"
+flat = true
+script = ExtResource("2_k1ao0")
