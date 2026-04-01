@@ -2,7 +2,7 @@ extends Node
 
 const BASE_URL = "http://localhost:3050/api/v1"
 
-var auth_token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZWI2MDQwYS0xZTczLTRkZWMtOGIyYy0zNGY3N2ViOTFkMDciLCJpYXQiOjE3NzUwMzMwMzEsImV4cCI6MTc3NTYzNzgzMX0.D7mr785_ouQI8_rIcDmX3K8MSLhAhUKGqOwLz9mqu_g"
+var auth_token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3YjQzMDQ3MC02MDgzLTQ2ZGEtODA5Yi0wZmE4MDhjOTZiYmUiLCJpYXQiOjE3NzUwNDM2ODYsImV4cCI6MTc3NTY0ODQ4Nn0.UI1QEaJOFwVZSqJqaXJ46b1T9JWue4rf2mQdfBWru10"
 
 signal request_finished(endpoint: String, success: bool, data: Dictionary)
 
