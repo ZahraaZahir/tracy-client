@@ -4,7 +4,7 @@ signal auth_finished(success: bool, message: String)
 
 func _ready() -> void:
 	BaseApiService.request_finished.connect(_on_base_request_finished)
-
+	
 func register(email: String, user: String, password: String) -> void:
 	var payload = {"email": email, "username": user, "password": password}
 	BaseApiService.send_request("/auth/register", HTTPClient.METHOD_POST, payload)
