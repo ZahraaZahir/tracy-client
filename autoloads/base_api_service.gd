@@ -2,16 +2,22 @@ extends Node
 
 const BASE_URL = "http://localhost:3050/api/v1"
 
-var auth_token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3YjQzMDQ3MC02MDgzLTQ2ZGEtODA5Yi0wZmE4MDhjOTZiYmUiLCJpYXQiOjE3NzUwNDM2ODYsImV4cCI6MTc3NTY0ODQ4Nn0.UI1QEaJOFwVZSqJqaXJ46b1T9JWue4rf2mQdfBWru10"
+var auth_token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxNjhmMTc0OS0yNTk2LTQ3ZTgtYTBiMi0zYTZkYzRiZmFjMjQiLCJpYXQiOjE3NzUxNTcwNzEsImV4cCI6MTc3NTc2MTg3MX0.fgBzTgdHrFEAzaN5JU2ud-PaPDv9fotI7tTnjbPyanM"
 
 signal request_finished(endpoint: String, success: bool, data: Dictionary)
+
+func _ready() -> void:
+	process_mode = PROCESS_MODE_ALWAYS
 
 func send_request(endpoint: String, method: int, payload: Dictionary = {}, use_auth: bool = false) -> void:   
 	var http = HTTPRequest.new()
 	add_child(http)
+	
+	http.process_mode = PROCESS_MODE_ALWAYS
+	
 	http.request_completed.connect(_on_request_completed.bind(http, endpoint))
 	
-	var headers = ["Content-Type: application/json"]
+	var headers =["Content-Type: application/json"]
 	if use_auth and not auth_token.is_empty():
 		headers.append("Authorization: Bearer " + auth_token)
 	
