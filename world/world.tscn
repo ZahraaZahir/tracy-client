@@ -22,7 +22,7 @@ offset_left = -927.0
 offset_top = -964.0
 offset_right = 1073.0
 offset_bottom = 1036.0
-color = Color(0.6172603, 0.99999994, 0.52946705, 1)
+color = Color(0.57254905, 0.7882353, 0.34509805, 1)
 
 [node name="CowEntity" parent="." unique_id=850722004 instance=ExtResource("3_jt3wm")]
 position = Vector2(86, 63)
