@@ -1,7 +1,7 @@
 extends Node
 
 const BASE_URL = "http://localhost:3050/api/v1"
-
+var developer_id: String = "GUEST"
 var auth_token: String = ""
 
 signal request_finished(endpoint: String, success: bool, data: Dictionary)
@@ -43,7 +43,9 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 		actual_payload = json_data["data"] 
 	if success and actual_payload.has("token"):
 		auth_token = actual_payload["token"]
-		print("TOKEN CAPTURED: ", auth_token.left(10), "...") # Optional debug
+		print("TOKEN CAPTURED: ", auth_token.left(10), "...") 
+	if success and actual_payload.has("username"):
+		developer_id = actual_payload["username"]
 	
 	request_finished.emit(endpoint, success, actual_payload)
 	
