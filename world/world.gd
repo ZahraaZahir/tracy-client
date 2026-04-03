@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var player = $Player
-
 const MAP_ID = "main_world"
 
 func _ready() -> void:
@@ -22,11 +21,14 @@ func _on_world_loaded(data: Dictionary) -> void:
 	if data.has("fixedGlitches") and data.has("totalEntities"):
 		ProgressionService.sync(data.fixedGlitches, data.totalEntities)
 		
+		await get_tree().process_frame
+		
 		for npc in get_tree().get_nodes_in_group("interactable"):
 			if npc.entity_id in data.fixedGlitches:
-				npc.is_fixed = true
-
+				npc.load_silent_state()
+	
 	WorldService.is_persistence_ready = true
 
 func _on_entity_fixed(_id: String) -> void:
 	WorldService.save_state(player.global_position, MAP_ID)
+	
