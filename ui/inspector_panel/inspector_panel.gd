@@ -48,14 +48,6 @@ func _ready() -> void:
 	footer_margin.add_theme_constant_override("margin_top", 8) 
 	footer_margin.add_theme_constant_override("margin_bottom", 8)
 
-	var btn_container = submit_button.get_parent()
-	if btn_container is BoxContainer:
-		btn_container.add_theme_constant_override("separation", 20)
-
-	var bottom_spacer = Control.new()
-	bottom_spacer.custom_minimum_size.y = 15
-	$ContentRoot/VBoxContainer.add_child(bottom_spacer)
-
 	EntityService.entity_data_received.connect(_on_npc_data_arrived)
 	EntityService.entity_solve_finished.connect(_on_solve_result)
 	

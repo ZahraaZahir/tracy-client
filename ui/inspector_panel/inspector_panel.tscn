@@ -74,7 +74,7 @@ anchor_bottom = 0.5
 offset_left = -438.0
 offset_top = -362.0
 offset_right = 453.0
-offset_bottom = 417.0
+offset_bottom = 282.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
@@ -120,21 +120,33 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_6qk5t")
 theme_override_font_sizes/font_size = 24
-text = "UTF-8 | Ln 1, Col 1"
+text = "4 Lines |  UTF-8"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InspectorPanel/ContentRoot/VBoxContainer" unique_id=758589971]
-layout_mode = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="InspectorPanel/ContentRoot" unique_id=758589971]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -230.0
+offset_right = 190.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_constants/separation = 0
 
-[node name="submit_button" type="Button" parent="InspectorPanel/ContentRoot/VBoxContainer/HBoxContainer" unique_id=918641416]
+[node name="submit_button" type="Button" parent="InspectorPanel/ContentRoot/HBoxContainer" unique_id=918641416]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(370, 110)
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_colors/font_color = Color(0.7137255, 0.5372549, 0.38431373, 1)
-theme_override_colors/font_pressed_color = Color(0.7137255, 0.5372549, 0.38431373, 1)
-theme_override_colors/font_hover_color = Color(0.7137255, 0.5372549, 0.38431373, 1)
+theme_override_colors/font_color = Color(0.5777841, 0.42194054, 0.285472, 1)
+theme_override_colors/font_pressed_color = Color(0.50884306, 0.36743584, 0.24322835, 1)
+theme_override_colors/font_hover_color = Color(0.50980395, 0.36862746, 0.24313726, 1)
 theme_override_fonts/font = ExtResource("2_06qfm")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = ExtResource("4_i0kcm")
@@ -143,4 +155,4 @@ theme_override_styles/hover = ExtResource("4_i0kcm")
 text = "SUBMIT"
 expand_icon = true
 
-[connection signal="pressed" from="InspectorPanel/ContentRoot/VBoxContainer/HBoxContainer/submit_button" to="InspectorPanel" method="_on_submit_pressed"]
+[connection signal="pressed" from="InspectorPanel/ContentRoot/HBoxContainer/submit_button" to="InspectorPanel" method="_on_submit_pressed"]
