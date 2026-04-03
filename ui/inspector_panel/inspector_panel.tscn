@@ -120,7 +120,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_6qk5t")
 theme_override_font_sizes/font_size = 24
-text = "4 Lines |  UTF-8"
+text = "Tracy++ | UTF-8 | 5 lines"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="InspectorPanel/ContentRoot" unique_id=758589971]
 layout_mode = 1

@@ -14,7 +14,7 @@ const THEME = {
 	"comment": Color("#7A7850"),
 	"text": Color("#333333"),
 	"line_bg": Color("#3A2C10", 0.15),
-	"editor_bg": Color("#E8D9B5"),
+	"editor_bg": Color("f3ead6ff"),
 	"footer_bg": Color("3a2c1000"),
 	"footer_text": Color("#897042")
 }
