@@ -2,7 +2,7 @@ extends Node
 
 const BASE_URL = "http://localhost:3050/api/v1"
 
-var auth_token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZDYzMzNmNC1mYWNiLTQ3YWItOGIwOC0wNTNjOTliOGFlMTAiLCJpYXQiOjE3NzUyMjYxODksImV4cCI6MTc3NTgzMDk4OX0.aU6foKF0idp04JWVNGEJF3E-KdE2-_axi4l-biTuCQg"
+var auth_token: String = ""
 
 signal request_finished(endpoint: String, success: bool, data: Dictionary)
 
@@ -34,14 +34,17 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 
 	var response_text = body.get_string_from_utf8()
 	var json_data = JSON.parse_string(response_text)
-	
 	if json_data == null:
-		json_data = {"message": "Server error: " + response_text}
+		json_data = {"message": "Server communication error."}
 	
 	var success = (response_code >= 200 and response_code < 300)
+	var actual_payload = json_data
+	if json_data.has("data"):
+		actual_payload = json_data["data"] 
+	if success and actual_payload.has("token"):
+		auth_token = actual_payload["token"]
+		print("TOKEN CAPTURED: ", auth_token.left(10), "...") # Optional debug
 	
-	if success and json_data.has("token"):
-		auth_token = json_data["token"]
+	request_finished.emit(endpoint, success, actual_payload)
 	
-	request_finished.emit(endpoint, success, json_data)
 	http_node.queue_free()
