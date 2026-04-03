@@ -21,7 +21,6 @@ const THEME = {
 
 @onready var panel = $ContentRoot
 @onready var main_window = $ContentRoot/MainWindow
-@onready var status_label = find_child("status_label", true, false)
 
 @onready var editor_rows = %EditorRows
 @onready var submit_button = %submit_button
@@ -70,8 +69,6 @@ func _on_npc_data_arrived(success: bool, data: Dictionary) -> void:
 	current_edits.clear()
 	slot_nodes.clear()
 	
-	status_label.text = "SYSTEM READY"
-	status_label.remove_theme_color_override("font_color")
 	panel.modulate.a = 1.0
 	visible = true
 	get_tree().paused = true
@@ -180,13 +177,10 @@ func _on_slot_clicked(slot_id: String):
 		
 func _on_submit_pressed():
 	submit_button.disabled = true
-	status_label.text = "PATCHING..."
 	EntityService.solve_entity(current_entity_id, current_edits)
 
 func _on_solve_result(success: bool, message: String, _wrong: String):
 	if success:
-		status_label.text = "STATUS: PATCHED!"
-		status_label.add_theme_color_override("font_color", Color("65ffb7"))
 		
 		var tween = create_tween().bind_node(self) 
 		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS) 
@@ -199,8 +193,6 @@ func _on_solve_result(success: bool, message: String, _wrong: String):
 		_set_status_error(message)
 
 func _set_status_error(message: String):
-	status_label.text = "ERROR: " + message
-	status_label.add_theme_color_override("font_color", Color("ff6761"))
 	
 	submit_button.disabled = false 
 	

@@ -93,14 +93,6 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="status_label" type="Label" parent="InspectorPanel/ContentRoot/VBoxContainer" unique_id=61679443]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.0020835039, 0.0004491884, 0.00016380934, 1)
-theme_override_fonts/font = ExtResource("2_06qfm")
-theme_override_font_sizes/font_size = 50
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="FooterBar" type="PanelContainer" parent="InspectorPanel/ContentRoot/VBoxContainer" unique_id=355319339]
 unique_name_in_owner = true
 layout_mode = 2
