@@ -12,13 +12,13 @@ vertical = true
 [node name="CodeRow" type="PanelContainer" unique_id=1206574651]
 script = ExtResource("1_as643")
 
-[node name="HFlowContainer" type="HBoxContainer" parent="." unique_id=267322215]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=267322215]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 2
+alignment = 1
 
-[node name="LineNumber" type="Label" parent="HFlowContainer" unique_id=765972299]
+[node name="LineNumber" type="Label" parent="HBoxContainer" unique_id=765972299]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
@@ -27,12 +27,12 @@ theme_override_fonts/font = ExtResource("2_uwadf")
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 2
 
-[node name="VSeparator" type="VSeparator" parent="HFlowContainer" unique_id=75298781]
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=75298781]
 layout_mode = 2
 theme_override_constants/separation = 10
 theme_override_styles/separator = SubResource("StyleBoxLine_as643")
 
-[node name="Content" type="HFlowContainer" parent="HFlowContainer" unique_id=1583753627]
+[node name="Content" type="HFlowContainer" parent="HBoxContainer" unique_id=1583753627]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

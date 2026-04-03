@@ -101,13 +101,31 @@ func _on_npc_data_arrived(success: bool, data: Dictionary) -> void:
 			row.set_line_data(i + 1, i % 2 == 1)
 		
 		var row_hbox = row.find_child("HBoxContainer", true, false)
-		if row_hbox:
-			row_hbox.add_theme_constant_override("separation", 25)
-		
 		var content_box = row.find_child("Content", true, false)
-		if content_box:
+		
+		if content_box and row_hbox:
 			content_box.add_theme_constant_override("separation", 0)
-			for token in lines_data[i]:
+			
+			var tokens = lines_data[i].duplicate()
+			
+			var leading_spaces = ""
+			while tokens.size() > 0 and tokens[0].get("type", "text") == "text":
+				var char_content = tokens[0].get("content", "")
+				if char_content == " " or char_content == "\t":
+					leading_spaces += char_content
+					tokens.pop_front()
+				else:
+					break
+					
+			if leading_spaces.length() > 0:
+				var indent_label = CODE_LABEL_SCENE.instantiate()
+				indent_label.text = leading_spaces.replace(" ", " ") 
+				indent_label.add_theme_font_size_override("font_size", 28)
+				
+				row_hbox.add_child(indent_label)
+				row_hbox.move_child(indent_label, content_box.get_index())
+			
+			for token in tokens:
 				if token.get("type") == "slot":
 					_create_slot_node(content_box, token, is_fixed, solutions)
 				else:
