@@ -37,7 +37,7 @@ func _on_auth_result(success: bool, message: String) -> void:
 	if success:
 		_set_status("Welcome, Developer.", COLOR_SUCCESS)
 		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_file("/Users/sarabimar/Documents/Uni/9th Semester /Final Year Project/tracy-client/world/world.tscn")
+		get_tree().change_scene_to_file("res://world/world.tscn")
 	else:
 		_set_status("Error: " + message, COLOR_ERROR)
 
