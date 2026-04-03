@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clbhok0qf2jo5" path="res://ui/hud/hud.gd" id="1_4d6w6"]
 [ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/fonts/rainyhearts.ttf" id="1_xmswo"]
-[ext_resource type="Texture2D" uid="uid://d0ro2snl8i1qu" path="res://assets/ui/inspector/UI Big Play Button.png" id="2_e0nub"]
+[ext_resource type="Texture2D" uid="uid://bell637mncyaa" path="res://assets/ui/inspector/UI Big Play Button.png" id="2_e0nub"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w75iv"]
 texture = ExtResource("2_e0nub")
@@ -27,29 +27,55 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="TopRight" type="VBoxContainer" parent="MainMargin" unique_id=778169558]
+[node name="TopLeft" type="VBoxContainer" parent="MainMargin" unique_id=778169558]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="ProgressWidget" type="PanelContainer" parent="MainMargin/TopRight" unique_id=241064091]
+[node name="ProgressWidget" type="PanelContainer" parent="MainMargin/TopLeft" unique_id=241064091]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_w75iv")
 
-[node name="Padding" type="MarginContainer" parent="MainMargin/TopRight/ProgressWidget" unique_id=809288271]
+[node name="Padding" type="MarginContainer" parent="MainMargin/TopLeft/ProgressWidget" unique_id=809288271]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ProgressHBox" type="HBoxContainer" parent="MainMargin/TopRight/ProgressWidget/Padding" unique_id=296655421]
+[node name="ProgressHBox" type="HBoxContainer" parent="MainMargin/TopLeft/ProgressWidget/Padding" unique_id=296655421]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainMargin/TopRight/ProgressWidget/Padding/ProgressHBox" unique_id=1574933262]
+[node name="Label" type="Label" parent="MainMargin/TopLeft/ProgressWidget/Padding/ProgressHBox" unique_id=1574933262]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.49506336, 0.3567175, 0.23513815, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_xmswo")
 theme_override_font_sizes/font_size = 32
 text = "Fixed: 0 / 3"
+
+[node name="TopRight" type="VBoxContainer" parent="MainMargin" unique_id=89423642]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="IDWidget" type="PanelContainer" parent="MainMargin/TopRight" unique_id=519824961]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_w75iv")
+
+[node name="Padding" type="MarginContainer" parent="MainMargin/TopRight/IDWidget" unique_id=146656889]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="IDHBox" type="HBoxContainer" parent="MainMargin/TopRight/IDWidget/Padding" unique_id=1220433981]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMargin/TopRight/IDWidget/Padding/IDHBox" unique_id=2072397908]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.49506336, 0.3567175, 0.23513815, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_xmswo")
+theme_override_font_sizes/font_size = 32
+text = "Developer ID:"
