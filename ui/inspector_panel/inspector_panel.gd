@@ -150,12 +150,12 @@ func _create_slot_node(parent: Node, token: Dictionary, is_fixed: bool, solution
 	slot_nodes[slot_id] = slot_instance
 	slot_instance.pressed.connect(_on_slot_clicked.bind(slot_id))
 	
-func _update_slot(id: String, val, state: String):
+func _update_slot(id: String, val, state: String, is_bug_value: bool = false):
 	current_edits[id] = val 
 	
 	var display_text = str(val)
 	
-	if typeof(val) == TYPE_STRING:
+	if typeof(val) == TYPE_STRING and not is_bug_value:
 		display_text = "\"" + display_text + "\""
 	
 	slot_nodes[id].set_slot_state(state, display_text)
@@ -164,7 +164,7 @@ func _on_slot_clicked(slot_id: String):
 	var node = slot_nodes[slot_id]
 	
 	if node.current_state == "draft":
-		_update_slot(slot_id, node.original_value, "bug")
+		_update_slot(slot_id, node.original_value, "bug", true)
 	else:
 		var cheat_val
 		if current_entity_id == "npc_cow_01":
@@ -173,7 +173,8 @@ func _on_slot_clicked(slot_id: String):
 			cheat_val = "Sunflower"
 		else:
 			cheat_val = false
-		_update_slot(slot_id, cheat_val, "draft")
+		
+		_update_slot(slot_id, cheat_val, "draft", false)
 		
 func _on_submit_pressed():
 	submit_button.disabled = true
