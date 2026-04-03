@@ -43,9 +43,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.95686275, 0.8901961, 0.7607843, 1)
-theme_override_colors/font_shadow_color = Color(0.7316903, 0.59869075, 0.5981234, 1)
 theme_override_colors/font_outline_color = Color(0.95686275, 0.8901961, 0.7607843, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_t24la")
 theme_override_font_sizes/font_size = 40
 text = "Hello, Tracy!"
@@ -58,6 +57,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 34.0
+offset_right = 1.0
+offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -102,5 +105,24 @@ theme_override_styles/hover = ExtResource("4_exp78")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_p3uh1")
 text = "Login"
 
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1263256571]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.49411765, 0.35686275, 0.23529412, 1)
+theme_override_colors/font_focus_color = Color(0.49411765, 0.35686275, 0.23529412, 1)
+theme_override_colors/font_pressed_color = Color(0.49411765, 0.35686275, 0.23529412, 1)
+theme_override_colors/font_hover_color = Color(0.49411765, 0.35686275, 0.23529412, 1)
+theme_override_colors/icon_focus_color = Color(0.49411765, 0.35686275, 0.23529412, 1)
+theme_override_fonts/font = ExtResource("2_t24la")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("3_t0loy")
+theme_override_styles/pressed = ExtResource("4_exp78")
+theme_override_styles/hover = ExtResource("4_exp78")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p3uh1")
+text = "Quit"
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/RegisterButton" to="." method="_on_register_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_button_pressed"]

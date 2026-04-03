@@ -25,13 +25,13 @@ offset_bottom = 1036.0
 color = Color(0.57254905, 0.7882353, 0.34509805, 1)
 
 [node name="CowEntity" parent="." unique_id=850722004 instance=ExtResource("3_jt3wm")]
-position = Vector2(86, 63)
+position = Vector2(-64, 27)
 
 [node name="GirlFarmerEntity" parent="." unique_id=182755861 instance=ExtResource("4_0b7qn")]
 position = Vector2(189, 83)
 
 [node name="MouseEntity" parent="." unique_id=1559858639 instance=ExtResource("5_k64l8")]
-position = Vector2(43, 102)
+position = Vector2(-2, 93)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1755151250]
 layer = 10

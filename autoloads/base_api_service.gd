@@ -48,5 +48,9 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 		developer_id = actual_payload["username"]
 	
 	request_finished.emit(endpoint, success, actual_payload)
-	
 	http_node.queue_free()
+	
+func logout() -> void: 
+		auth_token = ""
+		developer_id = "GUEST"
+		get_tree().change_scene_to_file("res://ui/welcome/welcome.tscn")

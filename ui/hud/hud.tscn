@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://clbhok0qf2jo5" path="res://ui/hud/hud.gd" id="1_4d6w6"]
 [ext_resource type="FontFile" uid="uid://b2gyd1ljqrxmo" path="res://assets/fonts/rainyhearts.ttf" id="1_xmswo"]
 [ext_resource type="Texture2D" uid="uid://bell637mncyaa" path="res://assets/ui/inspector/UI Big Play Button.png" id="2_e0nub"]
+[ext_resource type="StyleBox" uid="uid://b33q85kopr6o2" path="res://assets/ui/normalButton.tres" id="4_imuuq"]
+[ext_resource type="StyleBox" uid="uid://c0x2mtr3swiu6" path="res://assets/ui/pressedButton.tres" id="5_kwc50"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w75iv"]
 texture = ExtResource("2_e0nub")
@@ -11,6 +13,8 @@ texture_margin_top = 6.0
 texture_margin_right = 6.0
 texture_margin_bottom = 6.0
 region_rect = Rect2(0, 0, 96, 32)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2lis"]
 
 [node name="Hud" type="CanvasLayer" unique_id=167699842]
 layer = 5
@@ -31,6 +35,29 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+
+[node name="IDWidget" type="PanelContainer" parent="MainMargin/TopLeft" unique_id=519824961]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_w75iv")
+
+[node name="Padding" type="MarginContainer" parent="MainMargin/TopLeft/IDWidget" unique_id=146656889]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="IDHBox" type="HBoxContainer" parent="MainMargin/TopLeft/IDWidget/Padding" unique_id=1220433981]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMargin/TopLeft/IDWidget/Padding/IDHBox" unique_id=2072397908]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.49506336, 0.3567175, 0.23513815, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("1_xmswo")
+theme_override_font_sizes/font_size = 32
+text = "Developer ID:"
 
 [node name="ProgressWidget" type="PanelContainer" parent="MainMargin/TopLeft" unique_id=241064091]
 layout_mode = 2
@@ -58,24 +85,28 @@ text = "Fixed: 0 / 3"
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="IDWidget" type="PanelContainer" parent="MainMargin/TopRight" unique_id=519824961]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_w75iv")
-
-[node name="Padding" type="MarginContainer" parent="MainMargin/TopRight/IDWidget" unique_id=146656889]
+[node name="Padding" type="MarginContainer" parent="MainMargin/TopRight" unique_id=1970544303]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="IDHBox" type="HBoxContainer" parent="MainMargin/TopRight/IDWidget/Padding" unique_id=1220433981]
+[node name="LoginButton" type="Button" parent="MainMargin/TopRight/Padding" unique_id=393624721]
+custom_minimum_size = Vector2(160, 70)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MainMargin/TopRight/IDWidget/Padding/IDHBox" unique_id=2072397908]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.49506336, 0.3567175, 0.23513815, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.49411765, 0.35686275, 0.23529412, 1)
+theme_override_colors/font_focus_color = Color(0.49411765, 0.35686275, 0.23529412, 1)
+theme_override_colors/font_pressed_color = Color(0.49411765, 0.35686275, 0.23529412, 1)
+theme_override_colors/font_hover_color = Color(0.49411765, 0.35686275, 0.23529412, 1)
+theme_override_colors/icon_focus_color = Color(0.49411765, 0.35686275, 0.23529412, 1)
 theme_override_fonts/font = ExtResource("1_xmswo")
 theme_override_font_sizes/font_size = 32
-text = "Developer ID:"
+theme_override_styles/normal = ExtResource("4_imuuq")
+theme_override_styles/pressed = ExtResource("5_kwc50")
+theme_override_styles/hover = ExtResource("5_kwc50")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_o2lis")
+text = "Logout
+"

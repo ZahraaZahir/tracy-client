@@ -2,10 +2,11 @@ extends CanvasLayer
 
 @onready var progress_label = $MainMargin/TopLeft/ProgressWidget/Padding/ProgressHBox/Label
 @onready var progress_widget = $MainMargin/TopLeft/ProgressWidget
-@onready var dev_id_label = $MainMargin/TopRight/IDWidget/Padding/IDHBox/Label
-
+@onready var dev_id_label = $MainMargin/TopLeft/IDWidget/Padding/IDHBox/Label
+@onready var logout_button = $MainMargin/TopRight/Padding/LoginButton
 func _ready() -> void:
 	ProgressionService.progress_updated.connect(_on_progress_updated)
+	logout_button.pressed.connect(_on_logout_pressed)
 	_setup_developer_id()
 	progress_label.text = "Fixed: 0 / 0"
 
@@ -24,3 +25,6 @@ func _on_progress_updated(current: int, total: int) -> void:
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(progress_widget, "scale", Vector2.ONE, 0.2)\
 		.set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+		
+func _on_logout_pressed() -> void:
+	BaseApiService.logout()
