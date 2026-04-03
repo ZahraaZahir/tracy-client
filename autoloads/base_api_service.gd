@@ -6,12 +6,18 @@ var auth_token: String = ""
 
 signal request_finished(endpoint: String, success: bool, data: Dictionary)
 
+func _ready() -> void:
+	process_mode = PROCESS_MODE_ALWAYS
+
 func send_request(endpoint: String, method: int, payload: Dictionary = {}, use_auth: bool = false) -> void:   
 	var http = HTTPRequest.new()
 	add_child(http)
+	
+	http.process_mode = PROCESS_MODE_ALWAYS
+	
 	http.request_completed.connect(_on_request_completed.bind(http, endpoint))
 	
-	var headers = ["Content-Type: application/json"]
+	var headers =["Content-Type: application/json"]
 	if use_auth and not auth_token.is_empty():
 		headers.append("Authorization: Bearer " + auth_token)
 	
@@ -23,7 +29,9 @@ func send_request(endpoint: String, method: int, payload: Dictionary = {}, use_a
 		request_finished.emit(endpoint, false, {"message": "Local connection error"})
 		http.queue_free()
 
-func _on_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, http_node: HTTPRequest, endpoint: String) -> void:
+func _on_request_completed(_result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, http_node: HTTPRequest, endpoint: String) -> void:
+	print("BRIDGE DEBUG: Received response from ", endpoint, " | Code: ", response_code)
+
 	var response_text = body.get_string_from_utf8()
 	var json_data = JSON.parse_string(response_text)
 	if json_data == null:
