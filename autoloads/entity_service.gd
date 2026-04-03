@@ -13,11 +13,10 @@ func fetch_entity(entity_id: String) -> void:
 	var endpoint = "/entities/" + entity_id
 	BaseApiService.send_request(endpoint, HTTPClient.METHOD_GET, {}, true)
 
-func solve_entity(entity_id: String, answers: Dictionary) -> void:
+func solve_entity(entity_id: String, payload: Dictionary) -> void:
 	var endpoint = "/entities/" + entity_id + "/solve"
-	var payload = {"answers": answers}
 	BaseApiService.send_request(endpoint, HTTPClient.METHOD_POST, payload, true)
-
+	
 func _on_base_request_finished(endpoint: String, success: bool, data: Dictionary) -> void:
 	if endpoint.begins_with("/entities/") and not endpoint.ends_with("/solve"):
 		entity_data_received.emit(success, data)

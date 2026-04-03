@@ -8,7 +8,11 @@
 [ext_resource type="StyleBox" uid="uid://d1uh8prkym2hu" path="res://assets/ui/pressedButton.tres" id="5_0ly6t"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_6qk5t"]
-color = Color(0.7882353, 0.7254902, 0.5411765, 1)
+content_margin_left = 40.0
+content_margin_top = 0.0
+content_margin_right = 40.0
+content_margin_bottom = 0.0
+color = Color(0.7882353, 0.7254902, 0, 0)
 
 [node name="InspectorPanel" type="Control" unique_id=1875940252]
 layout_mode = 3
@@ -40,7 +44,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 
 [node name="MainWindow" type="NinePatchRect" parent="InspectorPanel/ContentRoot" unique_id=377900043]
-self_modulate = Color(0.9098039, 0.8509804, 0.70980394, 1)
+self_modulate = Color(0.9529412, 0.91764706, 0.8392157, 1)
 custom_minimum_size = Vector2(1200, 900)
 layout_mode = 1
 anchors_preset = 8
@@ -73,11 +77,11 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -438.0
 offset_top = -362.0
-offset_right = 453.0
-offset_bottom = 282.0
+offset_right = 438.0
+offset_bottom = 274.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 0
 
 [node name="TerminalContainer" type="MarginContainer" parent="InspectorPanel/ContentRoot/VBoxContainer" unique_id=1455771987]
 custom_minimum_size = Vector2(0, 300)
@@ -105,7 +109,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="RuntimeLabel" type="Label" parent="InspectorPanel/ContentRoot/VBoxContainer/FooterBar/MarginContainer/HBoxContainer" unique_id=421476646]
-modulate = Color(0.37606886, 0.30290052, 0.16563627, 1)
+modulate = Color(0.58431375, 0.41568628, 0.25490198, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_6qk5t")
 theme_override_font_sizes/font_size = 24
@@ -117,6 +121,7 @@ size_flags_horizontal = 3
 
 [node name="StatusBarInfo" type="Label" parent="InspectorPanel/ContentRoot/VBoxContainer/FooterBar/MarginContainer/HBoxContainer" unique_id=1621923278]
 unique_name_in_owner = true
+modulate = Color(0.68235296, 0.49411765, 0.31764707, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_6qk5t")
 theme_override_font_sizes/font_size = 24
