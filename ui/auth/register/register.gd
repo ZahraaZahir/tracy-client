@@ -41,10 +41,12 @@ func _on_auth_result(success: bool, message: String) -> void:
 	register_button.disabled = false
 	
 	if success:
-		_set_status("Registration Successful!", COLOR_SUCCESS)
-		await get_tree().create_timer(1.5).timeout
+		_set_status("Registration Successful! Initializing...", COLOR_SUCCESS)
+		await get_tree().create_timer(1.0).timeout
+		
 		if is_inside_tree():
-			_on_back_pressed()
+			
+			get_tree().change_scene_to_file("res://world/world.tscn")
 	else:
 		_set_status("Error: " + message, COLOR_ERROR)
 

@@ -41,14 +41,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Camera2D" type="Camera2D" parent="CenterContainer" unique_id=73601957]
-visible = false
-position = Vector2(491, 257)
-anchor_mode = 0
-zoom = Vector2(2, 2)
-drag_horizontal_offset = -1.0
-drag_left_margin = 0.0
-
 [node name="CredentialsContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1212821352]
 layout_mode = 2
 theme_override_constants/separation = 24
@@ -57,8 +49,9 @@ alignment = 1
 [node name="Title" type="Label" parent="CenterContainer/CredentialsContainer" unique_id=675580877]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.78039217, 0.6313726, 0.47843137, 1)
-theme_override_colors/font_outline_color = Color(0.76567525, 0.6151306, 0.45783913, 1)
+theme_override_colors/font_color = Color(0.95686275, 0.8901961, 0.7607843, 1)
+theme_override_colors/font_shadow_color = Color(0.73333335, 0.6, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0.93981296, 0.85031646, 0.67569846, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_8wugm")
 theme_override_font_sizes/font_size = 40
@@ -72,8 +65,9 @@ layout_mode = 2
 [node name="Identifier" type="Label" parent="CenterContainer/CredentialsContainer/IdentifierContainer" unique_id=876620875]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.78039217, 0.6313726, 0.47843137, 1)
-theme_override_colors/font_outline_color = Color(0.76567525, 0.6151306, 0.45783913, 1)
+theme_override_colors/font_color = Color(0.95686275, 0.8901961, 0.7607843, 1)
+theme_override_colors/font_shadow_color = Color(0.73333335, 0.6, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0.93981296, 0.85031646, 0.67569846, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_8wugm")
 theme_override_font_sizes/font_size = 28
@@ -98,8 +92,9 @@ layout_mode = 2
 [node name="Password" type="Label" parent="CenterContainer/CredentialsContainer/PasswordContainer" unique_id=1671581455]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.78039217, 0.6313726, 0.47843137, 1)
-theme_override_colors/font_outline_color = Color(0.76567525, 0.6151306, 0.45783913, 1)
+theme_override_colors/font_color = Color(0.95686275, 0.8901961, 0.7607843, 1)
+theme_override_colors/font_shadow_color = Color(0.73333335, 0.6, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0.93981296, 0.85031646, 0.67569846, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_8wugm")
 theme_override_font_sizes/font_size = 28

@@ -42,9 +42,9 @@ offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.78039217, 0.6313726, 0.47843137, 1)
-theme_override_colors/font_shadow_color = Color(0.627451, 0.4862745, 0.4862745, 1)
-theme_override_colors/font_outline_color = Color(0.7647059, 0.6156863, 0.45882353, 1)
+theme_override_colors/font_color = Color(0.95686275, 0.8901961, 0.7607843, 1)
+theme_override_colors/font_shadow_color = Color(0.7316903, 0.59869075, 0.5981234, 1)
+theme_override_colors/font_outline_color = Color(0.95686275, 0.8901961, 0.7607843, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_t24la")
 theme_override_font_sizes/font_size = 40
@@ -60,14 +60,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Camera2D" type="Camera2D" parent="CenterContainer" unique_id=229221660]
-visible = false
-position = Vector2(490, 227)
-anchor_mode = 0
-zoom = Vector2(2, 2)
-drag_horizontal_offset = -1.0
-drag_left_margin = 0.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1789233242]
 layout_mode = 2
