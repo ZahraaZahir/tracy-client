@@ -122,7 +122,7 @@ func _on_slot_clicked(id: String):
 	if node.current_state == "draft":
 		_update_slot(id, node.original_value, "bug", true)
 	else:
-		var cheat = 1.0 if current_entity_id == "npc_cow_01" else "Sunflower" if current_entity_id == "npc_mouse_01" else false
+		var cheat = 9.81 if current_entity_id == "npc_cow_01" else "Sunflower" if current_entity_id == "npc_mouse_01" else false
 		_update_slot(id, cheat, "draft")
 		
 func _on_submit_pressed():
