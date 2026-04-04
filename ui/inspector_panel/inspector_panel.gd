@@ -15,6 +15,7 @@ const THEME = {
 @onready var editor_rows = %EditorRows
 @onready var submit_button = %submit_button
 @onready var stats_label = %StatusBarInfo
+@onready var exit_button = %exit_button
 
 var current_entity_id: String = ""
 var current_edits: Dictionary = {}
@@ -25,6 +26,8 @@ func _ready() -> void:
 	visible = false
 	EntityService.entity_data_received.connect(_on_npc_data_arrived)
 	EntityService.entity_solve_finished.connect(_on_solve_result)
+	
+	exit_button.pressed.connect(_on_exit_pressed)
 	
 	if not submit_button.pressed.is_connected(_on_submit_pressed):
 		submit_button.pressed.connect(_on_submit_pressed)
@@ -151,3 +154,8 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel") and visible:
 		visible = false
 		get_tree().paused = false
+		
+func _on_exit_pressed() -> void:
+	visible = false
+	get_tree().paused = false
+	ProgressionService.is_ui_active = false 
