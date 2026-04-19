@@ -337,11 +337,11 @@ advance_mode = 2
 advance_condition = &"is_idling"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_my276"]
-advance_mode = 2
+advance_mode = 0
 advance_condition = &"is_attacking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yx0jh"]
-advance_mode = 2
+advance_mode = 0
 advance_condition = &"is_attacking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1ew0l"]
@@ -356,7 +356,10 @@ states/Sword/position = Vector2(630.77496, 197.15497)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_gggvi")
 states/Walk/position = Vector2(460.02496, 272.65497)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_w44yn"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_6ah6f"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_g1i3r"), "Idle", "Sword", SubResource("AnimationNodeStateMachineTransition_my276"), "Walk", "Sword", SubResource("AnimationNodeStateMachineTransition_yx0jh"), "Sword", "Idle", SubResource("AnimationNodeStateMachineTransition_1ew0l")]
-graph_offset = Vector2(76.27507, 38.594917)
+graph_offset = Vector2(76.275314, 49.912407)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
+size = Vector2(29, 29)
 
 [node name="Player" type="CharacterBody2D" unique_id=303713143]
 z_index = 5
@@ -371,7 +374,7 @@ frame = 88
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1509123204]
 position = Vector2(0, 3)
-zoom = Vector2(4, 4)
+zoom = Vector2(6, 6)
 process_callback = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1171964761]
@@ -386,6 +389,14 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_attacking = false
 parameters/conditions/is_idling = false
 parameters/conditions/is_walking = false
-parameters/Idle/blend_position = Vector2(0.8936485, 0.040094256)
-parameters/Sword/blend_position = Vector2(-0.3603896, 0.509434)
+parameters/Idle/blend_position = Vector2(-0.25552052, 0.5799527)
+parameters/Sword/blend_position = Vector2(-0.66456366, -0.15566039)
 parameters/Walk/blend_position = Vector2(0.21320343, -0.23231143)
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1690617373]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1025001248]
+light_mask = 2
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_rkbax")
