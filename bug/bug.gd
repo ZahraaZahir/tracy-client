@@ -87,6 +87,8 @@ func _on_hurt_done():
 
 func _on_death():
 	print("BUG DIED: Awaiting server loot...")
+	$DetectionArea.body_entered.disconnect(_on_detection_area_body_entered)
+	$DetectionArea.body_exited.disconnect(_on_detection_area_body_exited)
 	await get_tree().create_timer(2.0).timeout
 	queue_free()
 
