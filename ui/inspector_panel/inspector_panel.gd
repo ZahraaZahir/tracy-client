@@ -1,5 +1,10 @@
 extends CanvasLayer
 
+const INVENTORY_SLOT_SCENE = preload("res://ui/inventory/inventory_slot.tscn")
+
+@onready var inventory_list = %InventoryList
+@onready var drag_layer = $DragLayer
+
 const CODE_ROW_SCENE = preload("res://ui/inspector_panel/code_row.tscn")
 const CODE_LABEL_SCENE = preload("res://ui/inspector_panel/code_text.tscn")
 const CODE_SLOT_SCENE = preload("res://ui/inspector_panel/code_slot/code_slot.tscn")
@@ -43,6 +48,9 @@ func _on_npc_data_arrived(success: bool, data: Dictionary) -> void:
 	
 	submit_button.disabled = false
 	panel.modulate.a = 1.0
+	
+	var inventory = data.get("inventory", [])
+	_populate_inventory(inventory)
 	
 	for child in editor_rows.get_children(): child.free()
 	
@@ -159,3 +167,13 @@ func _on_exit_pressed() -> void:
 	visible = false
 	get_tree().paused = false
 	ProgressionService.is_ui_active = false 
+	
+func _populate_inventory(inventory_data: Array) -> void:
+	for child in inventory_list.get_children():
+		child.queue_free()
+		
+	for block_data in inventory_data:
+		var slot = INVENTORY_SLOT_SCENE.instantiate()
+		inventory_list.add_child(slot)
+		
+		slot.setup_block(block_data, drag_layer)

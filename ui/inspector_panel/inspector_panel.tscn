@@ -188,4 +188,33 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_cvr76")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_vrrrc")
 theme_override_styles/hover = SubResource("StyleBoxTexture_o1xy4")
 
+[node name="InventoryPanel" type="PanelContainer" parent="InspectorPanel" unique_id=606661609]
+process_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -96.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InspectorPanel/InventoryPanel" unique_id=1635344374]
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="InventoryList" type="HBoxContainer" parent="InspectorPanel/InventoryPanel/ScrollContainer" unique_id=1998183743]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="DragLayer" type="Control" parent="InspectorPanel" unique_id=1232210792]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 984.0
+offset_bottom = 984.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [connection signal="pressed" from="InspectorPanel/ContentRoot/HBoxContainer/submit_button" to="InspectorPanel" method="_on_submit_pressed"]
