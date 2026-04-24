@@ -201,20 +201,24 @@ mouse_filter = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="InspectorPanel/InventoryPanel" unique_id=1635344374]
 layout_mode = 2
+theme_override_constants/scrollbar_h_separation = 16
 vertical_scroll_mode = 0
 
 [node name="InventoryList" type="HBoxContainer" parent="InspectorPanel/InventoryPanel/ScrollContainer" unique_id=1998183743]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 16
+alignment = 1
 
 [node name="DragLayer" type="Control" parent="InspectorPanel" unique_id=1232210792]
 layout_mode = 3
-anchors_preset = 0
-offset_top = 984.0
-offset_bottom = 984.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 mouse_filter = 2
 
 [connection signal="pressed" from="InspectorPanel/ContentRoot/HBoxContainer/submit_button" to="InspectorPanel" method="_on_submit_pressed"]

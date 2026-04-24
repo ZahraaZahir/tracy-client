@@ -3,6 +3,9 @@
 [ext_resource type="Shader" uid="uid://lmspsm3gr785" path="res://ui/inspector_panel/code_slot/slot_squiggle.gdshader" id="1_k1ao0"]
 [ext_resource type="FontFile" uid="uid://boi0jbccfd0tn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="2_h131i"]
 [ext_resource type="Script" uid="uid://yb1dm8rlyqli" path="res://ui/inspector_panel/code_slot/code_slot.gd" id="2_k1ao0"]
+[ext_resource type="Script" uid="uid://nj1hdjl1vob2" path="res://addons/drag_and_drop/scripts/drop_zone.gd" id="4_mn6fe"]
+[ext_resource type="Script" uid="uid://b3yrcfpcbpfhu" path="res://addons/drag_and_drop/resources/drop_behaviors/drop_behavior_replace.gd" id="5_mn6fe"]
+[ext_resource type="Script" uid="uid://djdmnemxrx7bg" path="res://addons/drag_and_drop/resources/draggable_types/draggable_type.gd" id="6_igv45"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h131i"]
 shader = ExtResource("1_k1ao0")
@@ -10,6 +13,20 @@ shader_parameter/is_active = false
 shader_parameter/strength = 2.0
 shader_parameter/frequency = 20.0
 shader_parameter/speed = 15.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mn6fe"]
+size = Vector2(79.5, 51.5)
+
+[sub_resource type="Resource" id="Resource_mn6fe"]
+script = ExtResource("5_mn6fe")
+metadata/_custom_type_script = "uid://b3yrcfpcbpfhu"
+
+[sub_resource type="Resource" id="Resource_igv45"]
+script = ExtResource("6_igv45")
+
+[sub_resource type="Resource" id="Resource_dyfqn"]
+script = ExtResource("6_igv45")
+metadata/_custom_type_script = "uid://djdmnemxrx7bg"
 
 [node name="CodeSlot" type="Button" unique_id=660433212]
 material = SubResource("ShaderMaterial_h131i")
@@ -19,3 +36,20 @@ theme_override_font_sizes/font_size = 32
 text = "???"
 flat = true
 script = ExtResource("2_k1ao0")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1115202021]
+process_mode = 3
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=696853194]
+position = Vector2(40.25, 25.25)
+shape = SubResource("RectangleShape2D_mn6fe")
+
+[node name="DropZone" type="Node2D" parent="Area2D" unique_id=875131309 node_paths=PackedStringArray("attach_spot")]
+script = ExtResource("4_mn6fe")
+attach_spot = NodePath("..")
+drop_behavior = SubResource("Resource_mn6fe")
+snap_style = 1
+accepted_draggable_types = Array[ExtResource("6_igv45")]([SubResource("Resource_igv45"), SubResource("Resource_dyfqn")])
+metadata/_custom_type_script = "uid://nj1hdjl1vob2"
