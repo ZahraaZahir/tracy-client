@@ -78,3 +78,11 @@ func _gui_input(event: InputEvent) -> void:
 		if current_state == "draft":
 			block_dropped.emit(slot_id, {})
 			accept_event()
+			
+func flash_incomplete() -> void:
+	if pulse_tween: pulse_tween.kill()
+	modulate.a = 1.0
+	pulse_tween = create_tween().set_loops(5).bind_node(self).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	pulse_tween.tween_property(self, "modulate:a", 0.2, 0.1)
+	pulse_tween.tween_property(self, "modulate:a", 1.0, 0.1)
+	pulse_tween.finished.connect(func(): _start_glitch_pulse(), CONNECT_ONE_SHOT)

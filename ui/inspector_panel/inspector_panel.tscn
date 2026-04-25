@@ -221,4 +221,28 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 
+[node name="MarginContainer" type="MarginContainer" parent="InspectorPanel" unique_id=1676383791]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -212.0
+offset_right = 212.0
+offset_bottom = 62.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 32
+
+[node name="ColorRect" type="ColorRect" parent="InspectorPanel/MarginContainer" unique_id=723614656]
+layout_mode = 2
+
+[node name="WarningLabel" type="Label" parent="InspectorPanel/MarginContainer" unique_id=1247756163]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.33333334, 0.33333334, 1)
+theme_override_colors/font_outline_color = Color(1, 0.33333334, 0.33333334, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_06qfm")
+theme_override_font_sizes/font_size = 32
+text = "Some warning message goes here."
+horizontal_alignment = 1
+
 [connection signal="pressed" from="InspectorPanel/ContentRoot/HBoxContainer/submit_button" to="InspectorPanel" method="_on_submit_pressed"]

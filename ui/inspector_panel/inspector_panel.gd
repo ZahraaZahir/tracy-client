@@ -4,6 +4,8 @@ const INVENTORY_SLOT_SCENE = preload("res://ui/inventory/inventory_slot.tscn")
 
 @onready var inventory_list = %InventoryList
 @onready var drag_layer = $DragLayer
+@onready var warning_label = $MarginContainer/WarningLabel
+@onready var warning_container = $MarginContainer
 
 const CODE_ROW_SCENE = preload("res://ui/inspector_panel/code_row.tscn")
 const CODE_LABEL_SCENE = preload("res://ui/inspector_panel/code_text.tscn")
@@ -33,7 +35,9 @@ func _ready() -> void:
 	EntityService.entity_solve_finished.connect(_on_solve_result)
 	
 	exit_button.pressed.connect(_on_exit_pressed)
-	
+
+	warning_container.visible = false
+
 	if not submit_button.pressed.is_connected(_on_submit_pressed):
 		submit_button.pressed.connect(_on_submit_pressed)
 	
@@ -146,10 +150,18 @@ func _on_block_dropped(id: String, block_data: Dictionary):
 		_update_slot(id, block_data, "draft")
 		
 func _on_submit_pressed():
+	var unresolved: Array = []
+	for id in current_edits:
+		if typeof(current_edits[id]) != TYPE_DICTIONARY:
+			unresolved.append(id)
+	
+	if not unresolved.is_empty():
+		_handle_incomplete(unresolved)
+		return
+	
 	submit_button.disabled = true
-	var payload = {"answers": current_edits}
-	EntityService.solve_entity(current_entity_id, payload)
-
+	EntityService.solve_entity(current_entity_id, {"answers": current_edits})
+	
 func _on_solve_result(success: bool, _message: String, _wrong: String):
 	if success:
 		var tween = create_tween().bind_node(self).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS) 
@@ -170,6 +182,17 @@ func _handle_error():
 	shake.tween_property(panel, "position:x", original_x, 0.05)
 	shake.set_loops(2)
 
+func _handle_incomplete(unresolved: Array) -> void:
+	warning_label.text = "All slots must be filled before submitting."
+	warning_container.visible = true
+
+	for id in unresolved:
+		slot_nodes[id].flash_incomplete()
+
+	get_tree().create_timer(1.5).timeout.connect(func():
+		warning_container.visible = false
+	, CONNECT_ONE_SHOT)
+	
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel") and visible:
 		visible = false
