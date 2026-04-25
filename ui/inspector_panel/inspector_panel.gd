@@ -43,8 +43,10 @@ func _on_npc_data_arrived(success: bool, data: Dictionary) -> void:
 	current_entity_id = data.id 
 	current_edits.clear()
 	slot_nodes.clear()
+	
 	visible = true
-	get_tree().paused = true
+	
+	ProgressionService.is_ui_active = true
 	
 	submit_button.disabled = false
 	panel.modulate.a = 1.0
@@ -121,11 +123,20 @@ func _create_slot_node(parent: Node, token: Dictionary, fixed: bool, solutions: 
 	node.block_dropped.connect(_on_block_dropped)
 
 func _update_slot(id: String, val, state: String, is_bug: bool = false):
-	current_edits[id] = val 
-	var txt = str(val)
-	if typeof(val) == TYPE_STRING and !is_bug: txt = "\"" + txt + "\""
+	current_edits[id] = val
+	var txt: String
+	if typeof(val) == TYPE_DICTIONARY:
+		var block_val = val.get("value")
+		if val.get("type") == "string":
+			txt = '"%s"' % str(block_val)
+		else:
+			txt = str(block_val)
+	elif typeof(val) == TYPE_STRING and not is_bug:
+		txt = '"%s"' % val
+	else:
+		txt = str(val)
 	slot_nodes[id].set_slot_state(state, txt)
-
+	
 func _on_block_dropped(id: String, block_data: Dictionary):
 	if block_data.is_empty():
 		_update_slot(id, slot_nodes[id].original_value, "bug", true)
@@ -143,7 +154,7 @@ func _on_solve_result(success: bool, _message: String, _wrong: String):
 		tween.tween_property(panel, "modulate:a", 0.0, 0.3)
 		tween.finished.connect(func(): 
 			visible = false
-			get_tree().paused = false
+			ProgressionService.is_ui_active = false
 		)
 	else:
 		_handle_error()
@@ -160,11 +171,10 @@ func _handle_error():
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel") and visible:
 		visible = false
-		get_tree().paused = false
+		ProgressionService.is_ui_active = false
 		
 func _on_exit_pressed() -> void:
 	visible = false
-	get_tree().paused = false
 	ProgressionService.is_ui_active = false 
 	
 func _populate_inventory(inventory_data: Array) -> void:

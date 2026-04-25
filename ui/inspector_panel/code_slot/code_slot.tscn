@@ -15,35 +15,43 @@ shader_parameter/frequency = 20.0
 shader_parameter/speed = 15.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mn6fe"]
-size = Vector2(79.5, 51.5)
+size = Vector2(141.5, 51.5)
 
 [sub_resource type="Resource" id="Resource_mn6fe"]
 script = ExtResource("5_mn6fe")
 metadata/_custom_type_script = "uid://b3yrcfpcbpfhu"
 
-[sub_resource type="Resource" id="Resource_igv45"]
-script = ExtResource("6_igv45")
-
 [sub_resource type="Resource" id="Resource_dyfqn"]
 script = ExtResource("6_igv45")
-metadata/_custom_type_script = "uid://djdmnemxrx7bg"
 
-[node name="CodeSlot" type="Button" unique_id=660433212]
+[node name="CodeSlot" type="Control" unique_id=228056139]
 material = SubResource("ShaderMaterial_h131i")
 custom_minimum_size = Vector2(60, 0)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2_k1ao0")
+
+[node name="Label" type="Label" parent="." unique_id=150331806]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_h131i")
 theme_override_font_sizes/font_size = 32
-text = "???"
-flat = true
-script = ExtResource("2_k1ao0")
+text = "???????"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1115202021]
 process_mode = 3
+disable_mode = 2
 collision_layer = 8
-collision_mask = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=696853194]
-position = Vector2(40.25, 25.25)
+position = Vector2(71.25, 25.25)
 shape = SubResource("RectangleShape2D_mn6fe")
 
 [node name="DropZone" type="Node2D" parent="Area2D" unique_id=875131309 node_paths=PackedStringArray("attach_spot")]
@@ -51,5 +59,5 @@ script = ExtResource("4_mn6fe")
 attach_spot = NodePath("..")
 drop_behavior = SubResource("Resource_mn6fe")
 snap_style = 1
-accepted_draggable_types = Array[ExtResource("6_igv45")]([SubResource("Resource_igv45"), SubResource("Resource_dyfqn")])
+accepted_draggable_types = Array[ExtResource("6_igv45")]([SubResource("Resource_dyfqn")])
 metadata/_custom_type_script = "uid://nj1hdjl1vob2"

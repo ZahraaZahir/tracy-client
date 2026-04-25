@@ -28,6 +28,9 @@ script = ExtResource("1_hct3i")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=715188341]
 position = Vector2(60, 40)
+disable_mode = 2
+collision_layer = 8
+collision_mask = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="Area2D" unique_id=1643859641]
 custom_minimum_size = Vector2(140, 80)
