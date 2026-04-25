@@ -109,7 +109,9 @@ func _create_slot_node(parent: Node, token: Dictionary, fixed: bool, solutions: 
 	var val = ""
 	if fixed:
 		state = "fixed"
-		val = str(solutions.get(id, "FIXED"))
+		var solution = solutions.get(id, {})
+		var block_val = solution.get("value", "FIXED")
+		val = '"%s"' % str(block_val) if solution.get("type") == "string" else str(block_val)
 	else:
 		state = "bug"
 		val = str(token.get("currentValue", "???"))
