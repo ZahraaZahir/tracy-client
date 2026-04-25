@@ -22,12 +22,6 @@ func _ready() -> void:
 	draggable.drag_started.connect(func(_a): area.monitoring = true)
 	draggable.drag_ended.connect(func(_a, _spot): area.monitoring = false)
 
-func _on_drag_started(_area: Area2D) -> void:
-	area.monitoring = true
-
-func _on_drag_ended(_area: Area2D, _spot) -> void:
-	area.monitoring = false
-
 func setup_block(block_data: Dictionary, drag_layer: Node) -> void:
 	logic_block = block_data
 	draggable.drag_layer_parent = drag_layer
