@@ -11,6 +11,7 @@ var current_state: String = ""
 var original_value: String = ""
 var is_locked: bool = false
 var pulse_tween: Tween
+var highlight_tween: Tween
 var base_color: Color = Color(1, 1, 1)
 
 var _held_inventory_item = null
@@ -21,25 +22,43 @@ func _ready():
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	drop_zone.occupant_changed.connect(_on_occupant_changed)
+	
+	var area = $Area2D
+	area.area_entered.connect(_on_drag_entered)
+	area.area_exited.connect(_on_drag_exited)
 
+func _on_drag_entered(_other_area: Area2D):
+	if is_locked: return
+	if highlight_tween: highlight_tween.kill()
+	
+	highlight_tween = create_tween().bind_node(self)
+	highlight_tween.tween_property(self, "modulate", Color(1.2, 1.2, 0.9, 1.0), 0.1).set_trans(Tween.TRANS_SINE)
+
+func _on_drag_exited(_other_area: Area2D):
+	if is_locked: return
+	if highlight_tween: highlight_tween.kill()
+	
+	highlight_tween = create_tween().bind_node(self)
+	highlight_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.1).set_trans(Tween.TRANS_SINE)
+	
 func setup(id: String, val: String, state: String):
 	slot_id = id
 	original_value = val
 	set_slot_state(state, val)
+	
 func _on_occupant_changed(_zone, _spot, _old, new_occupant):
+	if highlight_tween: highlight_tween.kill()
+	modulate = Color(1.0, 1.0, 1.0, 1.0)
 	if new_occupant == null: return
 	var inventory_item = new_occupant.get_meta("slot_root", null)
 	if inventory_item == null: return
 
-	# Safeguard: Force restoration if overwriting an existing held item
 	if _held_area != null and _held_area != new_occupant:
 		restore_held_item()
 
-	# Capture the new item
 	_held_inventory_item = inventory_item
 	_held_area = new_occupant
 
-	# Hide visually but preserve HBoxContainer layout geometry
 	_held_inventory_item.modulate.a = 0.0
 	_held_inventory_item.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_held_area.visible = false
@@ -97,14 +116,17 @@ func set_slot_state(new_state: String, new_val: String):
 	
 func _resync_hitbox():
 	await get_tree().process_frame
-	var new_size = label.get_combined_minimum_size()
-	new_size.x += 20
-	custom_minimum_size.x = new_size.x
+	var text_size = label.get_combined_minimum_size()
+	
+	custom_minimum_size.x = text_size.x + 20 
 	
 	if collision_shape and collision_shape.shape is RectangleShape2D:
-		collision_shape.shape.size = Vector2(new_size.x, 48)
-		collision_shape.position = Vector2(new_size.x / 2, 24)
-
+		var target_width = max(text_size.x + 60.0, 180.0) 
+		var target_height = 100.0 
+		
+		collision_shape.shape.size = Vector2(target_width, target_height)
+		collision_shape.position = Vector2(custom_minimum_size.x / 2.0, size.y / 2.0)
+		
 func _apply_colors(color: Color):
 	label.add_theme_color_override("font_color", color)
 	label.add_theme_color_override("font_outline_color", color)
