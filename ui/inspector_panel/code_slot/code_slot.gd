@@ -32,11 +32,9 @@ func _on_occupant_changed(_zone, _spot, _old, new_occupant):
 	var inventory_item = new_occupant.get_meta("slot_root", null)
 	if inventory_item == null: return
 
-	# Capture the new item
 	_held_inventory_item = inventory_item
 	_held_area = new_occupant
 	
-	# Hide visually - the Label in inspector_panel handles the "text" display
 	_held_inventory_item.visible = false
 	_held_area.visible = false
 
@@ -52,22 +50,17 @@ func consume_held_item() -> void:
 
 func restore_held_item() -> void:
 	if is_instance_valid(_held_inventory_item) and is_instance_valid(_held_area):
-		# 1. Force visual visibility
 		_held_inventory_item.visible = true
 		_held_area.visible = true
 		_held_area.z_index = 0
 		
-		# 2. Reset plugin internal state to IDLE
 		var draggable = _held_area.get_meta("draggable", null)
 		if draggable:
-			draggable.state = 0 # DRAGGABLE_STATE.IDLE
+			draggable.state = 0 
 		
-		# 3. Force Reparent and Hard-Reset position
-		# false = do not keep global transform (snaps to local 0,0 of parent)
 		_held_area.reparent(_held_inventory_item, false)
-		_held_area.position = Vector2(60, 40) # Match the exact center of inventory_slot.tscn
+		_held_area.position = Vector2(60, 40)
 		
-		# 4. Clear plugin's internal tracking
 		DropUtils.clear_occupant_reference(drop_zone, _held_area)
 		
 	_held_inventory_item = null
@@ -111,10 +104,7 @@ func _on_mouse_entered():
 	if is_locked: return
 	label.add_theme_color_override("font_outline_color", Color(1, 1, 1))
 	
-	# TRIGGER REPLACE:
-	# If we have an item and the user is carrying a NEW item, kick the old one back.
 	if current_state == "draft":
-		# Check if anything is currently being dragged in the DragLayer
 		var drag_layer = get_tree().root.find_child("DragLayer", true, false)
 		if drag_layer and drag_layer.get_child_count() > 0:
 			restore_held_item()

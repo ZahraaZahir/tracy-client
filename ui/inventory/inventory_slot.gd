@@ -14,6 +14,7 @@ const TYPE_COLORS = {
 	"float":   Color("#B83C18"),
 	"string":  Color("#4E7010")
 }
+
 func _ready() -> void:
 	area.set_meta("slot_root", self)
 	draggable.area_reference = area
