@@ -138,18 +138,22 @@ func _on_block_dropped(id: String, block_data: Dictionary):
 		_update_slot(id, block_data, "draft")
 
 func _on_submit_pressed():
-	var unresolved: Array = []
+	var unresolved: Array =[]
 	for id in current_edits:
 		if typeof(current_edits[id]) != TYPE_DICTIONARY:
 			unresolved.append(id)
-
+			
 	if not unresolved.is_empty():
 		_handle_incomplete(unresolved)
 		return
 
 	submit_button.disabled = true
+	
+	for node in slot_nodes.values():
+		node.is_locked = true
+		
 	EntityService.solve_entity(current_entity_id, {"answers": current_edits})
-
+	
 func _on_solve_result(success: bool, _message: String, wrong_slot: String):
 	if success:
 		for node in slot_nodes.values():
@@ -166,6 +170,9 @@ func _on_solve_result(success: bool, _message: String, wrong_slot: String):
 func _handle_error(wrong_slot: String = ""):
 	submit_button.disabled = false
 	
+	for node in slot_nodes.values():
+		node.is_locked = false
+
 	if wrong_slot != "" and slot_nodes.has(wrong_slot):
 		slot_nodes[wrong_slot].flash_error()
 

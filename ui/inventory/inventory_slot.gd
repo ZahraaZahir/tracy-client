@@ -32,7 +32,7 @@ func setup_block(block_data: Dictionary, drag_layer: Node) -> void:
 		label.text = '"%s"' % val
 	else:
 		label.text = str(val)
-
+		
 	var block_type = block_data.get("type", "string")
 	var style = visuals.get_theme_stylebox("panel").duplicate()
 	style.bg_color = TYPE_COLORS.get(block_type, Color("#333333"))

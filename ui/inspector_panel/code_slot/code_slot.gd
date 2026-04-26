@@ -26,19 +26,45 @@ func setup(id: String, val: String, state: String):
 	slot_id = id
 	original_value = val
 	set_slot_state(state, val)
-
 func _on_occupant_changed(_zone, _spot, _old, new_occupant):
 	if new_occupant == null: return
 	var inventory_item = new_occupant.get_meta("slot_root", null)
 	if inventory_item == null: return
 
+	# Safeguard: Force restoration if overwriting an existing held item
+	if _held_area != null and _held_area != new_occupant:
+		restore_held_item()
+
+	# Capture the new item
 	_held_inventory_item = inventory_item
 	_held_area = new_occupant
-	
-	_held_inventory_item.visible = false
+
+	# Hide visually but preserve HBoxContainer layout geometry
+	_held_inventory_item.modulate.a = 0.0
+	_held_inventory_item.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_held_area.visible = false
 
 	block_dropped.emit(slot_id, inventory_item.logic_block)
+
+func restore_held_item() -> void:
+	if is_instance_valid(_held_inventory_item) and is_instance_valid(_held_area):
+		_held_inventory_item.modulate.a = 1.0
+		_held_inventory_item.mouse_filter = Control.MOUSE_FILTER_PASS
+		
+		_held_area.visible = true
+		_held_area.z_index = 0
+
+		var draggable = _held_area.get_meta("draggable", null)
+		if draggable:
+			draggable.state = 0
+		
+		_held_area.reparent(_held_inventory_item, false)
+		_held_area.position = Vector2(60, 40)
+		
+		DropUtils.clear_occupant_reference(drop_zone, _held_area)
+
+	_held_inventory_item = null
+	_held_area = null
 
 func consume_held_item() -> void:
 	if is_instance_valid(_held_inventory_item):
@@ -47,25 +73,8 @@ func consume_held_item() -> void:
 		_held_area.queue_free()
 	_held_inventory_item = null
 	_held_area = null
-
-func restore_held_item() -> void:
-	if is_instance_valid(_held_inventory_item) and is_instance_valid(_held_area):
-		_held_inventory_item.visible = true
-		_held_area.visible = true
-		_held_area.z_index = 0
-		
-		var draggable = _held_area.get_meta("draggable", null)
-		if draggable:
-			draggable.state = 0 
-		
-		_held_area.reparent(_held_inventory_item, false)
-		_held_area.position = Vector2(60, 40)
-		
-		DropUtils.clear_occupant_reference(drop_zone, _held_area)
-		
-	_held_inventory_item = null
-	_held_area = null
-
+	
+	
 func set_slot_state(new_state: String, new_val: String):
 	current_state = new_state
 	label.text = new_val
@@ -73,7 +82,7 @@ func set_slot_state(new_state: String, new_val: String):
 	if pulse_tween: pulse_tween.kill()
 	modulate.a = 1.0
 	add_theme_constant_override("outline_size", 2)
-
+	
 	match current_state:
 		"bug":
 			base_color = Color("#ff5555")
@@ -85,7 +94,7 @@ func set_slot_state(new_state: String, new_val: String):
 			add_theme_constant_override("outline_size", 0)
 	_apply_colors(base_color)
 	_resync_hitbox()
-
+	
 func _resync_hitbox():
 	await get_tree().process_frame
 	var new_size = label.get_combined_minimum_size()
@@ -99,7 +108,7 @@ func _resync_hitbox():
 func _apply_colors(color: Color):
 	label.add_theme_color_override("font_color", color)
 	label.add_theme_color_override("font_outline_color", color)
-
+	
 func _on_mouse_entered():
 	if is_locked: return
 	label.add_theme_color_override("font_outline_color", Color(1, 1, 1))
