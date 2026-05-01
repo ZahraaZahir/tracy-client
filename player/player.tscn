@@ -374,7 +374,7 @@ frame = 88
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1509123204]
 position = Vector2(0, 3)
-zoom = Vector2(8, 8)
+zoom = Vector2(4, 4)
 process_callback = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1171964761]

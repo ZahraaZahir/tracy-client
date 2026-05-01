@@ -86,10 +86,10 @@ func _on_hurt_done():
 			_transition_to_state(State.IDLE)
 
 func _on_death():
-	print("BUG DIED: Awaiting server loot...")
-	$DetectionArea.body_entered.disconnect(_on_detection_area_body_entered)
-	$DetectionArea.body_exited.disconnect(_on_detection_area_body_exited)
-	await get_tree().create_timer(2.0).timeout
+	print("BUG DIED: Requesting strategic loot from server...")
+	BaseApiService.send_request("/world/loot", HTTPClient.METHOD_POST, {}, true)
+	$DetectionArea.monitoring = false
+	await get_tree().create_timer(1.5).timeout
 	queue_free()
 
 func _on_detection_area_body_entered(body):
