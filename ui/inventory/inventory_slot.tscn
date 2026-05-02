@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://ycwns8w42288"]
+
+[ext_resource type="Script" uid="uid://dnpddo3vxl81t" path="res://ui/inventory/inventory_slot.gd" id="1_hct3i"]
+[ext_resource type="FontFile" uid="uid://boi0jbccfd0tn" path="res://assets/fonts/JetBrainsMono-Regular.ttf" id="2_e2a1b"]
+[ext_resource type="Script" uid="uid://crmnw3ldr3xev" path="res://addons/drag_and_drop/scripts/draggable.gd" id="2_hct3i"]
+[ext_resource type="Script" uid="uid://djdmnemxrx7bg" path="res://addons/drag_and_drop/resources/draggable_types/draggable_type.gd" id="3_e2a1b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hct3i"]
+bg_color = Color(0.94, 0.81278664, 0.6768, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hct3i"]
+size = Vector2(160, 80)
+
+[sub_resource type="Resource" id="Resource_7h5lb"]
+script = ExtResource("3_e2a1b")
+
+[node name="InventorySlot" type="Control" unique_id=1965030495]
+process_mode = 3
+custom_minimum_size = Vector2(160, 80)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_hct3i")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=715188341]
+position = Vector2(60, 40)
+disable_mode = 2
+collision_layer = 8
+collision_mask = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Area2D" unique_id=1643859641]
+custom_minimum_size = Vector2(140, 80)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -40.0
+offset_right = 100.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hct3i")
+
+[node name="Label" type="Label" parent="Area2D/PanelContainer" unique_id=1734909522]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25492135, 0.14999521, 0.011469052, 1)
+theme_override_fonts/font = ExtResource("2_e2a1b")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=226720965]
+position = Vector2(20, 0)
+shape = SubResource("RectangleShape2D_hct3i")
+
+[node name="Draggable" type="Node" parent="Area2D" unique_id=164823830]
+process_mode = 3
+script = ExtResource("2_hct3i")
+relative_dragging = true
+type = SubResource("Resource_7h5lb")
+metadata/_custom_type_script = "uid://crmnw3ldr3xev"
