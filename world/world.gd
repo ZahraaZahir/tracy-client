@@ -27,8 +27,6 @@ func _on_world_loaded(data: Dictionary) -> void:
 		for npc in get_tree().get_nodes_in_group("interactable"):
 			if npc.entity_id in data.fixedGlitches:
 				npc.load_silent_state()
-		
-		# spawn bugs based on unfixed NPC count
 		var unfixed_count = data.totalEntities - data.fixedGlitches.size()
 		_spawn_bugs(unfixed_count)
 	
@@ -40,24 +38,15 @@ func _spawn_bugs(count: int) -> void:
 		return
 	
 	print("WORLD: Preparing to spawn ", count, " bugs...")
-	
-	# Instead of a fixed area, let's spawn them NEAR the player
-	# This ensures 'Liveness' — the player sees the threat immediately
 	var player_pos = player.global_position
 	
 	for i in range(count):
 		var bug = BUG_SCENE.instantiate()
-		
-		# 1. Randomize position in a circle around the player
 		var angle = randf() * TAU
-		var distance = randf_range(150, 400) # Not too close, not too far
+		var distance = randf_range(150, 400) 
 		var spawn_pos = player_pos + Vector2(cos(angle), sin(angle)) * distance
-		
-		# 2. Add to tree BEFORE setting position
 		add_child(bug)
 		bug.global_position = spawn_pos
-		
-		# 3. Visual Check: Give them a random scale so they look different
 		var s = randf_range(0.8, 1.2)
 		bug.scale = Vector2(s, s)
 		
