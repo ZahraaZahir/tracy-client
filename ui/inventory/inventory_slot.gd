@@ -5,6 +5,8 @@ extends Control
 @onready var label: Label = $Area2D/PanelContainer/Label
 @onready var draggable: Node = $Area2D/Draggable
 
+@export var is_draggable: bool = true
+
 var logic_block: Dictionary = {}
 
 const TYPE_COLORS = {
@@ -16,6 +18,12 @@ const TYPE_COLORS = {
 }
 
 func _ready() -> void:
+	if not is_draggable:
+		area.monitoring = false
+		area.monitorable = false
+		draggable.queue_free()
+		return
+	
 	area.set_meta("slot_root", self)
 	draggable.area_reference = area
 	
@@ -25,7 +33,9 @@ func _ready() -> void:
 
 func setup_block(block_data: Dictionary, drag_layer: Node) -> void:
 	logic_block = block_data
-	draggable.drag_layer_parent = drag_layer
+	
+	if is_instance_valid(draggable):
+		draggable.drag_layer_parent = drag_layer
 
 	var val = block_data.get("value", "??")
 	if typeof(val) == TYPE_STRING:
