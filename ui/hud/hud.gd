@@ -7,15 +7,21 @@ extends CanvasLayer
 
 const INVENTORY_SLOT_SCENE = preload("res://ui/inventory/inventory_slot.tscn")
 @onready var hud_inventory_list = %HudInventoryList
+@onready var inventory_ui = $MainMargin/InventoryContainer
 
 func _ready() -> void:
-	WorldService.inventory_updated.connect(_on_inventory_updated)
+	ProgressionService.ui_state_changed.connect(_on_ui_state_changed)
 	ProgressionService.progress_updated.connect(_on_progress_updated)
+	
+	WorldService.inventory_updated.connect(_on_inventory_updated)
 	
 	logout_button.pressed.connect(_on_logout_pressed)
 	_setup_developer_id()
 	_on_inventory_updated(WorldService.current_inventory)
+	
 	progress_label.text = "Fixed: 0 / 0"
+	
+	inventory_ui.visible = !ProgressionService.is_ui_active
 
 func _setup_developer_id() -> void:
 	var dev_name = BaseApiService.developer_id
@@ -46,3 +52,6 @@ func _on_inventory_updated(inventory_data: Array) -> void:
 		slot.is_draggable = false
 		hud_inventory_list.add_child(slot)
 		slot.setup_block(block_data, null)
+		
+func _on_ui_state_changed(is_active: bool) -> void:
+	inventory_ui.visible = !is_active
