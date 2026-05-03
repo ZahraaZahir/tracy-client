@@ -4,10 +4,17 @@ extends CanvasLayer
 @onready var progress_widget = $MainMargin/TopLeft/ProgressWidget
 @onready var dev_id_label = $MainMargin/TopLeft/IDWidget/Padding/IDHBox/Label
 @onready var logout_button = $MainMargin/TopRight/Padding/LoginButton
+
+const INVENTORY_SLOT_SCENE = preload("res://ui/inventory/inventory_slot.tscn")
+@onready var hud_inventory_list = %HudInventoryList
+
 func _ready() -> void:
+	WorldService.inventory_updated.connect(_on_inventory_updated)
 	ProgressionService.progress_updated.connect(_on_progress_updated)
+	
 	logout_button.pressed.connect(_on_logout_pressed)
 	_setup_developer_id()
+	_on_inventory_updated(WorldService.current_inventory)
 	progress_label.text = "Fixed: 0 / 0"
 
 func _setup_developer_id() -> void:
@@ -28,3 +35,14 @@ func _on_progress_updated(current: int, total: int) -> void:
 		
 func _on_logout_pressed() -> void:
 	BaseApiService.logout()
+	
+func _on_inventory_updated(inventory_data: Array) -> void:
+	print("HUD DEBUG: Updating list with ", inventory_data.size(), " items.")
+	for child in hud_inventory_list.get_children():
+		child.queue_free()
+		
+	for block_data in inventory_data:
+		var slot = INVENTORY_SLOT_SCENE.instantiate()
+		slot.is_draggable = false
+		hud_inventory_list.add_child(slot)
+		slot.setup_block(block_data, null)

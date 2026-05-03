@@ -34,6 +34,11 @@ func _on_base_request_finished(endpoint: String, success: bool, data: Dictionary
 		current_inventory = actual_data.get("inventory", [])
 		inventory_updated.emit(current_inventory)
 		world_loaded.emit(actual_data)
+		
+	elif endpoint == "/world/loot" and success:
+		add_loot(data)
+		print("HUD DEBUG: Loot received and added to state.")
+		
 	elif endpoint == "/world/save" and success:
 		print("SYSTEM: World synced.")
 		
