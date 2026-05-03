@@ -111,3 +111,21 @@ theme_override_styles/hover = ExtResource("5_kwc50")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_o2lis")
 text = "Logout
 "
+
+[node name="InventoryContainer" type="MarginContainer" parent="MainMargin" unique_id=498084559]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = 16
+
+[node name="InventoryScroll" type="ScrollContainer" parent="MainMargin/InventoryContainer" unique_id=259882829]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 4
+vertical_scroll_mode = 0
+
+[node name="HudInventoryList" type="HBoxContainer" parent="MainMargin/InventoryContainer/InventoryScroll" unique_id=152841402]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+alignment = 1
