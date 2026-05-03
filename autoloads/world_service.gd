@@ -50,3 +50,14 @@ func sync_progress(fixed_list: Array, total: int) -> void:
 func add_loot(block_data: Dictionary) -> void:
 	current_inventory.append(block_data)
 	inventory_updated.emit(current_inventory)
+	
+func remove_blocks(used_blocks: Dictionary) -> void:
+	var used_ids = []
+	for val in used_blocks.values():
+		if typeof(val) == TYPE_DICTIONARY and val.has("blockId"):
+			used_ids.append(val.blockId)
+	
+	current_inventory = current_inventory.filter(func(item):
+		return not used_ids.has(item.get("blockId"))
+	)
+	inventory_updated.emit(current_inventory)

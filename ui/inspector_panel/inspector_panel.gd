@@ -40,7 +40,6 @@ func _ready() -> void:
 func _on_npc_data_arrived(success: bool, data: Dictionary) -> void:
 	if not success: return
 
-	# Clear drag ghosts
 	for child in drag_layer.get_children():
 		child.queue_free()
 	
@@ -156,6 +155,7 @@ func _on_submit_pressed():
 	
 func _on_solve_result(success: bool, _message: String, wrong_slot: String):
 	if success:
+		WorldService.remove_blocks(current_edits)
 		for node in slot_nodes.values():
 			node.consume_held_item()
 		var tween = create_tween().bind_node(self).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
