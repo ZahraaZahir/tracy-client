@@ -2,15 +2,12 @@ extends Node
 
 signal world_loaded(data: Dictionary)
 signal progress_updated(current: int, total: int)
-signal inventory_updated(new_inventory: Array)
+signal inventory_updated(inventory: Array)
 
 var current_inventory: Array = [] 
 var patched_bugs_count: int = 0
 var total_bugs_count: int = 0
 var is_persistence_ready: bool = false
-
-signal inventory_updated(inventory: Array)
-var current_inventory: Array = []
 
 func _ready() -> void:
 	BaseApiService.request_finished.connect(_on_base_request_finished)
@@ -35,6 +32,17 @@ func add_loot(loot_data: Dictionary) -> void:
 	inventory_updated.emit(current_inventory)
 	print("WORLD SERVICE: Item added. Current inventory size: ", current_inventory.size())
 
+func remove_blocks(used_blocks: Dictionary) -> void:
+	var used_ids = []
+	for val in used_blocks.values():
+		if typeof(val) == TYPE_DICTIONARY and val.has("blockId"):
+			used_ids.append(val.blockId)
+	
+	current_inventory = current_inventory.filter(func(item):
+		return not used_ids.has(item.get("blockId"))
+	)
+	inventory_updated.emit(current_inventory)
+
 func _on_base_request_finished(endpoint: String, success: bool, data: Dictionary) -> void:
 	if endpoint == "/world/load" and success:
 		var actual_data = data.get("data", data)
@@ -53,18 +61,3 @@ func sync_progress(fixed_list: Array, total: int) -> void:
 	patched_bugs_count = fixed_list.size()
 	total_bugs_count = total
 	progress_updated.emit(patched_bugs_count, total_bugs_count)
-	
-func add_loot(block_data: Dictionary) -> void:
-	current_inventory.append(block_data)
-	inventory_updated.emit(current_inventory)
-	
-func remove_blocks(used_blocks: Dictionary) -> void:
-	var used_ids = []
-	for val in used_blocks.values():
-		if typeof(val) == TYPE_DICTIONARY and val.has("blockId"):
-			used_ids.append(val.blockId)
-	
-	current_inventory = current_inventory.filter(func(item):
-		return not used_ids.has(item.get("blockId"))
-	)
-	inventory_updated.emit(current_inventory)
