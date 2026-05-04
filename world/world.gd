@@ -17,38 +17,40 @@ func _ready() -> void:
 func _on_world_loaded(data: Dictionary) -> void:
 	if not player: return
 	
-	# 1. Sync Position
 	if data.has("posX") and data.has("posY"):
 		var target_pos = Vector2(data.posX, data.posY)
 		if target_pos.length() > 0.1:
 			player.global_position = target_pos
 	
-	# 2. Sync Progression & NPCs
 	if data.has("fixedGlitches") and data.has("totalEntities"):
 		ProgressionService.sync(data.fixedGlitches, data.totalEntities)
 		
 		await get_tree().process_frame 
 		
-		var total_unfixed_npcs = 0
 		var fixed_ids = data.get("fixedGlitches", [])
+		var inventory_list = data.get("inventory", [])
+		var inventory_count = inventory_list.size()
 		
+
 		for npc in get_tree().get_nodes_in_group("interactable"):
 			if npc.entity_id in fixed_ids:
 				npc.load_silent_state()
-			else:
-				total_unfixed_npcs += 1
 		
-		var inventory_count = WorldService.current_inventory.size()
-		var spawn_count = total_unfixed_npcs - inventory_count
 		
-		print("WORLD: NPCs left: ", total_unfixed_npcs, " | Inventory: ", inventory_count)
+		var total_npcs = data.totalEntities
+		var fixed_count = fixed_ids.size()
+		var unfixed_count = total_npcs - fixed_count
+		var spawn_count = unfixed_count - inventory_count
+		
+		print("DEBUG SPAWN: Total:", total_npcs, " Fixed:", fixed_count, " Unfixed:", unfixed_count, " In-Pocket:", inventory_count)
+		
 		_spawn_bugs(max(0, spawn_count))
 	
 	WorldService.is_persistence_ready = true
 
 func _spawn_bugs(count: int) -> void:
 	if count <= 0:
-		print("WORLD: No bugs needed.")
+		print("WORLD: Logic blocks accounted for. No bugs spawned.")
 		return
 	
 	var player_pos = player.global_position
