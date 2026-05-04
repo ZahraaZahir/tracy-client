@@ -2,7 +2,9 @@ extends Node
 
 signal world_loaded(data: Dictionary)
 signal progress_updated(current: int, total: int)
+signal inventory_updated(new_inventory: Array)
 
+var current_inventory: Array = [] 
 var patched_bugs_count: int = 0
 var total_bugs_count: int = 0
 var is_persistence_ready: bool = false
@@ -25,10 +27,21 @@ func load_state() -> void:
 	is_persistence_ready = false
 	BaseApiService.send_request("/world/load", HTTPClient.METHOD_GET, {}, true)
 
+func add_loot(loot_data: Dictionary) -> void:
+	current_inventory.append(loot_data)
+	inventory_updated.emit(current_inventory)
+	print("WORLD SERVICE: Item added. Current inventory size: ", current_inventory.size())
+
 func _on_base_request_finished(endpoint: String, success: bool, data: Dictionary) -> void:
 	if endpoint == "/world/load" and success:
 		var actual_data = data.get("data", data)
+		
+		if actual_data.has("inventory"):
+			current_inventory = actual_data.inventory
+			inventory_updated.emit(current_inventory)
+			
 		world_loaded.emit(actual_data)
+		
 	elif endpoint == "/world/save" and success:
 		print("SYSTEM: World synced.")
 
@@ -36,4 +49,3 @@ func sync_progress(fixed_list: Array, total: int) -> void:
 	patched_bugs_count = fixed_list.size()
 	total_bugs_count = total
 	progress_updated.emit(patched_bugs_count, total_bugs_count)
-	

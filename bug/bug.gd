@@ -2,23 +2,26 @@ extends CharacterBody2D
 
 enum State { IDLE, ALERT, HURT, DYING }
 
-const SPEED_FLEE = 100.0
+const SPEED_FLEE = 60.0 # Nerfed from 100 to 60 as per action plan
 const MAX_HEALTH = 3
 
 var current_state = State.IDLE
 var health = MAX_HEALTH
 var target_player: CharacterBody2D = null
-var hurt_timer: SceneTreeTimer = null
+var is_dead: bool = false # STOPS DOUBLE DROPS
 
 @onready var anim_tree = $AnimationTree
 @onready var state_machine = anim_tree.get("parameters/playback")
 
 func _ready():
 	anim_tree.active = true
+	# Connect signals to the functions below
 	$DetectionArea.body_entered.connect(_on_detection_area_body_entered)
 	$DetectionArea.body_exited.connect(_on_detection_area_body_exited)
 
 func _physics_process(delta):
+	if is_dead: return # Stop moving if dead
+	
 	match current_state:
 		State.IDLE:
 			_logic_idle()
@@ -41,65 +44,66 @@ func _logic_alert(delta):
 	anim_tree.set("parameters/ALERT/blend_position", dir_away)
 
 func take_damage():
-	if current_state == State.HURT or current_state == State.DYING:
+	# If already dead or flinching, ignore extra hits
+	if is_dead or current_state == State.HURT:
 		return
+		
 	health -= 1
 	print("BUG: Ouch! Health remaining: ", health)
+	
 	if health <= 0:
-		_transition_to_state(State.DYING)
+		_enter_dying_state()
 	else:
 		_transition_to_state(State.HURT)
 
-func _transition_to_state(new_state: State):
-	current_state = new_state
-	match new_state:
-		State.IDLE:
-			state_machine.travel("IDLE")
-		State.ALERT:
-			state_machine.travel("ALERT")
-		State.HURT:
-			state_machine.travel("HURT")
-			var hurt_dir = Vector2.ZERO
-			if target_player != null:
-				hurt_dir = (global_position - target_player.global_position).normalized()
-			else:
-				hurt_dir = Vector2.DOWN
-			anim_tree.set("parameters/HURT/blend_position", hurt_dir)
-			_start_hurt_recovery()
-		State.DYING:
-			anim_tree.set("parameters/conditions/is_dead", true)
-			state_machine.travel("DYING")
-			_on_death()
-
-func _start_hurt_recovery():
-	if hurt_timer != null:
-		hurt_timer.timeout.disconnect(_on_hurt_done)
-	hurt_timer = get_tree().create_timer(0.4)
-	hurt_timer.timeout.connect(_on_hurt_done)
-
-func _on_hurt_done():
-	hurt_timer = null
-	if current_state == State.HURT:
-		if target_player != null:
-			_transition_to_state(State.ALERT)
-		else:
-			_transition_to_state(State.IDLE)
-
-func _on_death():
-	print("BUG DIED: Requesting strategic loot from server...")
-	BaseApiService.send_request("/world/loot", HTTPClient.METHOD_POST, {}, true)
-	$DetectionArea.monitoring = false
+func _enter_dying_state():
+	is_dead = true # LOCK SET IMMEDIATELY
+	current_state = State.DYING
+	
+	# Disable physics/interaction so it can't be hit twice
+	$DetectionArea.set_deferred("monitoring", false)
+	
+	# Check if your collision node is named CollisionShape2D or CollisionShape2D2
+	if has_node("CollisionShape2D"):
+		$CollisionShape2D.set_deferred("disabled", true)
+	elif has_node("CollisionShape2D2"):
+		$CollisionShape2D2.set_deferred("disabled", true)
+	
+	anim_tree.set("parameters/conditions/is_dead", true)
+	state_machine.travel("DYING")
+	
+	# EMIT THE SIGNAL TO THE LOOT MANAGER (This triggers the API call)
+	SignalBus.bug_slain.emit()
+	
+	# Cleanup after animation
 	await get_tree().create_timer(1.5).timeout
 	queue_free()
 
+func _transition_to_state(new_state: State):
+	if is_dead: return
+	current_state = new_state
+	match new_state:
+		State.IDLE: state_machine.travel("IDLE")
+		State.ALERT: state_machine.travel("ALERT")
+		State.HURT:
+			state_machine.travel("HURT")
+			_start_hurt_recovery()
+
+func _start_hurt_recovery():
+	await get_tree().create_timer(0.4).timeout
+	if not is_dead:
+		_transition_to_state(State.ALERT if target_player else State.IDLE)
+
+# --- THE MISSING FUNCTIONS THAT CAUSED YOUR ERROR ---
+
 func _on_detection_area_body_entered(body):
+	if is_dead: return
 	if body.is_in_group("tracy"):
 		target_player = body
 		_transition_to_state(State.ALERT)
-	else:
-		print("DETECTION: something entered but not tracy, it was: ", body.name)
 
 func _on_detection_area_body_exited(body):
 	if body == target_player:
 		target_player = null
-		_transition_to_state(State.IDLE)
+		if not is_dead:
+			_transition_to_state(State.IDLE)
