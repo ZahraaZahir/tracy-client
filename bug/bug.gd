@@ -72,10 +72,8 @@ func _enter_dying_state():
 	anim_tree.set("parameters/conditions/is_dead", true)
 	state_machine.travel("DYING")
 	
-	# EMIT THE SIGNAL TO THE LOOT MANAGER (This triggers the API call)
 	SignalBus.bug_slain.emit()
 	
-	# Cleanup after animation
 	await get_tree().create_timer(1.5).timeout
 	queue_free()
 
