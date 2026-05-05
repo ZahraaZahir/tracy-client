@@ -27,6 +27,8 @@ EntityService="*uid://d38fyeovgt72m"
 InspectorPanel="*uid://crinpj5srnbbe"
 WorldService="*uid://ce7s0x7xswksv"
 ProgressionService="*uid://8qaiklypwson"
+SignalBus="*uid://blfcxf3rla0sa"
+LootManager="*uid://h4pfpomjbr8v"
 
 [display]
 
