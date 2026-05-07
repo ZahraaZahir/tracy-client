@@ -54,15 +54,40 @@ func _spawn_bugs(count: int) -> void:
 		return
 	
 	var player_pos = player.global_position
-	for i in range(count):
-		var bug = BUG_SCENE.instantiate()
+	var space_state = get_world_2d().direct_space_state
+	var spawned_count = 0
+	var attempts = 0
+	var max_attempts = count * 20
+	
+	while spawned_count < count and attempts < max_attempts:
+		attempts += 1
+		
 		var angle = randf() * TAU
 		var distance = randf_range(200, 450) 
-		var spawn_pos = player_pos + Vector2(cos(angle), sin(angle)) * distance
-		add_child(bug)
-		bug.global_position = spawn_pos
-		var s = randf_range(0.9, 1.1)
-		bug.scale = Vector2(s, s)
+		var target_pos = player_pos + Vector2(cos(angle), sin(angle)) * distance
+		
+		var query = PhysicsPointQueryParameters2D.new()
+		query.position = target_pos
+		query.collision_mask = 1
+		
+		var intersections = space_state.intersect_point(query)
+		
+		if intersections.is_empty():
+			var bug = BUG_SCENE.instantiate()
+			
+			bug.z_index = 3           
+			bug.y_sort_enabled = true
+			
+			add_child(bug)
+			bug.global_position = target_pos
+			
+			var s = randf_range(0.9, 1.1)
+			bug.scale = Vector2(s, s)
+			spawned_count += 1
+
+	if spawned_count < count:
+		push_warning("WORLD: Limited walkable space. Only spawned %d/%d bugs." % [spawned_count, count])
+		
 
 func _on_entity_fixed(_id: String) -> void:
 	WorldService.save_state(player.global_position, MAP_ID)
