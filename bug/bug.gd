@@ -2,25 +2,24 @@ extends CharacterBody2D
 
 enum State { IDLE, ALERT, HURT, DYING }
 
-const SPEED_FLEE = 60.0 # Nerfed from 100 to 60 as per action plan
+const SPEED_FLEE = 60.0 
 const MAX_HEALTH = 3
 
 var current_state = State.IDLE
 var health = MAX_HEALTH
 var target_player: CharacterBody2D = null
-var is_dead: bool = false # STOPS DOUBLE DROPS
+var is_dead: bool = false 
 
 @onready var anim_tree = $AnimationTree
 @onready var state_machine = anim_tree.get("parameters/playback")
 
 func _ready():
 	anim_tree.active = true
-	# Connect signals to the functions below
 	$DetectionArea.body_entered.connect(_on_detection_area_body_entered)
 	$DetectionArea.body_exited.connect(_on_detection_area_body_exited)
 
 func _physics_process(delta):
-	if is_dead: return # Stop moving if dead
+	if is_dead: return 
 	
 	match current_state:
 		State.IDLE:
@@ -44,7 +43,6 @@ func _logic_alert(delta):
 	anim_tree.set("parameters/ALERT/blend_position", dir_away)
 
 func take_damage():
-	# If already dead or flinching, ignore extra hits
 	if is_dead or current_state == State.HURT:
 		return
 		
@@ -57,13 +55,13 @@ func take_damage():
 		_transition_to_state(State.HURT)
 
 func _enter_dying_state():
-	is_dead = true # LOCK SET IMMEDIATELY
+	is_dead = true
 	current_state = State.DYING
 	
-	# Disable physics/interaction so it can't be hit twice
+
 	$DetectionArea.set_deferred("monitoring", false)
 	
-	# Check if your collision node is named CollisionShape2D or CollisionShape2D2
+	
 	if has_node("CollisionShape2D"):
 		$CollisionShape2D.set_deferred("disabled", true)
 	elif has_node("CollisionShape2D2"):
@@ -92,7 +90,6 @@ func _start_hurt_recovery():
 	if not is_dead:
 		_transition_to_state(State.ALERT if target_player else State.IDLE)
 
-# --- THE MISSING FUNCTIONS THAT CAUSED YOUR ERROR ---
 
 func _on_detection_area_body_entered(body):
 	if is_dead: return
