@@ -366,7 +366,7 @@ z_index = 5
 script = ExtResource("1_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=408226223]
-position = Vector2(0, 2)
+position = Vector2(0, -7)
 texture = ExtResource("2_gmlin")
 hframes = 33
 vframes = 4
@@ -378,6 +378,7 @@ zoom = Vector2(4, 4)
 process_callback = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1171964761]
+position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_aqk2v")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1653214311]
