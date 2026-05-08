@@ -557,7 +557,6 @@ graph_offset = Vector2(86.0252, -56.58744)
 [node name="Bug" type="CharacterBody2D" unique_id=1831532933]
 visibility_layer = 3
 collision_layer = 2
-collision_mask = 0
 script = ExtResource("1_qkyey")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2096467085]
