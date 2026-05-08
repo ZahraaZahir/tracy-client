@@ -232,9 +232,10 @@ _data = {
 }
 
 [node name="GirlFarmerEntity" unique_id=850722004 instance=ExtResource("1_8epw3")]
+position = Vector2(0, 1)
 collision_layer = 2
 script = ExtResource("2_a1nye")
-target_offset = Vector2(150, 0)
+target_offset = Vector2(180, 0)
 entity_id = "npc_girl_farmer_01"
 
 [node name="Sprite2D" parent="." index="0" unique_id=275432032]
