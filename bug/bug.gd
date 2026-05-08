@@ -69,11 +69,18 @@ func _enter_dying_state():
 	
 	anim_tree.set("parameters/conditions/is_dead", true)
 	state_machine.travel("DYING")
-	
 	SignalBus.bug_slain.emit()
-	
-	await get_tree().create_timer(1.5).timeout
-	queue_free()
+	await get_tree().create_timer(3).timeout
+	var tween = create_tween()
+	for i in range(3):
+		tween.tween_property(self, "modulate:a", 0.0, 0.1) 
+		tween.tween_property(self, "modulate:a", 1.0, 0.1) 
+	tween.set_parallel(true)
+	tween.tween_property(self, "modulate:a", 0.0, 0.4)
+	tween.tween_property(self, "scale", Vector2(1.5, 1.5), 0.4)
+	tween.set_parallel(false)
+	SignalBus.collection_animation_done.emit()
+	tween.tween_callback(queue_free)
 
 func _transition_to_state(new_state: State):
 	if is_dead: return
