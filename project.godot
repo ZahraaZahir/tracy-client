@@ -29,6 +29,7 @@ WorldService="*uid://ce7s0x7xswksv"
 ProgressionService="*uid://8qaiklypwson"
 SignalBus="*uid://blfcxf3rla0sa"
 LootManager="*uid://h4pfpomjbr8v"
+DialogueManager="*uid://c3rodes2l3gxb"
 
 [display]
 
@@ -41,7 +42,7 @@ mouse_cursor/custom_image="uid://c8idd1nmnq5x5"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/drag_and_drop/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/drag_and_drop/plugin.cfg")
 
 [input]
 
@@ -80,6 +81,10 @@ draggable_click={
 "events": [null, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://main.dialogue")
 
 [physics]
 
