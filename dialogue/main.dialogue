@@ -1,0 +1,23 @@
+~ game_intro
+NPC: [[SYSTEM_ALERT: Logic Fragment Missing...|CRITICAL_ERROR: Runtime Exception...]]
+NPC: ...Hello? Can you hear me? My coordinates are drifting.
+Tracy: I'm Tracy. I'm a developer. I'm here to stabilize the system.
+NPC: The Developer?! You finally established a connection!
+NPC: We've been invaded. These glitches... they scuttled into our source code and tore out our logic.
+Tracy: So that's why the game won't compile. 
+NPC: Yes! They've manifested as physical Bugs. They are holding our Logic Blocks hostage.
+NPC: Please, Tracy. Hunt them down, recapture the blocks, and use your [I] Inspector to patch us back together.
+=> END
+
+~ first_inspect
+System: [ INSPECTOR_BOOT_SEQUENCE_COMPLETE ]
+System: This is the Entity's Source Code. 
+System: The 'holes' in the code are glitched slots. You must fill them with recaptured Logic Blocks.
+System: Drag a block from your inventory into a slot. Once the code is logical, hit [SUBMIT] to recompile.
+=> END
+
+~ first_kill
+System: [ DATA_RECAPTURED ]
+System: Logic Fragment secured and moved to the persistent inventory.
+System: Integrity is rising. Return to a glitched NPC to apply the fix.
+=> END

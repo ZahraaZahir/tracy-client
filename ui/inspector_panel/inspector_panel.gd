@@ -91,6 +91,13 @@ func _on_npc_data_arrived(success: bool, data: Dictionary) -> void:
 				_create_slot_node(content_box, token, is_fixed, solutions)
 			else:
 				_create_text_node(content_box, token)
+	if StoryService.should_play("first_inspect"):
+		DialogueManager.show_example_dialogue_balloon(
+			load("res://dialogue/main.dialogue"), 
+			"first_inspect"
+		)
+		StoryService.mark_as_seen("first_inspect")
+
 
 func _create_text_node(parent: Node, token: Dictionary):
 	var label = CODE_LABEL_SCENE.instantiate()

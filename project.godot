@@ -29,6 +29,7 @@ WorldService="*uid://ce7s0x7xswksv"
 ProgressionService="*uid://8qaiklypwson"
 SignalBus="*uid://blfcxf3rla0sa"
 LootManager="*uid://h4pfpomjbr8v"
+StoryService="*uid://3ktckqqvhi25"
 DialogueManager="*uid://c3rodes2l3gxb"
 
 [display]
@@ -84,7 +85,7 @@ draggable_click={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://main.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogue/main.dialogue")
 
 [physics]
 
