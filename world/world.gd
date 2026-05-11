@@ -47,12 +47,12 @@ func _on_world_loaded(data: Dictionary) -> void:
 		_spawn_bugs(max(0, spawn_count))
 	
 	WorldService.is_persistence_ready = true
+	await get_tree().process_frame 
+	
 	if StoryService.should_play("game_intro"):
 		_play_intro_sequence()
 
-
 func _play_intro_sequence():
-	# 1. Load the dialogue file
 	var dialogue_resource = load("res://dialogue/main.dialogue")
 	DialogueManager.show_example_dialogue_balloon(dialogue_resource, "game_intro")
 	StoryService.mark_as_seen("game_intro")
@@ -101,3 +101,4 @@ func _spawn_bugs(count: int) -> void:
 
 func _on_entity_fixed(_id: String) -> void:
 	WorldService.save_state(player.global_position, MAP_ID)
+	

@@ -30,7 +30,7 @@ func _on_animation_finished() -> void:
 	else:
 		print("WORLD SERVICE: Warning - Animation finished but queue was empty.")
 
-# 3. THE CLEANUP (Logic Side)
+
 func remove_blocks(used_blocks: Dictionary) -> void:
 	var used_ids = []
 	for val in used_blocks.values():
@@ -45,7 +45,14 @@ func remove_blocks(used_blocks: Dictionary) -> void:
 
 func save_state(pos: Vector2, map_name: String) -> void:
 	if not is_persistence_ready: return
-	var payload = { "posX": pos.x, "posY": pos.y, "mapName": map_name }
+	var flags = StoryService.seen_dialogues
+	
+	var payload = {
+		"posX": pos.x,
+		"posY": pos.y,
+		"mapName": map_name,
+		"seenDialogues": flags
+	}
 	BaseApiService.send_request("/world/save", HTTPClient.METHOD_POST, payload, true)
 
 func load_state() -> void:
