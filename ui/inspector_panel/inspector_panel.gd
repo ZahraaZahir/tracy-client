@@ -25,6 +25,7 @@ const THEME = {
 var current_entity_id: String = ""
 var current_edits: Dictionary = {}
 var slot_nodes: Dictionary = {}
+var warning_tween: Tween
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -160,7 +161,7 @@ func _on_submit_pressed():
 		
 	EntityService.solve_entity(current_entity_id, {"answers": current_edits})
 	
-func _on_solve_result(success: bool, _message: String, wrong_slot: String):
+func _on_solve_result(success: bool, message: String, wrong_slot: String):
 	if success:
 		WorldService.remove_blocks(current_edits)
 		for node in slot_nodes.values():
@@ -172,9 +173,9 @@ func _on_solve_result(success: bool, _message: String, wrong_slot: String):
 			ProgressionService.is_ui_active = false
 		)
 	else:
-		_handle_error(wrong_slot)
+		_handle_error(wrong_slot, message)
 
-func _handle_error(wrong_slot: String = ""):
+func _handle_error(wrong_slot: String, message: String = ""):
 	submit_button.disabled = false
 	
 	for node in slot_nodes.values():
@@ -183,17 +184,19 @@ func _handle_error(wrong_slot: String = ""):
 	if wrong_slot != "" and slot_nodes.has(wrong_slot):
 		slot_nodes[wrong_slot].flash_error()
 
+	if message != "":
+		_show_warning(message, 3.0)
+
 	var original_x = panel.position.x
 	var shake = create_tween().bind_node(self).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	shake.tween_property(panel, "position:x", original_x + 10, 0.05)
 	shake.tween_property(panel, "position:x", original_x - 10, 0.05)
 	shake.tween_property(panel, "position:x", original_x, 0.05)
 	shake.set_loops(2)
-
+	
 func _handle_incomplete(unresolved: Array) -> void:
-	warning_label.text = "All slots must be filled before submitting."
-	warning_container.visible = true
-
+	_show_warning("Please fill the slot with a code block from the inventory.", .0)
+	
 	for id in unresolved:
 		slot_nodes[id].flash_incomplete()
 
@@ -213,3 +216,14 @@ func _populate_inventory(inventory_data: Array) -> void:
 		var slot = INVENTORY_SLOT_SCENE.instantiate()
 		inventory_list.add_child(slot)
 		slot.setup_block(block_data, drag_layer)
+
+func _show_warning(message_text: String, duration: float) -> void:
+	warning_label.text = message_text
+	warning_container.visible = true
+	
+	if warning_tween:
+		warning_tween.kill()
+		
+	warning_tween = create_tween().bind_node(self).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	warning_tween.tween_interval(duration)
+	warning_tween.tween_callback(func(): warning_container.visible = false)
