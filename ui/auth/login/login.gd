@@ -24,7 +24,7 @@ func _on_login_pressed() -> void:
 	var pw = password_input.text.strip_edges()
 	
 	if id.is_empty() or pw.is_empty():
-		_set_status("Error: Enter credentials.", COLOR_ERROR)
+		_set_status("Please Enter credentials.", COLOR_ERROR)
 		return
 	
 	_set_status("Authenticating...", COLOR_PENDING)
@@ -39,7 +39,7 @@ func _on_auth_result(success: bool, message: String) -> void:
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://world/world.tscn")
 	else:
-		_set_status("Error: " + message, COLOR_ERROR)
+		_set_status(message, COLOR_ERROR)
 
 func _set_status(text: String, color: Color) -> void:
 	status_label.text = text
