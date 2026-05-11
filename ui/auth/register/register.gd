@@ -26,11 +26,11 @@ func _on_register_pressed() -> void:
 	var confirm = confirm_password_input.text.strip_edges()
 	
 	if email.is_empty() or username.is_empty() or password.is_empty() or confirm.is_empty():
-		_set_status("Error: All fields required.", COLOR_ERROR)
+		_set_status("All fields are required.", COLOR_ERROR)
 		return
 	
 	if password != confirm:
-		_set_status("Error: Passwords do not match.", COLOR_ERROR)
+		_set_status("Passwords do not match.", COLOR_ERROR)
 		return
 		
 	_set_status("Connecting to system...", COLOR_PENDING)
@@ -48,7 +48,7 @@ func _on_auth_result(success: bool, message: String) -> void:
 			
 			get_tree().change_scene_to_file("res://world/world.tscn")
 	else:
-		_set_status("Error: " + message, COLOR_ERROR)
+		_set_status(message, COLOR_ERROR)
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://ui/welcome/welcome.tscn")

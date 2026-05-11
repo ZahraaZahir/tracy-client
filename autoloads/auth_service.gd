@@ -15,5 +15,17 @@ func login(identifier: String, password: String) -> void:
 
 func _on_base_request_finished(endpoint: String, success: bool, data: Dictionary) -> void:
 	if endpoint == "/auth/register" or endpoint == "/auth/login":
-		var msg = data.get("message", data.get("error", "Action successful" if success else "Action failed"))
+		var msg = ""
+		
+		if success:
+			msg = data.get("message", "Action successful")
+		else:
+			if data.has("details") and data["details"] is Array:
+				var errors = []
+				for issue in data["details"]:
+					errors.append("• " + issue.get("message", "Invalid input"))
+				msg = "\n".join(errors)
+			else:
+				msg = data.get("message", data.get("error", "Action failed"))
+				
 		auth_finished.emit(success, msg)
