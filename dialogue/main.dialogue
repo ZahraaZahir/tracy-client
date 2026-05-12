@@ -1,7 +1,7 @@
 ~ game_intro
 System: The world is breaking apart.
 System: Bugs stole the Logic Blocks holding it together.
-System: Find them. Fix the code. Stay alive.
+System: Find the bugs. Get the blocks. Save the world.
 => END
 
 
@@ -12,6 +12,6 @@ System: Insert recovered blocks to repair the entity.
 
 
 ~ first_kill
-System: Logic Block recovered.
-System: New repairs available.
+System: YAY you successfully took away what was yours!
+System: Now new repairs are available.
 => END
