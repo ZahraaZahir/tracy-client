@@ -1,6 +1,6 @@
 extends Node
 
-const BASE_URL = "http://localhost:3050/api/v1"
+const BASE_URL = "https://tracy.up.railway.app/api/v1"
 var developer_id: String = "GUEST"
 var auth_token: String = ""
 
