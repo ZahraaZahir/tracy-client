@@ -10,6 +10,9 @@ func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
 
 func send_request(endpoint: String, method: int, payload: Dictionary = {}, use_auth: bool = false) -> void:   
+	if use_auth and auth_token.is_empty():
+		push_error("API ERROR: Attempted protected request without a token: " + endpoint)
+		return
 	var http = HTTPRequest.new()
 	add_child(http)
 	

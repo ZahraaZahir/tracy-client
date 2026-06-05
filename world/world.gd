@@ -6,10 +6,11 @@ const MAP_ID = "main_world"
 const BUG_SCENE = preload("res://bug/Bug.tscn")
 
 func _ready() -> void:
-	
-	if player and not player.is_in_group("tracy"):
-		player.add_to_group("tracy")
-		
+	if BaseApiService.auth_token.is_empty():
+		print("WORLD: No token found. Redirecting to login...")
+		get_tree().change_scene_to_file("res://ui/welcome/welcome.tscn")
+		return
+
 	WorldService.world_loaded.connect(_on_world_loaded)
 	WorldService.load_state()
 	
