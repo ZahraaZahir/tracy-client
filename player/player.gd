@@ -57,7 +57,8 @@ func _perform_attack():
 	is_attacking = true
 	animation_state.travel("Sword")
 	
-
+	await get_tree().physics_frame
+	
 	var targets = attack_area.get_overlapping_bodies()
 	for body in targets:
 		if body.has_method("take_damage"):
