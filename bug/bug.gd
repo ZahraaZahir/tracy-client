@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 enum State { IDLE, ALERT, HURT, DYING }
 
+const BUG_HIT_SFX = preload("res://audio/sounds/bug_hit.wav") 
+
 const SPEED_FLEE = 60.0 
 const MAX_HEALTH = 3
 
@@ -12,11 +14,16 @@ var is_dead: bool = false
 
 @onready var anim_tree = $AnimationTree
 @onready var state_machine = anim_tree.get("parameters/playback")
+@onready var hit_player: AudioStreamPlayer2D = get_node_or_null("HitPlayer") 
 
 func _ready():
 	anim_tree.active = true
 	$DetectionArea.body_entered.connect(_on_detection_area_body_entered)
 	$DetectionArea.body_exited.connect(_on_detection_area_body_exited)
+	
+	if hit_player:
+		hit_player.stream = BUG_HIT_SFX
+		hit_player.bus = "sfx"
 
 func _physics_process(delta):
 	if is_dead: return 
@@ -49,6 +56,10 @@ func take_damage():
 	health -= 1
 	print("BUG: Ouch! Health remaining: ", health)
 	
+	# 3. Plays bug_hit.wav
+	if hit_player:
+		hit_player.play()
+	
 	if health <= 0:
 		_enter_dying_state()
 	else:
@@ -58,9 +69,11 @@ func _enter_dying_state():
 	is_dead = true
 	current_state = State.DYING
 	
-
+	# 4. Plays bug_death.wav via global manager
+	if SfxManager:
+		SfxManager.play_bug_death(global_position)
+		
 	$DetectionArea.set_deferred("monitoring", false)
-	
 	
 	if has_node("CollisionShape2D"):
 		$CollisionShape2D.set_deferred("disabled", true)
@@ -96,7 +109,6 @@ func _start_hurt_recovery():
 	await get_tree().create_timer(0.4).timeout
 	if not is_dead:
 		_transition_to_state(State.ALERT if target_player else State.IDLE)
-
 
 func _on_detection_area_body_entered(body):
 	if is_dead: return
