@@ -80,15 +80,17 @@ func _on_entity_registered(entity: Node2D, type: String):
 		dot.texture = BUG_DOT
 		dot.size = bug_dot_size
 	elif type == "npc":
-		# Check the real fixed status of the NPC
-		var is_fixed = entity.get("is_fixed")
-		dot.texture = CHECK_DOT if is_fixed else NPC_DOT
+		# THE SOURCE OF TRUTH FIX:
+		# Check the WorldService memory directly using the NPC's ID
+		var npc_id = entity.get("entity_id")
+		var is_actually_fixed = npc_id in WorldService.current_fixed_list
+		
+		dot.texture = CHECK_DOT if is_actually_fixed else NPC_DOT
 		dot.size = npc_dot_size
-		if is_fixed: dot.modulate = Color.GREEN
+		if is_actually_fixed: dot.modulate = Color.GREEN
 
 	marker_container.add_child(dot)
 	markers[entity] = dot
-
 func _on_npc_fixed(id: String):
 	for entity in markers.keys():
 		if is_instance_valid(entity) and entity.get("entity_id") == id:

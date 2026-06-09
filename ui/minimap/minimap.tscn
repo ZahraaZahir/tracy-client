@@ -4,39 +4,71 @@
 [ext_resource type="Texture2D" uid="uid://bu4qe2wjccjks" path="res://assets/ui/minimap/tracy_full_map-2.png" id="2_buwfp"]
 [ext_resource type="Texture2D" uid="uid://bt545g3cv2k74" path="res://assets/character/main.png" id="2_nfbjl"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buwfp"]
+bg_color = Color(0.8235294, 0.7058824, 0.54901963, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.8235294, 0.7058824, 0.54901963, 1)
+
 [node name="Minimap" type="Control" unique_id=1831061202]
 clip_contents = true
-custom_minimum_size = Vector2(268, 190)
+custom_minimum_size = Vector2(274, 196)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_q8st6")
 
-[node name="MapLayer" type="Control" parent="." unique_id=1429933443]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 268.0
-offset_bottom = 190.0
+[node name="Panel" type="Panel" parent="." unique_id=298984520]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_buwfp")
 
-[node name="Background" type="TextureRect" parent="MapLayer" unique_id=777478279]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1253089488]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 13
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_right = 13
+theme_override_constants/margin_bottom = 13
+
+[node name="MapLayer" type="Control" parent="MarginContainer" unique_id=1429933443]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="MarginContainer/MapLayer" unique_id=777478279]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(268, 190)
-layout_mode = 0
-offset_right = 300.0
-offset_bottom = 300.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_buwfp")
 expand_mode = 2
 
-[node name="Markers" type="Control" parent="MapLayer" unique_id=314835895]
+[node name="Markers" type="Control" parent="MarginContainer/MapLayer" unique_id=314835895]
 unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="TracyIcon" type="Sprite2D" parent="." unique_id=147472149]
-position = Vector2(150, 150)
-scale = Vector2(1.5, 1.5)
+[node name="TracyIcon" type="Sprite2D" parent="MarginContainer/MapLayer" unique_id=147472149]
+position = Vector2(134, 95)
 texture = ExtResource("2_nfbjl")
 hframes = 33
 vframes = 4
