@@ -1,15 +1,22 @@
 extends CharacterBody2D
 
+const SWORD_SLICE_SFX = preload("res://audio/sounds/sword_slice.wav") 
+const STEP_SFX = preload("res://audio/sounds/step.mp3")
+
 const MAX_SPEED = 150.0
 const ACCELERATION = 500.0
 const FRICTION = 500.0
+const STEP_INTERVAL = 0.35
 
 @onready var animation_tree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
 @onready var attack_area = $AttackArea
 
+@onready var sword_slice_player: AudioStreamPlayer2D = get_node_or_null("SwordSlicePlayer") 
+@onready var step_player: AudioStreamPlayer2D = get_node_or_null("StepPlayer")
 
 var is_attacking: bool = false
+var step_timer: float = 0.0
 
 func _ready():
 	add_to_group("tracy")
@@ -22,6 +29,7 @@ func _physics_process(delta):
 		return
 
 	_handle_movement(delta)
+	_handle_footsteps(delta)
 	move_and_slide()
 
 func _input(event):
@@ -50,12 +58,25 @@ func _handle_movement(delta):
 		animation_state.travel("Idle")
 		_apply_friction(delta)
 
+func _handle_footsteps(delta):
+	if not is_attacking and velocity.length() > 10.0:
+		step_timer -= delta
+		if step_timer <= 0.0:
+			if step_player:
+				step_player.play()
+			step_timer = STEP_INTERVAL
+	else:
+		step_timer = 0.0
+
 func _apply_friction(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 func _perform_attack():
 	is_attacking = true
 	animation_state.travel("Sword")
+	
+	if sword_slice_player:
+		sword_slice_player.play()
 	
 	await get_tree().physics_frame
 	
