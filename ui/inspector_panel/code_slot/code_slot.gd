@@ -63,6 +63,9 @@ func _on_occupant_changed(_zone, _spot, _old, new_occupant):
 	_held_inventory_item.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_held_area.visible = false
 
+	if SfxManager:
+		SfxManager.play_block_drop()
+
 	block_dropped.emit(slot_id, inventory_item.logic_block)
 
 func restore_held_item() -> void:
@@ -82,6 +85,9 @@ func restore_held_item() -> void:
 		
 		DropUtils.clear_occupant_reference(drop_zone, _held_area)
 
+		if SfxManager:
+			SfxManager.play_block_deselect()
+
 	_held_inventory_item = null
 	_held_area = null
 
@@ -92,7 +98,6 @@ func consume_held_item() -> void:
 		_held_area.queue_free()
 	_held_inventory_item = null
 	_held_area = null
-	
 	
 func set_slot_state(new_state: String, new_val: String):
 	current_state = new_state
