@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://puionjcd3so8"]
+[gd_scene format=3 uid="uid://dsd4thpbii13f"]
 
 [ext_resource type="Script" uid="uid://d3apklxpaxd0c" path="res://bug/bug.gd" id="1_4cion"]
 [ext_resource type="Texture2D" uid="uid://g340bpmfcec8" path="res://assets/character/BugSprite.png" id="2_ug7dv"]
@@ -593,7 +593,6 @@ graph_offset = Vector2(86.0252, -56.58744)
 [node name="Bug" type="CharacterBody2D" unique_id=1831532933]
 visibility_layer = 3
 collision_layer = 2
-collision_mask = 1
 script = ExtResource("1_4cion")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2096467085]
