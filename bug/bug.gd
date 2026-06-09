@@ -14,6 +14,7 @@ var is_dead: bool = false
 @onready var state_machine = anim_tree.get("parameters/playback")
 
 func _ready():
+	add_to_group("bug")
 	anim_tree.active = true
 	$DetectionArea.body_entered.connect(_on_detection_area_body_entered)
 	$DetectionArea.body_exited.connect(_on_detection_area_body_exited)
