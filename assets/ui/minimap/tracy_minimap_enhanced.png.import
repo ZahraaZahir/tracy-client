@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8yqwa1nfbd8r"
-path="res://.godot/imported/checkmark.png-8e50a4da657484571ce173346dfef8a2.ctex"
+uid="uid://cmf8ef77l78sf"
+path="res://.godot/imported/tracy_minimap_enhanced.png-797fd991fbc4d35364081c549caf1a6f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/minimap/checkmark.png"
-dest_files=["res://.godot/imported/checkmark.png-8e50a4da657484571ce173346dfef8a2.ctex"]
+source_file="res://assets/ui/minimap/tracy_minimap_enhanced.png"
+dest_files=["res://.godot/imported/tracy_minimap_enhanced.png-797fd991fbc4d35364081c549caf1a6f.ctex"]
 
 [params]
 

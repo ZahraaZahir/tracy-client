@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://b4cuku04ahdsn"]
 
 [ext_resource type="Script" uid="uid://cjbrf5ginvqei" path="res://ui/minimap/minimap.gd" id="1_q8st6"]
-[ext_resource type="Texture2D" uid="uid://c607sxalpnee6" path="res://assets/ui/minimap/tracy_full_map.png" id="2_buwfp"]
+[ext_resource type="Texture2D" uid="uid://bu4qe2wjccjks" path="res://assets/ui/minimap/tracy_full_map-2.png" id="2_buwfp"]
 [ext_resource type="Texture2D" uid="uid://bt545g3cv2k74" path="res://assets/character/main.png" id="2_nfbjl"]
 
 [node name="Minimap" type="Control" unique_id=1831061202]
 clip_contents = true
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(268, 190)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -14,23 +14,28 @@ offset_bottom = 40.0
 script = ExtResource("1_q8st6")
 
 [node name="MapLayer" type="Control" parent="." unique_id=1429933443]
+unique_name_in_owner = true
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 268.0
+offset_bottom = 190.0
 
 [node name="Background" type="TextureRect" parent="MapLayer" unique_id=777478279]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(268, 190)
 layout_mode = 0
-offset_right = 203.0
-offset_bottom = 202.0
+offset_right = 300.0
+offset_bottom = 300.0
 texture = ExtResource("2_buwfp")
+expand_mode = 2
 
 [node name="Markers" type="Control" parent="MapLayer" unique_id=314835895]
+unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TracyIcon" type="Sprite2D" parent="." unique_id=147472149]
-position = Vector2(100, 100)
+position = Vector2(150, 150)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_nfbjl")
 hframes = 33
