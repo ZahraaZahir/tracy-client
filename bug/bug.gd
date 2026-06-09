@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
-enum State { IDLE, ALERT, HURT, DYING }
+signal update_location(pos)
+signal died
 
+enum State { IDLE, ALERT, HURT, DYING }
 const SPEED_FLEE = 60.0 
 const MAX_HEALTH = 3
-
 var current_state = State.IDLE
 var health = MAX_HEALTH
 var target_player: CharacterBody2D = null
@@ -18,10 +19,11 @@ func _ready():
 	anim_tree.active = true
 	$DetectionArea.body_entered.connect(_on_detection_area_body_entered)
 	$DetectionArea.body_exited.connect(_on_detection_area_body_exited)
+	SignalBus.register_on_map.emit(self, "bug")
 
 func _physics_process(delta):
-	if is_dead: return 
-	
+	if is_dead: return
+	update_location.emit(global_position)
 	match current_state:
 		State.IDLE:
 			_logic_idle()
@@ -46,10 +48,8 @@ func _logic_alert(delta):
 func take_damage():
 	if is_dead or current_state == State.HURT:
 		return
-		
 	health -= 1
 	print("BUG: Ouch! Health remaining: ", health)
-	
 	if health <= 0:
 		_enter_dying_state()
 	else:
@@ -58,19 +58,15 @@ func take_damage():
 func _enter_dying_state():
 	is_dead = true
 	current_state = State.DYING
-	
-
 	$DetectionArea.set_deferred("monitoring", false)
-	
-	
 	if has_node("CollisionShape2D"):
 		$CollisionShape2D.set_deferred("disabled", true)
 	elif has_node("CollisionShape2D2"):
 		$CollisionShape2D2.set_deferred("disabled", true)
-	
 	anim_tree.set("parameters/conditions/is_dead", true)
 	state_machine.travel("DYING")
 	SignalBus.bug_slain.emit()
+	died.emit()
 	await get_tree().create_timer(3).timeout
 	var tween = create_tween()
 	for i in range(3):
@@ -97,7 +93,6 @@ func _start_hurt_recovery():
 	await get_tree().create_timer(0.4).timeout
 	if not is_dead:
 		_transition_to_state(State.ALERT if target_player else State.IDLE)
-
 
 func _on_detection_area_body_entered(body):
 	if is_dead: return
