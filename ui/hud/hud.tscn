@@ -113,7 +113,14 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_o2lis")
 text = "Logout
 "
 
-[node name="Minimap" parent="MainMargin/TopRight" unique_id=1831061202 instance=ExtResource("6_kwc50")]
+[node name="Padding2" type="MarginContainer" parent="MainMargin/TopRight" unique_id=1104127265]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="Minimap" parent="MainMargin/TopRight/Padding2" unique_id=1831061202 instance=ExtResource("6_kwc50")]
 layout_mode = 2
 
 [node name="InventoryContainer" type="MarginContainer" parent="MainMargin" unique_id=498084559]
