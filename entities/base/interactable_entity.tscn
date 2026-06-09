@@ -19,6 +19,8 @@ radius = 12.0415945
 [node name="InteractableEntity" type="CharacterBody2D" unique_id=850722004]
 script = ExtResource("1_3q5qu")
 
+[node name="BuzzPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1273296487]
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=275432032]
 material = SubResource("ShaderMaterial_mf7ll")
 

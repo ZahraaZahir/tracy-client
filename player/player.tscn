@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b4h4v11ymnsep" path="res://player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://bt545g3cv2k74" path="res://assets/character/main.png" id="2_gmlin"]
+[ext_resource type="AudioStream" uid="uid://b1cl2vvslo0jx" path="res://audio/sounds/sword_slice.wav" id="2_yw30f"]
+[ext_resource type="AudioStream" uid="uid://7hh7yanwar7h" path="res://audio/sounds/step.mp3" id="3_qjkh3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aqk2v"]
 
@@ -364,6 +366,15 @@ size = Vector2(29, 29)
 [node name="Player" type="CharacterBody2D" unique_id=303713143]
 z_index = 5
 script = ExtResource("1_dovo2")
+
+[node name="SwordSlicePlayer" type="AudioStreamPlayer2D" parent="." unique_id=164486474]
+stream = ExtResource("2_yw30f")
+bus = &"sfx"
+
+[node name="StepPlayer" type="AudioStreamPlayer2D" parent="." unique_id=748237943]
+stream = ExtResource("3_qjkh3")
+volume_db = -20.0
+bus = &"sfx"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=408226223]
 position = Vector2(0, -7)
