@@ -1,19 +1,18 @@
 extends CharacterBody2D
 
-signal player_approached(entity)
-signal player_left()
-
 @export var entity_id: String = "npc_01"
 
 @export var is_fixed: bool = false:
 	set(value):
 		is_fixed = value
-		_apply_visual_state()
-		if is_fixed:
-			EntityService.request_prompt_hide.emit()
+		if is_node_ready():
+			_apply_visual_state()
+			if is_fixed:
+				EntityService.request_prompt_hide.emit()
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var buzz_player: AudioStreamPlayer2D = get_node_or_null("BuzzPlayer") 
 
 var player_is_near: bool = false
 
@@ -34,6 +33,12 @@ func _apply_visual_state() -> void:
 	
 	if sprite.material:
 		sprite.material.set_shader_parameter("is_glitched", !is_fixed)
+
+	if buzz_player:
+		if is_fixed:
+			buzz_player.stop()
+		elif not buzz_player.playing:
+			buzz_player.play()
 
 	if is_fixed:
 		anim.play("idle_normal")

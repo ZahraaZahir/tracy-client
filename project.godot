@@ -19,6 +19,10 @@ run/main_scene="uid://lvusyqkntfi"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout=""
+
 [autoload]
 
 BaseApiService="*uid://dhu41xyaip8il"
@@ -31,6 +35,8 @@ SignalBus="*uid://blfcxf3rla0sa"
 LootManager="*uid://h4pfpomjbr8v"
 StoryService="*uid://3ktckqqvhi25"
 DialogueManager="*uid://c3rodes2l3gxb"
+AudioService="*uid://bv4dnkjocemyw"
+SfxManager="*uid://u8p2sxx6snn2"
 
 [display]
 

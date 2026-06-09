@@ -595,6 +595,8 @@ visibility_layer = 3
 collision_layer = 2
 script = ExtResource("1_4cion")
 
+[node name="HitPlayer" type="AudioStreamPlayer2D" parent="." unique_id=784566386]
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2096467085]
 scale = Vector2(0.35140625, 0.35178128)
 texture = ExtResource("2_ug7dv")
