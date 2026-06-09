@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://bq2ykguaqlglu"]
-
-[ext_resource type="Texture2D" uid="uid://b5gsb2o5ppt08" path="res://assets/ui/minimap/bug_dot.png" id="1_gprwl"]
-[ext_resource type="Script" uid="uid://r431bjf6fc5k" path="res://sprite_2d.gd" id="2_r6110"]
-
-[node name="Marker" type="Sprite2D" unique_id=775535669]
-texture = ExtResource("1_gprwl")
-script = ExtResource("2_r6110")
