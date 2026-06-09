@@ -22,6 +22,7 @@ func _ready() -> void:
 	$InteractionZone.body_exited.connect(_on_player_exited)
 	EntityService.entity_fixed_globally.connect(_on_live_solve)
 	_apply_visual_state()
+	SignalBus.register_on_map.emit(self, "npc")
 
 func _process(_delta: float) -> void:
 	if player_is_near and not is_fixed:

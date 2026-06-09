@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bell637mncyaa" path="res://assets/ui/inspector/UI Big Play Button.png" id="2_e0nub"]
 [ext_resource type="StyleBox" uid="uid://b33q85kopr6o2" path="res://assets/ui/normalButton.tres" id="4_imuuq"]
 [ext_resource type="StyleBox" uid="uid://c0x2mtr3swiu6" path="res://assets/ui/pressedButton.tres" id="5_kwc50"]
+[ext_resource type="PackedScene" uid="uid://b4cuku04ahdsn" path="res://ui/minimap/minimap.tscn" id="6_kwc50"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w75iv"]
 texture = ExtResource("2_e0nub")
@@ -111,6 +112,16 @@ theme_override_styles/hover = ExtResource("5_kwc50")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_o2lis")
 text = "Logout
 "
+
+[node name="Padding2" type="MarginContainer" parent="MainMargin/TopRight" unique_id=1104127265]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="Minimap" parent="MainMargin/TopRight/Padding2" unique_id=1831061202 instance=ExtResource("6_kwc50")]
+layout_mode = 2
 
 [node name="InventoryContainer" type="MarginContainer" parent="MainMargin" unique_id=498084559]
 layout_mode = 2

@@ -10,6 +10,7 @@ var patched_bugs_count: int = 0
 var total_bugs_count: int = 0
 var is_persistence_ready: bool = false
 var _pending_loot_queue: Array = []
+var current_fixed_list: Array = []
 
 func _ready() -> void:
 	BaseApiService.request_finished.connect(_on_base_request_finished)
@@ -66,6 +67,7 @@ func _on_base_request_finished(endpoint: String, success: bool, data: Dictionary
 	if endpoint == "/world/load":
 		var actual_data = data.get("data", data)
 		current_inventory = actual_data.get("inventory", [])
+		current_fixed_list = actual_data.get("fixedGlitches", [])
 		inventory_updated.emit(current_inventory)
 		world_loaded.emit(actual_data)
 		
