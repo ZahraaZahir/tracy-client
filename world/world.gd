@@ -5,7 +5,15 @@ extends Node2D
 const MAP_ID = "main_world"
 const BUG_SCENE = preload("res://bug/Bug.tscn")
 
+var loading_curtain: CanvasLayer = null
+
 func _ready() -> void:
+	loading_curtain = preload("res://ui/loading_screen/loading_screen.tscn").instantiate()
+	add_child(loading_curtain)
+	
+	if has_node("Hud"):
+		$Hud.visible = false
+		
 	WorldService.world_loaded.connect(_on_world_loaded)
 	WorldService.load_state()
 	
@@ -38,12 +46,20 @@ func _on_world_loaded(data: Dictionary) -> void:
 		var unfixed_count = total_npcs - fixed_count
 		var spawn_count = unfixed_count - inventory_count
 		
-		print("DEBUG SPAWN: Total:", total_npcs, " Fixed:", fixed_count, " Unfixed:", unfixed_count, " In-Pocket:", inventory_count)
-		
 		_spawn_bugs(max(0, spawn_count))
 	
 	WorldService.is_persistence_ready = true
-	await get_tree().process_frame 
+	
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
+	if loading_curtain:
+		if has_node("Hud"):
+			$Hud.visible = true
+		
+		var tween = create_tween()
+		tween.tween_property(loading_curtain, "modulate:a", 0.0, 0.5)
+		tween.tween_callback(loading_curtain.queue_free)
 	
 	if StoryService.should_play("game_intro"):
 		_play_intro_sequence()
@@ -55,7 +71,6 @@ func _play_intro_sequence():
 
 func _spawn_bugs(count: int) -> void:
 	if count <= 0:
-		print("WORLD: Logic blocks accounted for. No bugs spawned.")
 		return
 	
 	var player_pos = player.global_position
@@ -81,20 +96,13 @@ func _spawn_bugs(count: int) -> void:
 		
 		if intersections.is_empty() and not has_env_tile:
 			var bug = BUG_SCENE.instantiate()
-			
 			bug.z_index = 3           
 			bug.y_sort_enabled = true
-			
 			add_child(bug)
 			bug.global_position = target_pos
-			
 			var s = randf_range(0.9, 1.1)
 			bug.scale = Vector2(s, s)
 			spawned_count += 1
 
-	if spawned_count < count:
-		push_warning("WORLD: Limited walkable space. Only spawned %d/%d bugs." % [spawned_count, count])
-
 func _on_entity_fixed(_id: String) -> void:
 	WorldService.save_state(player.global_position, MAP_ID)
-	
