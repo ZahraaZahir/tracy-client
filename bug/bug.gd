@@ -53,6 +53,7 @@ func take_damage():
 	if health <= 0:
 		_enter_dying_state()
 	else:
+		$HitPlayer.play()
 		_transition_to_state(State.HURT)
 
 func _enter_dying_state():
@@ -66,8 +67,12 @@ func _enter_dying_state():
 		$CollisionShape2D2.set_deferred("disabled", true)
 	anim_tree.set("parameters/conditions/is_dead", true)
 	state_machine.travel("DYING")
+	
+	$DeathPlayer.play() 
+	
 	SignalBus.bug_slain.emit()
 	died.emit()
+	
 	await get_tree().create_timer(1.0).timeout
 	var tween = create_tween()
 	for i in range(3):
@@ -81,7 +86,6 @@ func _enter_dying_state():
 		SignalBus.collection_animation_done.emit()
 		queue_free()
 	)
-
 func _transition_to_state(new_state: State):
 	if is_dead: return
 	current_state = new_state
