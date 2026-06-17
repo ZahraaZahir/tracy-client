@@ -68,3 +68,4 @@ func _on_player_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		player_is_near = false
 		EntityService.request_prompt_hide.emit()
+		

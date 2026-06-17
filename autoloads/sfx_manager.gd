@@ -5,6 +5,7 @@ extends Node
 @onready var ui_drop_player: AudioStreamPlayer = $UIDropPlayer
 @onready var ui_deselect_player: AudioStreamPlayer = $UIDeselectPlayer
 @onready var ui_collect_player: AudioStreamPlayer = $UICollectPlayer
+@onready var ui_error_player: AudioStreamPlayer = $UIErrorPlayer
 
 func _ready() -> void:
 	_connect_buttons_recursive(get_tree().root)
@@ -44,3 +45,6 @@ func play_block_deselect() -> void:
 
 func _on_collection_done() -> void:
 	ui_collect_player.play()
+
+func play_error() -> void:
+	ui_error_player.play()
