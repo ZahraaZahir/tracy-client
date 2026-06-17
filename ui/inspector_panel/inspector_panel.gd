@@ -231,3 +231,8 @@ func _show_warning(message_text: String, duration: float) -> void:
 	warning_tween = create_tween().bind_node(self).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	warning_tween.tween_interval(duration)
 	warning_tween.tween_callback(func(): warning_container.visible = false)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if visible and event.is_action_pressed("ui_cancel"):
+		_on_exit_pressed()
+		get_viewport().set_input_as_handled()
