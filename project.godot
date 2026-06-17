@@ -21,7 +21,7 @@ config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout="uid://cwd0dseeqglu0"
+buses/default_bus_layout="uid://di25eb1mwbkwb"
 
 [autoload]
 
@@ -36,7 +36,7 @@ LootManager="*uid://h4pfpomjbr8v"
 StoryService="*uid://3ktckqqvhi25"
 DialogueManager="*uid://c3rodes2l3gxb"
 AudioService="*uid://bv4dnkjocemyw"
-SfxManager="*uid://u8p2sxx6snn2"
+SfxManager="*uid://6rttv5hjwahw"
 
 [display]
 

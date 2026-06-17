@@ -58,7 +58,13 @@ func _on_world_loaded(data: Dictionary) -> void:
 			$Hud.visible = true
 		
 		var tween = create_tween()
-		tween.tween_property(loading_curtain, "modulate:a", 0.0, 0.5)
+		
+		if loading_curtain.get_child_count() > 0:
+			var visual_element = loading_curtain.get_child(0)
+			tween.tween_property(visual_element, "modulate:a", 0.0, 0.5)
+		else:
+			loading_curtain.visible = false
+			
 		tween.tween_callback(loading_curtain.queue_free)
 	
 	if StoryService.should_play("game_intro"):

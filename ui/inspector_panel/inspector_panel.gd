@@ -178,6 +178,8 @@ func _on_solve_result(success: bool, message: String, wrong_slot: String):
 func _handle_error(wrong_slot: String, message: String = ""):
 	submit_button.disabled = false
 	
+	SfxManager.play_error() 
+	
 	for node in slot_nodes.values():
 		node.is_locked = false
 
@@ -195,7 +197,9 @@ func _handle_error(wrong_slot: String, message: String = ""):
 	shake.set_loops(2)
 	
 func _handle_incomplete(unresolved: Array) -> void:
-	_show_warning("Please fill the slot with a code block from the inventory.", .0)
+	_show_warning("Please fill the slot with a code block from the inventory.", 4.0)
+	
+	SfxManager.play_error() 
 	
 	for id in unresolved:
 		slot_nodes[id].flash_incomplete()

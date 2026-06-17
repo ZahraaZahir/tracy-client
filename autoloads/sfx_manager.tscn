@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://6rttv5hjwahw"]
+
+[ext_resource type="Script" uid="uid://u8p2sxx6snn2" path="res://autoloads/sfx_manager.gd" id="1_4xuo2"]
+[ext_resource type="AudioStream" uid="uid://b50pttyclf6bv" path="res://audio/sounds/button_click.wav" id="2_wvrhm"]
+[ext_resource type="AudioStream" uid="uid://d0uvn5wyn3cvp" path="res://audio/sounds/entity_solved.wav" id="3_6cj6q"]
+[ext_resource type="AudioStream" uid="uid://ubu1ubv5ue7m" path="res://audio/sounds/pop.wav" id="4_0xtwo"]
+[ext_resource type="AudioStream" uid="uid://dq60ry3adgcs0" path="res://audio/sounds/codeblock_collect.wav" id="5_6cj6q"]
+[ext_resource type="AudioStream" uid="uid://tlnnnmvw2kh2" path="res://audio/sounds/error.mp3" id="6_0xtwo"]
+
+[node name="SfxManager" type="Node2D" unique_id=1702940150]
+script = ExtResource("1_4xuo2")
+
+[node name="UIClickPlayer" type="AudioStreamPlayer" parent="." unique_id=1630665485]
+stream = ExtResource("2_wvrhm")
+bus = &"sfx"
+
+[node name="UISolvePlayer" type="AudioStreamPlayer" parent="." unique_id=1054251308]
+stream = ExtResource("3_6cj6q")
+bus = &"sfx"
+
+[node name="UIDropPlayer" type="AudioStreamPlayer" parent="." unique_id=419351316]
+stream = ExtResource("4_0xtwo")
+bus = &"sfx"
+
+[node name="UIDeselectPlayer" type="AudioStreamPlayer" parent="." unique_id=838775620]
+stream = ExtResource("4_0xtwo")
+bus = &"sfx"
+
+[node name="UICollectPlayer" type="AudioStreamPlayer" parent="." unique_id=377177454]
+stream = ExtResource("5_6cj6q")
+bus = &"sfx"
+
+[node name="UIErrorPlayer" type="AudioStreamPlayer" parent="." unique_id=1422784016]
+stream = ExtResource("6_0xtwo")
+bus = &"sfx"
