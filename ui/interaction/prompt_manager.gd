@@ -16,7 +16,7 @@ func _process(_delta: float) -> void:
 func _on_show_requested(node: Node2D) -> void:
 	print("PROMPT SYSTEM: Showing for ", node.entity_id)
 	target_npc = node
-	text = "[I] Inspect"
+	text = "[E] Inspect"
 	show()
 
 func _on_hide_requested() -> void:
