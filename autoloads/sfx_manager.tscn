@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://b50pttyclf6bv" path="res://audio/sounds/button_click.wav" id="2_wvrhm"]
 [ext_resource type="AudioStream" uid="uid://d0uvn5wyn3cvp" path="res://audio/sounds/entity_solved.wav" id="3_6cj6q"]
 [ext_resource type="AudioStream" uid="uid://ubu1ubv5ue7m" path="res://audio/sounds/pop.wav" id="4_0xtwo"]
+[ext_resource type="AudioStream" uid="uid://dq60ry3adgcs0" path="res://audio/sounds/codeblock_collect.wav" id="5_6cj6q"]
 
 [node name="SfxManager" type="Node2D" unique_id=1702940150]
 script = ExtResource("1_4xuo2")
@@ -22,4 +23,8 @@ bus = &"sfx"
 
 [node name="UIDeselectPlayer" type="AudioStreamPlayer" parent="." unique_id=838775620]
 stream = ExtResource("4_0xtwo")
+bus = &"sfx"
+
+[node name="UICollectPlayer" type="AudioStreamPlayer" parent="." unique_id=377177454]
+stream = ExtResource("5_6cj6q")
 bus = &"sfx"

@@ -4,6 +4,7 @@ extends Node
 @onready var ui_solved_player: AudioStreamPlayer = $UISolvePlayer
 @onready var ui_drop_player: AudioStreamPlayer = $UIDropPlayer
 @onready var ui_deselect_player: AudioStreamPlayer = $UIDeselectPlayer
+@onready var ui_collect_player: AudioStreamPlayer = $UICollectPlayer
 
 func _ready() -> void:
 	_connect_buttons_recursive(get_tree().root)
@@ -11,6 +12,7 @@ func _ready() -> void:
 	
 	if get_node_or_null("/root/EntityService"):
 		get_node("/root/EntityService").entity_fixed_globally.connect(_on_entity_solved)
+		SignalBus.collection_animation_done.connect(_on_collection_done) 
 
 func _on_node_added(node: Node) -> void:
 	if node is BaseButton:
@@ -39,3 +41,6 @@ func play_block_drop() -> void:
 func play_block_deselect() -> void:
 	ui_deselect_player.pitch_scale = 1.15
 	ui_deselect_player.play()
+
+func _on_collection_done() -> void:
+	ui_collect_player.play()
