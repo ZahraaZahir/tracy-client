@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cpkph0aca3mcb" path="res://entities/base/interactable_entity.gd" id="1_3q5qu"]
 [ext_resource type="Shader" uid="uid://jm36tsnykneo" path="res://entities/base/interactable_entity.gdshader" id="1_duvm5"]
+[ext_resource type="AudioStream" uid="uid://dyo2pylu8i8tm" path="res://audio/sounds/glitching.mp3" id="2_bcl2n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mf7ll"]
 shader = ExtResource("1_duvm5")
@@ -20,6 +21,10 @@ radius = 12.0415945
 script = ExtResource("1_3q5qu")
 
 [node name="BuzzPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1273296487]
+stream = ExtResource("2_bcl2n")
+max_distance = 100.0
+attenuation = 2.000001
+bus = &"sfx"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=275432032]
 material = SubResource("ShaderMaterial_mf7ll")

@@ -40,7 +40,7 @@ func _apply_visual_state() -> void:
 			buzz_player.stop()
 		elif not buzz_player.playing:
 			buzz_player.play()
-
+			
 	if is_fixed:
 		anim.play("idle_normal")
 	else:
@@ -61,7 +61,8 @@ func _play_celebration() -> void: pass
 func _on_player_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		player_is_near = true
-		if not is_fixed: EntityService.request_prompt_show.emit(self)
+		if not is_fixed: 
+			EntityService.request_prompt_show.emit(self)
 
 func _on_player_exited(body: Node2D) -> void:
 	if body.name == "Player":
